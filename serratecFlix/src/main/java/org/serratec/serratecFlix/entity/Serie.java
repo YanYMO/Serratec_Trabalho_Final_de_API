@@ -1,6 +1,7 @@
 package org.serratec.serratecFlix.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,4 +52,15 @@ public class Serie {
 
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
+
+    @OneToMany(mappedBy = "serie")
+    @JsonManagedReference
+    private List<AvaliacaoSerie> avaliacoesSeries;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "serie_categoria",
+            joinColumns = @JoinColumn(name = "id_serie"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    @JsonManagedReference
+    private List<Categoria> categorias;
 }
