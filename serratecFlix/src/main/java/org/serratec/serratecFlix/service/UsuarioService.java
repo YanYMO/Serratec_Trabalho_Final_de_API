@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
+import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
