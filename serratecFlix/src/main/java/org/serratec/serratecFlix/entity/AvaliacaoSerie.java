@@ -1,5 +1,6 @@
 package org.serratec.serratecFlix.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -35,4 +36,14 @@ public class AvaliacaoSerie {
     @UpdateTimestamp
     @Column(name = "data_da_avaliacao", nullable = false, updatable = true)
     private LocalDate dataAvaliacao;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference
+    private Usuario usuario;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "serie_id", nullable = false)
+    @JsonBackReference
+    private Serie serie;
 }
