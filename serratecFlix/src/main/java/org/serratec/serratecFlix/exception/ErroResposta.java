@@ -5,7 +5,6 @@ public class ErroResposta {
 	private Integer status;
 	private String menssagem;
 	
-	
 	public ErroResposta(Integer status, String menssagem) {
 		super();
 		this.status = status;
@@ -23,6 +22,4 @@ public class ErroResposta {
 	public String getMenssagem() {
 		return menssagem;
 	}
-	
-	
 }
