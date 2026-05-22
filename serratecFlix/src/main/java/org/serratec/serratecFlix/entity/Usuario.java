@@ -1,6 +1,7 @@
 package org.serratec.serratecFlix.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -52,4 +54,16 @@ public class Usuario {
     @CreationTimestamp
     @Column(name = "data_de_criacao", nullable = false)
     private LocalDate dataCriacao;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
+    private List<AvaliacaoFilme> avaliacaoFilme;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
+    private List<AvaliacaoSerie> avaliacaoSerie;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
+    private List<ListaFavoritos> listaFavoritos;
 }

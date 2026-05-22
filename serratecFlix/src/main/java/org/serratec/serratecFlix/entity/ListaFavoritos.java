@@ -1,5 +1,7 @@
 package org.serratec.serratecFlix.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +13,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,4 +39,23 @@ public class ListaFavoritos {
     @CreationTimestamp
     @Column(name = "data_de_criacao", nullable = false, updatable = true)
     private LocalDate dataCriacao;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference
+    private Usuario usuario;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "favoritos_filmes",
+            joinColumns = @JoinColumn(name = "id_lista_de_favoritos"),
+            inverseJoinColumns = @JoinColumn(name = "id_filme"))
+    @JsonManagedReference
+    private List<Filme> filmes;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "favoritos_series",
+            joinColumns = @JoinColumn(name = "id_lista_de_favoritos"),
+            inverseJoinColumns = @JoinColumn(name = "id_serie"))
+    @JsonManagedReference
+    private List<Serie> series;
 }
