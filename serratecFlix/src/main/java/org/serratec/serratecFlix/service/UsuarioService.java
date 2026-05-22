@@ -31,7 +31,7 @@ public class UsuarioService {
         return usuarioDTO;
     }
 
-    public UsuarioResponse findById (Long id) {
+    public UsuarioResponse findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
 

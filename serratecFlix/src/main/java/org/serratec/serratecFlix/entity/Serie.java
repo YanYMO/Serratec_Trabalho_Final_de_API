@@ -48,7 +48,7 @@ public class Serie {
     @Past
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_lancamento", nullable = false)
-    private LocalDate dataLançamento;
+    private LocalDate dataLancamento;
 
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
