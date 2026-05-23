@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.serratec.serratecFlix.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
@@ -32,11 +33,11 @@ public class UsuarioService {
         return usuarioDTO;
     }
 
-    public UsuarioResponse findById(Long id) {
+    public UsuarioResponseDTO findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
-        UsuarioResponse usuarioDTO = new UsuarioResponseDTO(usuario);
+        UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO(usuario);
 
         return usuarioDTO;
     }

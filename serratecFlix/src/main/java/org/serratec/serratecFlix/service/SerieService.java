@@ -40,8 +40,6 @@ public SerieResponseDTO findById (Long id){
     Serie serie = serieRepository.findById(id)
           .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma série com esse identificador."));
 
-    
-
     return new SerieResponseDTO(serie);
 }
 
@@ -79,7 +77,6 @@ public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
     serie.setCategorias(serieDTO.getCategorias());
 
     return new SerieResponseDTO(serie);
-
 }
 
 @Transactional
