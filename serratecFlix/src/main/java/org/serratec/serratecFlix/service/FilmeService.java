@@ -2,8 +2,8 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.serratec.serratecFlix.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
-import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +76,7 @@ public class FilmeService {
 
     @Transactional
     public void deletar(Long id) {
-        Filme ffilme = filmeRepository.findById(id)
+        Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
         filmeRepository.deleteById(id);
