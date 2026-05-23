@@ -1,5 +1,7 @@
 package org.serratec.serratecFlix.repository;
 
+
+
 import java.util.List;
 
 import org.serratec.serratecFlix.entity.Filme;
@@ -14,5 +16,8 @@ public interface FilmeRepository extends JpaRepository <Filme, Long> {
       @Query("SELECT f FROM Filme f ORDER BY f.notaMedia DESC")
       List<Filme> findRankingFilmes();
 
-     
+      
+
+
+
 }
