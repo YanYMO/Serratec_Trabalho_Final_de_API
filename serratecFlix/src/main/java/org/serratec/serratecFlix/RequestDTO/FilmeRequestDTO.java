@@ -1,4 +1,4 @@
-package org.serratec.serratecFli.RequestDTO;
+package org.serratec.serratecFlix.RequestDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,26 +13,29 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class FilmeRequest {
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 50)
+public class FilmeRequestDTO {
+
+    @NotBlank(message = "O nome do filme e obrigatorio")
+    @Size(max = 50, message = "A senha deve ter no maximo 50 caracteres")
     private String titulo;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
+    @NotBlank(message = "A descricao do filme e obrigatoria")
+    @Size(max = 200, message = "A senha deve ter no maximo 200 caracteres")
     private String descricao;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    @NotNull(message = "A duracao do filme e obrigatoria")
     private Integer duracaoMinutos;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    @NotNull(message = "A data de lancamento do filme é obrigatoria")
     @Past
     private LocalDate dataLancamento;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    @NotNull(message = "A classificacao do filme é obrigatoria")
     private ClassificacaoIndicativa classificacao;
 
     private List<AvaliacaoFilme> avaliacoesFilmes;
-
+    
+    
     private List<Categoria> categorias;
 }
