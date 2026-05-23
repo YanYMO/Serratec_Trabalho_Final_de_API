@@ -77,6 +77,8 @@ public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
     List<Categoria> categorias = new Categoria();
     serie.setCategorias(serieDTO.getCategorias());
 
+    return new SerieResponseDTO(serie);
+
 }
 
 @Transactional
