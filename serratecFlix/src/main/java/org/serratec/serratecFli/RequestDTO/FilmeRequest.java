@@ -27,7 +27,7 @@ public class FilmeRequest {
 
     @NotNull(message = "Este campo precisa ser preenchido")
     @Past
-    private LocalDate dataLacamento;
+    private LocalDate dataLancamento;
 
     @NotNull(message = "Este campo precisa ser preenchido")
     private ClassificacaoIndicativa classificacao;
