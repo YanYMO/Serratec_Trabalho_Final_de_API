@@ -43,6 +43,7 @@ public class SerieService {
 
     @Transactional
     public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO) {
+        
         Serie serie = new Serie();
         serie.setTitulo(serieDTO.getTitulo());
         serie.setDescricao(serieDTO.getDescricao());
@@ -51,16 +52,17 @@ public class SerieService {
         serie.setDataLancamento(serieDTO.getDataLancamento());
         serie.setNotaMedia(serieDTO.getNotaMedia());
         serie.setCategorias(serieDTO.getCategorias());
-
+        
         serieRepository.save(serie);
+    
         return new SerieResponseDTO(serie);
     }
 
     @Transactional
-    public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id) {
+    public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
         Serie serie = serieRepository.findById(id)
-            .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
-
+             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
+        
         serie.setTitulo(serieDTO.getTitulo());
         serie.setDescricao(serieDTO.getDescricao());
         serie.setTemporadas(serieDTO.getTemporadas());
@@ -68,15 +70,17 @@ public class SerieService {
         serie.setDataLancamento(serieDTO.getDataLancamento());
         serie.setNotaMedia(serieDTO.getNotaMedia());
         serie.setCategorias(serieDTO.getCategorias());
-
+    
+        serieRepository.save(serie);
+        
         return new SerieResponseDTO(serie);
     }
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(Long id){
         Serie serie = serieRepository.findById(id)
             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
-
+    
         serieRepository.deleteById(id);
     }
 }

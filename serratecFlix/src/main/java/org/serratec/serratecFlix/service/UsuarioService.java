@@ -2,9 +2,11 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.serratec.serratecFlix.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
+import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +33,11 @@ public class UsuarioService {
         return usuarioDTO;
     }
 
-    public UsuarioResponse findById (Long id) {
+    public UsuarioResponseDTO findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
-        UsuarioResponse usuarioDTO = new UsuarioResponseDTO(usuario);
+        UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO(usuario);
 
         return usuarioDTO;
     }
@@ -58,7 +60,7 @@ public class UsuarioService {
     @Transactional
     public UsuarioResponseDTO atualizar(@Valid UsuarioRequestDTO usuarioDTO, Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuario.setId(usuarioDTO.getId());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
@@ -74,7 +76,7 @@ public class UsuarioService {
     @Transactional
     public void deletar(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuarioRepository.deleteById(id);
     }

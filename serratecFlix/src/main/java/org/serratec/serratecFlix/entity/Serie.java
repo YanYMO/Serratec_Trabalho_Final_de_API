@@ -41,7 +41,7 @@ public class Serie {
     private Integer temporadas;
 
     @NotNull(message = "Este campo precisa ser preenchido")
-    @Column(name = "epsodios", nullable = false)
+    @Column(name = "episodios", nullable = false)
     private Integer episodios;
 
     @NotNull(message = "Este campo precisa ser preenchido")
