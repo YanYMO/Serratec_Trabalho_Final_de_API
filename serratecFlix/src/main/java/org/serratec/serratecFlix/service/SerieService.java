@@ -3,6 +3,7 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.serratec.serratecFlix.ResponseDTO.SerieResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoSerie;
 import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.entity.Serie;
@@ -21,7 +22,7 @@ public class SerieService {
 
     public List<SerieResponseDTO> findAll(){
         List<Serie> series = serieRepository.findAll();
-    }
+    
 
     if(series.isEmpty()){
         throw new ValorNaoEncontradoException("Não existem Séries cadastradas.");
@@ -33,14 +34,15 @@ public class SerieService {
     }
     return serieDTO;
 }
+}
 
-public SerieResponse findById (Long id){
+public SerieResponseDTO findById (Long id){
     Serie serie = serieRepository.findById(id)
           .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma série com esse identificador."));
 
-    SerieResponse serieDTO = new UsuarioResponseDTO(usuario);
+    
 
-    return serieDTO;
+    return new SerieResponseDTO(serie);
 }
 
 @Transactional
@@ -52,7 +54,7 @@ public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO){
     serie.setDescricao(serieDTO.getDescricao());
     serie.setTemporadas(serieDTO.getTemporadas());
     serie.setEpisodios(serieDTO.getEpisodios());
-    serie.setDataLancamento(serieDTO.getDataLancamento);
+    serie.setDataLancamento(serieDTO.getDataLancamento());
     serie.setNotaMedia(serieDTO.getNotaMedia());
     List<Categoria> categorias = new Categoria();
     serie.setCategorias(serieDTO.getCategorias());
@@ -74,7 +76,6 @@ public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
     serie.setEpisodios(serieDTO.getEpisodios());
     serie.setDataLancamento(serieDTO.getDataLancamento());
     serie.setNotaMedia(serieDTO.getNotaMedia());
-    List<Categoria> categorias = new Categoria();
     serie.setCategorias(serieDTO.getCategorias());
 
     return new SerieResponseDTO(serie);
