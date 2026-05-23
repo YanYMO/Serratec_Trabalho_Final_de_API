@@ -25,9 +25,7 @@ public class AvaliacaoSerie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Min(0) @Max(10)
-    @Column(name = "nota")
+    @Column(name = "nota", nullable = false)
     private Integer nota;
 
     @Column(name = "comentario", nullable = true)
@@ -37,12 +35,12 @@ public class AvaliacaoSerie {
     @Column(name = "data_da_avaliacao", nullable = false, updatable = true)
     private LocalDate dataAvaliacao;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne()
     @JoinColumn(name = "usuario_id", nullable = false)
     @JsonBackReference
     private Usuario usuario;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne()
     @JoinColumn(name = "serie_id", nullable = false)
     @JsonBackReference
     private Serie serie;
