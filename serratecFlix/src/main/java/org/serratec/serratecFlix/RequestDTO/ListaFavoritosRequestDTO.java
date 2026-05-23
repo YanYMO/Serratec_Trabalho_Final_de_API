@@ -1,4 +1,4 @@
-package org.serratec.serratecFli.RequestDTO;
+package org.serratec.serratecFlix.RequestDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,20 +11,20 @@ import org.serratec.serratecFlix.entity.Usuario;
 import java.util.List;
 
 @Data
-public class ListaFavoritosRequest {
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 60)
+public class ListaFavoritosRequestDTO {
+
+    @NotBlank(message = "O nome da lista e obrigatorio")
+    @Size(max = 60, message = "A senha deve ter no maximo 60 caracteres")
     private String nomeLista;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    @NotNull(message = "O tipo da lista e obrigatorio")
     private Boolean privada;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    @NotNull(message = "O usuario e obrigatorio")
     private Usuario usuario;
 
     private List<Filme> filmes;
 
     private List<Serie> series;
-
 }

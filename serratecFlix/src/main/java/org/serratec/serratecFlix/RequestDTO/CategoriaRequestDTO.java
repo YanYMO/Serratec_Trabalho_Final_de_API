@@ -1,16 +1,18 @@
-package org.serratec.serratecFli.RequestDTO;
+package org.serratec.serratecFlix.RequestDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class CategoriaRequest {
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 500)
+public class CategoriaRequestDTO {
+
+    @NotBlank(message = "A categoria precisa ter um nome")
+    @Size(max = 50, message = "A senha deve ter no maximo 50 caracteres")
     private String nome;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
+    @NotBlank(message = "A categoria deve ter uma descricao")
+    @Size(max = 200, message = "A senha deve ter no maximo 200 caracteres")
     private String descricao;
 }
