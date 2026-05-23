@@ -16,75 +16,73 @@ import jakarta.validation.Valid;
 
 @Service
 public class SerieService {
-      
+
     @Autowired
     private SerieRepository serieRepository;
 
-    public List<SerieResponseDTO> findAll(){
+    public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
-    
 
-    if(series.isEmpty()){
-        throw new ValorNaoEncontradoException("Não existem Séries cadastradas.");
+        if (series.isEmpty()) {
+            throw new ValorNaoEncontradoException("Não existem Séries cadastradas.");
+        }
+
+        List<SerieResponseDTO> serieDTO = new ArrayList<>();
+        for (Serie serie : series) {
+            serieDTO.add(new SerieResponseDTO(serie));
+        }
+        return serieDTO;
     }
-    List<SerieResponseDTO> serieDTO = new ArrayList<SerieResponseDTO>();
-    
-    for (Serie serie : series){
-        serieDTO.add(new SerieResponseDTO(serie));
+
+    public SerieResponseDTO findById(Long id) {
+        Serie serie = serieRepository.findById(id)
+            .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma série com esse identificador."));
+
+        return new SerieResponseDTO(serie);
     }
-    return serieDTO;
-}
-}
 
-public SerieResponseDTO findById (Long id){
-    Serie serie = serieRepository.findById(id)
-          .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma série com esse identificador."));
+    @Transactional
+    public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO) {
+        
+        Serie serie = new Serie();
+        serie.setTitulo(serieDTO.getTitulo());
+        serie.setDescricao(serieDTO.getDescricao());
+        serie.setTemporadas(serieDTO.getTemporadas());
+        serie.setEpisodios(serieDTO.getEpisodios());
+        serie.setDataLancamento(serieDTO.getDataLancamento());
+        serie.setNotaMedia(serieDTO.getNotaMedia());
+        serie.setCategorias(serieDTO.getCategorias());
+        
+        serieRepository.save(serie);
+    
+        return new SerieResponseDTO(serie);
+    }
 
-    return new SerieResponseDTO(serie);
-}
+    @Transactional
+    public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
+        Serie serie = serieRepository.findById(id)
+             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
+        
+        serie.setTitulo(serieDTO.getTitulo());
+        serie.setDescricao(serieDTO.getDescricao());
+        serie.setTemporadas(serieDTO.getTemporadas());
+        serie.setEpisodios(serieDTO.getEpisodios());
+        serie.setDataLancamento(serieDTO.getDataLancamento());
+        serie.setNotaMedia(serieDTO.getNotaMedia());
+        serie.setCategorias(serieDTO.getCategorias());
+    
+        serieRepository.save(serie);
+        
+        return new SerieResponseDTO(serie);
+    }
 
-@Transactional
-public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO){
-
-    Serie serie = new Serie();
-    serie.setId(serieDTO.getId());
-    serie.setTitulo(serieDTO.getTitulo());
-    serie.setDescricao(serieDTO.getDescricao());
-    serie.setTemporadas(serieDTO.getTemporadas());
-    serie.setEpisodios(serieDTO.getEpisodios());
-    serie.setDataLancamento(serieDTO.getDataLancamento());
-    serie.setNotaMedia(serieDTO.getNotaMedia());
-    List<Categoria> categorias = new Categoria();
-    serie.setCategorias(serieDTO.getCategorias());
-
-    serieRepository.save(serie);
-
-    return new SerieResponseDTO(serie);
-}
-
-@Transactional
-public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
-    Serie serie = serieRepository.findById(id)
-         .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
-
-    serie.setId(serieDTO.getId());
-    serie.setTitulo(serieDTO.getTitulo());
-    serie.setDescricao(serieDTO.getDescricao());
-    serie.setTemporadas(serieDTO.getTemporadas());
-    serie.setEpisodios(serieDTO.getEpisodios());
-    serie.setDataLancamento(serieDTO.getDataLancamento());
-    serie.setNotaMedia(serieDTO.getNotaMedia());
-    serie.setCategorias(serieDTO.getCategorias());
-
-    return new SerieResponseDTO(serie);
-}
-
-@Transactional
-public void deletar(Long id){
-    Serie serie = serieRepository.findById(id)
-        .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
-
+    @Transactional
+    public void deletar(Long id){
+        Serie serie = serieRepository.findById(id)
+            .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
+    
         serieRepository.deleteById(id);
+    }
 }
 
 
