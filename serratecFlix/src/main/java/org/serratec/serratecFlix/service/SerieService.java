@@ -72,7 +72,7 @@ public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
     serie.setDescricao(serieDTO.getDescricao());
     serie.setTemporadas(serieDTO.getTemporadas());
     serie.setEpisodios(serieDTO.getEpisodios());
-    serie.setDataLancamento(serieDTO.getDataLancamento);
+    serie.setDataLancamento(serieDTO.getDataLancamento());
     serie.setNotaMedia(serieDTO.getNotaMedia());
     List<Categoria> categorias = new Categoria();
     serie.setCategorias(serieDTO.getCategorias());
