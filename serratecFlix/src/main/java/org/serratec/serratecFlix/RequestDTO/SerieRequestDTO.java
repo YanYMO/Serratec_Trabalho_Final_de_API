@@ -18,11 +18,11 @@ import lombok.Data;
 public class SerieRequestDTO {
 
 	@NotBlank(message = "O nome do serie e obrigatorio")
-	@Size(max = 50, message = "A senha deve ter no maximo 50 caracteres")
+	@Size(max = 50, message = "O nome deve ter no maximo 50 caracteres")
     private String titulo;
 
 	@NotBlank(message = "A descricao do filme e obrigatoria")
-	@Size(max = 200, message = "A senha deve ter no maximo 200 caracteres")
+	@Size(max = 200, message = "A descricao deve ter no maximo 200 caracteres")
     private String descricao;
 
     @NotNull(message = "A quantidade de temporadas e obrigatoria")
@@ -34,7 +34,7 @@ public class SerieRequestDTO {
     private Integer episodios;
 
     @NotNull(message = "A data de lancamento e obrigatoria")
-    @Past
+    @Past(message = "Data inválida! A data deve ser no passado")
     private LocalDate dataLancamento;
 
     private List<AvaliacaoSerie> avaliacoesSeries;
