@@ -45,7 +45,7 @@ public class Filme {
     @Past
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_lancamento", nullable = false)
-    private LocalDate dataLançamento;
+    private LocalDate dataLancamento;
 
     @NotNull(message = "Este campo precisa ser preenchido")
     @Enumerated(EnumType.STRING)
