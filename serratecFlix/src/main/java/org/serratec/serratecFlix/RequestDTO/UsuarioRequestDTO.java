@@ -14,7 +14,7 @@ import lombok.Data;
 public class UsuarioRequestDTO {
 
     @NotBlank(message = "O nome do usuario e obrigatorio")
-    @Size(max = 80, message = "A senha deve ter no maximo 80 caracteres")
+    @Size(max = 80, message = "O nome deve ter no maximo 80 caracteres")
     private String nome;
 
     @NotNull(message = "A data de nascimento e obrigatoria")
@@ -23,11 +23,11 @@ public class UsuarioRequestDTO {
 
     @NotBlank(message = "O email e obrigatorio")
     @Email(message = "Email preenchido de forma incorreta")
-    @Size(max = 80, message = "A senha deve ter no maximo 80 caracteres")
+    @Size(max = 80, message = "O email deve ter no maximo 80 caracteres")
     private String email;
 
     @NotBlank(message = "O username e obrigatorio")
-    @Size(max = 40, message = "A senha deve ter no maximo 40 caracteres")
+    @Size(max = 40, message = "O userName deve ter no maximo 40 caracteres")
     private String userName;
 
     @NotBlank(message = "A senha nao pode ser nula")
