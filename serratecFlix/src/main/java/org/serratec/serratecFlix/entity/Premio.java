@@ -4,7 +4,7 @@ package org.serratec.serratecFlix.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,8 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+
 
 
 @Entity
@@ -24,13 +24,13 @@ public class Premio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(name = "nome")
     private String nome; 
 
-    @NotBlank
+    @Column(name = "categoria")
     private String categoria; 
 
-    @NotNull
+    @Column(name = "ano")
     private Integer ano;
 
    
@@ -50,7 +50,7 @@ public class Premio {
     public Premio() {
     }
 
-    public Premio(Long id, @NotBlank String nome, @NotBlank String categoria, Integer ano, Boolean vencedor,
+    public Premio(Long id, String nome,  String categoria, Integer ano, Boolean vencedor,
             Filme filme, Serie serie) {
         this.id = id;
         this.nome = nome;
