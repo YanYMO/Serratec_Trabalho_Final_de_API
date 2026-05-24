@@ -1,17 +1,18 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.serratec.serratecFlix.RequestDTO.CategoriaRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.CategoriaResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.CategoriaRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.CategoriaResponseDTO;
 import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class CategoriaService {
@@ -42,7 +43,7 @@ public class CategoriaService {
     }
 
     @Transactional
-    public CategoriaResponseDTO cadastrar(@Valid CategoriaRequestDTO categoriaDTO){
+    public CategoriaResponseDTO cadastrar( CategoriaRequestDTO categoriaDTO){
           Categoria categoria = new Categoria();
           categoria.setNome(categoriaDTO.getNome());
           categoria.setDescricao(categoriaDTO.getDescricao());
@@ -53,7 +54,7 @@ public class CategoriaService {
     }
 
     @Transactional
-    public CategoriaResponseDTO atualizar(@Valid CategoriaRequestDTO categoriaDTO, Long id){
+    public CategoriaResponseDTO atualizar( CategoriaRequestDTO categoriaDTO, Long id){
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
         

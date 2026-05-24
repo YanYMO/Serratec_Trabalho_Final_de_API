@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.ResponseDTO;
+package org.serratec.serratecFlix.DTO.ResponseDTO;
 
 
 
