@@ -1,17 +1,18 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.serratec.serratecFlix.RequestDTO.FilmeRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.FilmeResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.FilmeRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class FilmeService {

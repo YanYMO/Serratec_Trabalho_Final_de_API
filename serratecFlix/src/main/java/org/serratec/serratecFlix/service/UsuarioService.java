@@ -1,9 +1,10 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.serratec.serratecFlix.RequestDTO.UsuarioRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.UsuarioResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.UsuarioRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
@@ -11,8 +12,8 @@ import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class UsuarioService {

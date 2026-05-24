@@ -4,14 +4,14 @@ package org.serratec.serratecFlix.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.serratec.serratecFlix.RequestDTO.PremioRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.PremioResponseDTO;
-import org.serratec.serratecFlix.entity.Premio;
+import org.serratec.serratecFlix.DTO.RequestDTO.PremioRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.PremioResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
+import org.serratec.serratecFlix.entity.Premio;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
-import org.serratec.serratecFlix.repository.PremioRepository;
 import org.serratec.serratecFlix.repository.FilmeRepository;
+import org.serratec.serratecFlix.repository.PremioRepository;
 import org.serratec.serratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

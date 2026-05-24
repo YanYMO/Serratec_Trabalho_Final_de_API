@@ -2,8 +2,8 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
-import org.serratec.serratecFlix.RequestDTO.PremioRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.PremioResponseDTO;
+import org.serratec.serratecFlix.DTO.RequestDTO.PremioRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.PremioResponseDTO;
 import org.serratec.serratecFlix.service.PremioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import jakarta.validation.Valid;
 
