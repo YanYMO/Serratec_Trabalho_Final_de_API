@@ -1,7 +1,6 @@
 package org.serratec.serratecFlix.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
 
 import org.serratec.serratecFlix.DTO.RequestDTO.FilmeRequestDTO;
 import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
@@ -11,8 +10,8 @@ import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FilmeService {
@@ -44,7 +43,7 @@ public class FilmeService {
     }
 
     @Transactional
-    public FilmeResponseDTO cadastrar(@Valid FilmeRequestDTO filmeDTO) {
+    public FilmeResponseDTO cadastrar( FilmeRequestDTO filmeDTO) {
 
         Filme filme = new Filme();
         filme.setTitulo(filmeDTO.getTitulo());
@@ -60,7 +59,7 @@ public class FilmeService {
     }
 
     @Transactional
-    public FilmeResponseDTO atualizar(@Valid FilmeRequestDTO filmeDTO, Long id) {
+    public FilmeResponseDTO atualizar(FilmeRequestDTO filmeDTO, Long id) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
@@ -76,7 +75,7 @@ public class FilmeService {
 
     @Transactional
     public void deletar(Long id) {
-        filmeRepository.findById(id)
+         filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
         filmeRepository.deleteById(id);
