@@ -11,7 +11,7 @@ public class CategoriaResponseDTO {
     private String nome;
     private String descricao;
     
-    CategoriaResponseDTO(Categoria categoria){
+    public CategoriaResponseDTO(Categoria categoria){
     	this.nome = categoria.getNome();
     	this.descricao = categoria.getDescricao();
     }

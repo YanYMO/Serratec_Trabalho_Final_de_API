@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.serratec.serratecFlix.RequestDTO.UsuarioRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
@@ -46,7 +47,6 @@ public class UsuarioService {
     public UsuarioResponseDTO cadastrar(@Valid UsuarioRequestDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
-        usuario.setId(usuarioDTO.getId());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUserName(usuarioDTO.getUserName());
@@ -54,7 +54,7 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
-        return new UsuarioResponseDTO(aluno);
+        return new UsuarioResponseDTO(usuario);
     }
 
     @Transactional
@@ -62,7 +62,6 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
-        usuario.setId(usuarioDTO.getId());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUserName(usuarioDTO.getUserName());
@@ -70,7 +69,7 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
-        return new UsuarioResponseDTO(aluno);
+        return new UsuarioResponseDTO(usuario);
     }
 
     @Transactional
