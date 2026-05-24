@@ -24,30 +24,18 @@ public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 80)
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Past
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Email(message = "Email preenchido de forma incorreta")
-    @Size(max = 80)
-    @Column(name = "email", nullable = false, length = 80)
+    @Column(name = "email", nullable = false, length = 80, unique = true)
     private String email;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 40)
     @Column(name = "use_name", nullable = false, length = 40, unique = true)
     private String userName;
 
-    @NotBlank(message = "Este campos precisa ser preenchido")
-    @Size(min = 10)
     @Column(name = "senha", nullable = false)
     private String senha;
 
@@ -55,15 +43,15 @@ public class Usuario {
     @Column(name = "data_de_criacao", nullable = false)
     private LocalDate dataCriacao;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AvaliacaoFilme> avaliacaoFilme;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AvaliacaoSerie> avaliacaoSerie;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ListaFavoritos> listaFavoritos;
 }

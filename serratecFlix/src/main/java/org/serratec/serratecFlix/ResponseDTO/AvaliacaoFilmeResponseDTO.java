@@ -16,7 +16,7 @@ public class AvaliacaoFilmeResponseDTO {
     private LocalDate dataAvaliacao;
     private String nomeUsuario;
     
-    AvaliacaoFilmeResponseDTO(AvaliacaoFilme avaFilme){
+    public AvaliacaoFilmeResponseDTO(AvaliacaoFilme avaFilme){
     	this.nota = avaFilme.getNota();
     	this.comentario = avaFilme.getComentario();
     	this.dataAvaliacao = avaFilme.getDataAvaliacao();

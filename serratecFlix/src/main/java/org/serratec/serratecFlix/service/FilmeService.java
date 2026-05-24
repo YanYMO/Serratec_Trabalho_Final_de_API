@@ -2,7 +2,6 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-
 import org.serratec.serratecFlix.RequestDTO.FilmeRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
@@ -26,7 +25,7 @@ public class FilmeService {
         if (filmes.isEmpty()) {
             throw new ValorNaoEncontradoException("Não existem Filmes cadastrados.");
         }
-        List<FimeResponseDTO> filmeDTO = new ArrayList<FilmeResponseDTO>();
+        List<FilmeResponseDTO> filmeDTO = new ArrayList<FilmeResponseDTO>();
 
         for (Filme filme : filmes) {
             filmeDTO.add(new FilmeResponseDTO(filme));
@@ -52,7 +51,7 @@ public class FilmeService {
         filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
         filme.setDataLancamento(filmeDTO.getDataLancamento());
         filme.setClassificacao(filmeDTO.getClassificacao());
-        filme.setCategorias(filmeDTO.getCategorias);
+        filme.setCategorias(filmeDTO.getCategorias());
 
         filmeRepository.save(filme);
 
@@ -64,12 +63,10 @@ public class FilmeService {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
-        filme.setTitulo(filmeDTO.getDataNascimento());
-        filme.setDescricao(filmeDTO.getEmail());
-        filme.setDuracaoMinutos(filmeDTO.getUserName());
-        filme.setNotaMedia(filmeDTO.getSenha());
+        filme.setTitulo(filmeDTO.getTitulo());
+        filme.setDescricao(filmeDTO.getDescricao());
+        filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
         filme.setCategorias(filmeDTO.getCategorias());
-        filme.setCategorias(filmeDTO.getCategorias);
 
         filmeRepository.save(filme);
 

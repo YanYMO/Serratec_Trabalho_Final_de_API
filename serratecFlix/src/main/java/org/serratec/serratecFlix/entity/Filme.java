@@ -28,34 +28,25 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 50)
     @Column(name = "titulo", nullable = false, length = 60)
     private String titulo;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
     @Column(name = "duracao_em_minutos", nullable = false)
     private Integer duracaoMinutos;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Past
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_lancamento", nullable = false)
     private LocalDate dataLancamento;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Enumerated(EnumType.STRING)
     @Column(name = "classificacao_indicativa", nullable = false)
     private ClassificacaoIndicativa classificacao;
 
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
 
-    @OneToMany(mappedBy = "filme")
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AvaliacaoFilme> avaliacoesFilmes;
 

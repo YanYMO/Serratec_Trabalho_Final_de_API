@@ -14,7 +14,7 @@ public class UsuarioResponseDTO {
     private String userName;
     private LocalDate dataCriacao;
     
-    UsuarioResponseDTO(Usuario usuario){
+    public UsuarioResponseDTO(Usuario usuario){
     	this.nome = usuario.getNome();
     	this.userName = usuario.getUserName();
     	this.dataCriacao = usuario.getDataCriacao();

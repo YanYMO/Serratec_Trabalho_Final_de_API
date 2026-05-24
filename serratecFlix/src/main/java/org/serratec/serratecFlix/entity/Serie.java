@@ -27,33 +27,25 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 60)
     @Column(name = "titulo", nullable = false, length = 60)
     private String titulo;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
     @Column(name = "temporadas", nullable = false)
     private Integer temporadas;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
     @Column(name = "episodios", nullable = false)
     private Integer episodios;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Past
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_lancamento", nullable = false)
     private LocalDate dataLancamento;
 
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
 
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AvaliacaoSerie> avaliacoesSeries;
 

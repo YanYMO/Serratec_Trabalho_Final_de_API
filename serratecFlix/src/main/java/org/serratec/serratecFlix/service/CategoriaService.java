@@ -1,8 +1,7 @@
 package org.serratec.serratecFlix.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.serratec.serratecFlix.RequestDTO.CategoriaRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.CategoriaResponseDTO;
 import org.serratec.serratecFlix.entity.Categoria;
@@ -11,8 +10,8 @@ import org.serratec.serratecFlix.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CategoriaService {

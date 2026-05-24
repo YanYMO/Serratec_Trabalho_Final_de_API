@@ -1,10 +1,9 @@
 package org.serratec.serratecFlix.ResponseDTO;
 
-import java.time.LocalDate;
-
+import lombok.Data;
 import org.serratec.serratecFlix.entity.Serie;
 
-import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 
@@ -17,7 +16,7 @@ public class SerieResponseDTO {
     private LocalDate dataLancamento;    
     private Double notaMedia;
     
-    SerieResponseDTO(Serie serie){
+    public SerieResponseDTO(Serie serie){
     	this.titulo = serie.getTitulo();
     	this.descricao = serie.getDescricao();
     	this.temporadas = serie.getTemporadas();
