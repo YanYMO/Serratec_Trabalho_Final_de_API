@@ -19,7 +19,7 @@ public class OpenAPIConfig {
         contato.setEmail("grupo3API@gmail.com");
         contato.setName("Grupo 3 - API - Turma 37");
         
-        contato.url("https://serratec.org.br");
+        contato.setUrl("https://serratec.org.br");
         
         License apacheLicense = new License()
         .name("Apache licence")

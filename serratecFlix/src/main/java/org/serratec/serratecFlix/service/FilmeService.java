@@ -2,6 +2,8 @@ package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+
+import org.serratec.serratecFlix.RequestDTO.FilmeRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
