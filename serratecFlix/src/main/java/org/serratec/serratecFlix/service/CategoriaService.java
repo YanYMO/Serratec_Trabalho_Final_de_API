@@ -66,7 +66,7 @@ public class CategoriaService {
 
     @Transactional
     public void deletar(Long id){
-        Categoria categoria = categoriaRepository.findById(id)
+        categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
 
         categoriaRepository.deleteById(id);
