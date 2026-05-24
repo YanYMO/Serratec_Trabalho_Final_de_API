@@ -3,6 +3,7 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.serratec.serratecFlix.RequestDTO.SerieRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.SerieResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoSerie;
 import org.serratec.serratecFlix.entity.Categoria;
@@ -68,7 +69,6 @@ public class SerieService {
         serie.setTemporadas(serieDTO.getTemporadas());
         serie.setEpisodios(serieDTO.getEpisodios());
         serie.setDataLancamento(serieDTO.getDataLancamento());
-        serie.setNotaMedia(serieDTO.getNotaMedia());
         serie.setCategorias(serieDTO.getCategorias());
     
         serieRepository.save(serie);
