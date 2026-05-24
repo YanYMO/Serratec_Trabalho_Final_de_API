@@ -58,6 +58,12 @@ public class PremioService {
     }
 
     public List<PremioResponseDTO> buscarTodos() {
+         List<Premio> premios = premioRepository.findAll();
+
+    if (premios.isEmpty()) {
+        throw new ValorNaoEncontradoException("Nenhum prêmio encontrado.");
+    }
+
         return premioRepository.findAll()
                 .stream()
                 .map(this::toResponseDTO)
