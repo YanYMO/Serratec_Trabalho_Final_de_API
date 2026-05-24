@@ -1,7 +1,6 @@
 package org.serratec.serratecFlix.service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.serratec.serratecFlix.RequestDTO.CategoriaRequestDTO;
 import org.serratec.serratecFlix.ResponseDTO.CategoriaResponseDTO;
 import org.serratec.serratecFlix.entity.Categoria;
@@ -42,7 +41,7 @@ public class CategoriaService {
     }
 
     @Transactional
-    public CategoriaResponseDTO cadastrar(@Valid CategoriaRequestDTO categoriaDTO){
+    public CategoriaResponseDTO cadastrar( CategoriaRequestDTO categoriaDTO){
           Categoria categoria = new Categoria();
           categoria.setNome(categoriaDTO.getNome());
           categoria.setDescricao(categoriaDTO.getDescricao());
@@ -53,7 +52,7 @@ public class CategoriaService {
     }
 
     @Transactional
-    public CategoriaResponseDTO atualizar(@Valid CategoriaRequestDTO categoriaDTO, Long id){
+    public CategoriaResponseDTO atualizar( CategoriaRequestDTO categoriaDTO, Long id){
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
         
@@ -66,7 +65,7 @@ public class CategoriaService {
 
     @Transactional
     public void deletar(Long id){
-        Categoria categoria = categoriaRepository.findById(id)
+         categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
 
         categoriaRepository.deleteById(id);

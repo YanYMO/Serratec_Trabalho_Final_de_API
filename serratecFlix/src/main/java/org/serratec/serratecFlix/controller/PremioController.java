@@ -28,8 +28,8 @@ public class PremioController {
     private PremioService premioService;
 
     @PostMapping
-    public ResponseEntity<PremioResponseDTO> inserir(@RequestBody @Valid PremioRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(premioService.inserir(dto));
+    public ResponseEntity<PremioResponseDTO> inserir(@RequestBody @Valid PremioRequestDTO premioDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(premioService.inserir(premioDTO));
     }
 
     @GetMapping
@@ -43,13 +43,13 @@ public class PremioController {
     }
 
     @GetMapping("/filme/{filmeId}")
-    public ResponseEntity<List<PremioResponseDTO>> buscarPorFilme(@PathVariable Long filmeId) {
-        return ResponseEntity.ok(premioService.buscarPorFilme(filmeId));
+    public ResponseEntity<List<PremioResponseDTO>> buscarPorFilme(@PathVariable Long idFilme) {
+        return ResponseEntity.ok(premioService.buscarPorFilme(idFilme));
     }
 
     @GetMapping("/serie/{serieId}")
-    public ResponseEntity<List<PremioResponseDTO>> buscarPorSerie(@PathVariable Long serieId) {
-        return ResponseEntity.ok(premioService.buscarPorSerie(serieId));
+    public ResponseEntity<List<PremioResponseDTO>> buscarPorSerie(@PathVariable Long idSerie) {
+        return ResponseEntity.ok(premioService.buscarPorSerie(idSerie));
     }
 
 
@@ -59,8 +59,8 @@ public class PremioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PremioResponseDTO> atualizar( @PathVariable Long id,@RequestBody @Valid PremioRequestDTO dto) {
-        return ResponseEntity.ok(premioService.atualizar(id, dto));
+    public ResponseEntity<PremioResponseDTO> atualizar( @PathVariable Long id,@RequestBody @Valid PremioRequestDTO premioDTO) {
+        return ResponseEntity.ok(premioService.atualizar(id, premioDTO));
     }
 
     @DeleteMapping("/{id}")
