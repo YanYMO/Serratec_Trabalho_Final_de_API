@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.RequestDTO;
+package org.serratec.serratecFlix.DTO.RequestDTO;
 
 import java.time.LocalDate;
 

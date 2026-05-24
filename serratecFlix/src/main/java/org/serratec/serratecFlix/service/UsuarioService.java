@@ -1,9 +1,10 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.serratec.serratecFlix.RequestDTO.UsuarioRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.UsuarioResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.UsuarioRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
@@ -11,8 +12,8 @@ import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class UsuarioService {
@@ -44,7 +45,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioResponseDTO cadastrar(@Valid UsuarioRequestDTO usuarioDTO) {
+    public UsuarioResponseDTO cadastrar(UsuarioRequestDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
@@ -58,7 +59,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioResponseDTO atualizar(@Valid UsuarioRequestDTO usuarioDTO, Long id) {
+    public UsuarioResponseDTO atualizar( UsuarioRequestDTO usuarioDTO, Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
@@ -74,7 +75,7 @@ public class UsuarioService {
 
     @Transactional
     public void deletar(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
+         usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuarioRepository.deleteById(id);

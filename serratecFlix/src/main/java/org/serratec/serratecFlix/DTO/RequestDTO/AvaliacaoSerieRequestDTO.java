@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.RequestDTO;
+package org.serratec.serratecFlix.DTO.RequestDTO;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

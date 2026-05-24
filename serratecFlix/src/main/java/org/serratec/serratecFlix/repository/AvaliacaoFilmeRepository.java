@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AvaliacaoFilmeRepository extends JpaRepository <AvaliacaoFilme, Long>{
-     Boolean existsByUsuarioID(Long idUsuario);
+     Boolean existsByUsuarioId(Long idUsuario);
 
 }

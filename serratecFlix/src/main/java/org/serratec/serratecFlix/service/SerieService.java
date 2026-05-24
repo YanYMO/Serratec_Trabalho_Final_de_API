@@ -1,17 +1,18 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.serratec.serratecFlix.RequestDTO.SerieRequestDTO;
-import org.serratec.serratecFlix.ResponseDTO.SerieResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.SerieRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.SerieResponseDTO;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class SerieService {
@@ -41,7 +42,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO) {
+    public SerieResponseDTO cadastrar( SerieRequestDTO serieDTO) {
         
         Serie serie = new Serie();
         serie.setTitulo(serieDTO.getTitulo());
@@ -57,7 +58,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
+    public SerieResponseDTO atualizar( SerieRequestDTO serieDTO, Long id){
         Serie serie = serieRepository.findById(id)
              .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
         
@@ -75,7 +76,7 @@ public class SerieService {
 
     @Transactional
     public void deletar(Long id){
-        Serie serie = serieRepository.findById(id)
+         serieRepository.findById(id)
             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
     
         serieRepository.deleteById(id);
