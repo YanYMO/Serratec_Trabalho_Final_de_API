@@ -1,8 +1,5 @@
 package org.serratec.serratecFlix.exception;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
@@ -11,29 +8,36 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import jakarta.validation.ConstraintViolationException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
+	
+	@Override
+	public ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex,
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+		
+		ErroResposta erro = new ErroResposta(HttpStatus.BAD_REQUEST.value(), "A variável utilizada no caminho está incorreta ou está faltando!");
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
 	
 	@Override
 	public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		
-		List<String> erros = new ArrayList<>();
+		FieldError error = ex.getFieldError();
+		String erroMsg = error.getField() + ":" + error.getDefaultMessage();
 		
-		for( FieldError error : ex.getBindingResult().getFieldErrors()) {
-			erros.add(error.getField() + ":" + error.getDefaultMessage());
-		}
+		ErroResposta erro = new ErroResposta(status.value(), erroMsg);
 		
-		ErroResposta erro = new ErroResposta(status.value(), "Argumentos Inválidos foram adicionados!");
-		
-		return super.handleExceptionInternal(ex, erro, headers, status, request);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
 	
 	@ExceptionHandler(org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class)
@@ -93,5 +97,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		ErroResposta erro = new ErroResposta(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-	}	
+	}
 }
