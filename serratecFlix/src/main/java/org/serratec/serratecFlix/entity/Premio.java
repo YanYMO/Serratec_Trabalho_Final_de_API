@@ -1,10 +1,10 @@
 package org.serratec.serratecFlix.entity;
 
-import java.time.LocalDateTime;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,24 +13,27 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
-@Table(name = "comentarios")
-public class Comentario {
-  
+@Table(name = "premios")
+public class Premio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 500)
-    private String conteudo;
+    private String nome; 
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonIgnore
-    private Usuario usuario;
+    @NotBlank
+    private String categoria; 
+
+    @NotNull
+    private Integer ano;
+
+   
 
     @ManyToOne
     @JoinColumn(name = "filme_id")
@@ -42,22 +45,19 @@ public class Comentario {
     @JsonIgnore
     private Serie serie;
 
-    @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao;
-
     
 
-    public Comentario() {
+    public Premio() {
     }
 
-    public Comentario(Long id, @NotBlank @Size(min = 3, max = 500) String conteudo, Usuario usuario, Filme filme,
-            Serie serie, LocalDateTime dataCriacao) {
+    public Premio(Long id, @NotBlank String nome, @NotBlank String categoria, Integer ano, Boolean vencedor,
+            Filme filme, Serie serie) {
         this.id = id;
-        this.conteudo = conteudo;
-        this.usuario = usuario;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.ano = ano;
         this.filme = filme;
         this.serie = serie;
-        this.dataCriacao = dataCriacao;
     }
 
     public Long getId() {
@@ -68,21 +68,30 @@ public class Comentario {
         this.id = id;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
+
 
     public Filme getFilme() {
         return filme;
@@ -99,14 +108,11 @@ public class Comentario {
     public void setSerie(Serie serie) {
         this.serie = serie;
     }
+    
 
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
+    
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
+    
 
     
 }
