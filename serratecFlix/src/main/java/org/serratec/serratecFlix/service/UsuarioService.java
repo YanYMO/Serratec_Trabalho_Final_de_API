@@ -45,7 +45,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioResponseDTO cadastrar(@Valid UsuarioRequestDTO usuarioDTO) {
+    public UsuarioResponseDTO cadastrar(UsuarioRequestDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
@@ -59,7 +59,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioResponseDTO atualizar(@Valid UsuarioRequestDTO usuarioDTO, Long id) {
+    public UsuarioResponseDTO atualizar( UsuarioRequestDTO usuarioDTO, Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
@@ -75,7 +75,7 @@ public class UsuarioService {
 
     @Transactional
     public void deletar(Long id) {
-        usuarioRepository.findById(id)
+         usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuarioRepository.deleteById(id);

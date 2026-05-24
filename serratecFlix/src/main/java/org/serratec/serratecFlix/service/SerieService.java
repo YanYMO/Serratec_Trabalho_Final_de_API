@@ -42,7 +42,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO cadastrar(@Valid SerieRequestDTO serieDTO) {
+    public SerieResponseDTO cadastrar( SerieRequestDTO serieDTO) {
         
         Serie serie = new Serie();
         serie.setTitulo(serieDTO.getTitulo());
@@ -58,7 +58,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO atualizar(@Valid SerieRequestDTO serieDTO, Long id){
+    public SerieResponseDTO atualizar( SerieRequestDTO serieDTO, Long id){
         Serie serie = serieRepository.findById(id)
              .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
         
@@ -76,7 +76,7 @@ public class SerieService {
 
     @Transactional
     public void deletar(Long id){
-        serieRepository.findById(id)
+         serieRepository.findById(id)
             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
     
         serieRepository.deleteById(id);
