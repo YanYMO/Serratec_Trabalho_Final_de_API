@@ -1,6 +1,8 @@
 package org.serratec.serratecFlix.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,29 +29,31 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 60)
+   
     @Column(name = "titulo", nullable = false, length = 60)
     private String titulo;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
+    
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    
     @Column(name = "temporadas", nullable = false)
     private Integer temporadas;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
+    
     @Column(name = "epsodios", nullable = false)
     private Integer episodios;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
-    @Past
+   
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "data_de_lancamento", nullable = false)
     private LocalDate dataLançamento;
 
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
+
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Premio> premios = new ArrayList<>();
 }
