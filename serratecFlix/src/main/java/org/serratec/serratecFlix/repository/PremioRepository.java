@@ -8,17 +8,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PremioRepository extends JpaRepository<Premio, Long> {
-List<Premio> findByFilmeIdOrderByDataCriacaoDesc(Long filmeId);
+    
 
     
-    List<Premio> findByFilmeId(Long filmeId);
+    List<Premio> findByFilmeId(Long idFilme);
 
    
-    List<Premio> findBySerieId(Long serieId);
+    List<Premio> findBySerieId(Long idSerie);
 
     @Query(value = "SELECT * FROM premios WHERE ano = :ano ORDER BY nome ASC", nativeQuery = true)
     List<Premio> buscarPorAno(@Param("ano") Integer ano);
-
+    
     
    
 }

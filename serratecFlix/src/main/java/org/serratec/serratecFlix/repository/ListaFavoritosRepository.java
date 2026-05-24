@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ListaFavoritosRepository extends JpaRepository <ListaFavoritos, Long> {
       
-      Boolean existsByNomeLista();
+      Boolean existsByNomeLista(String nomeLista);
 
 }
