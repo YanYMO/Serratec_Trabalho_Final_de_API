@@ -1,11 +1,10 @@
-package org.serratec.serratecFlix.ResponseDTO;
+package org.serratec.serratecFlix.DTO.ResponseDTO;
 
-import java.time.LocalDate;
-
+import lombok.Data;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 
-import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 
@@ -14,7 +13,7 @@ public class FilmeResponseDTO {
 	private String titulo;
 	private String descricao;
 	private Integer duracaoMinutos;
-	private LocalDate dataLançamento;
+	private LocalDate dataLancamento;
 	private ClassificacaoIndicativa classificacao;
 	private Double notaMedia;
 	
@@ -22,7 +21,7 @@ public class FilmeResponseDTO {
 		this.titulo = filme.getTitulo();
 		this.descricao = filme.getDescricao();
 		this.duracaoMinutos = filme.getDuracaoMinutos();
-		this.dataLançamento = filme.getDataLançamento();
+		this.dataLancamento = filme.getDataLancamento();
 		this.classificacao = filme.getClassificacao();
 		this.notaMedia = filme.getNotaMedia();
 	}

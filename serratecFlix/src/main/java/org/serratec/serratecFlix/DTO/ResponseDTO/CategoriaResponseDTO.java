@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.ResponseDTO;
+package org.serratec.serratecFlix.DTO.ResponseDTO;
 
 import org.serratec.serratecFlix.entity.Categoria;
 
@@ -11,7 +11,7 @@ public class CategoriaResponseDTO {
     private String nome;
     private String descricao;
     
-    CategoriaResponseDTO(Categoria categoria){
+    public CategoriaResponseDTO(Categoria categoria){
     	this.nome = categoria.getNome();
     	this.descricao = categoria.getDescricao();
     }

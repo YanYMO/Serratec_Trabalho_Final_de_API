@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.ResponseDTO;
+package org.serratec.serratecFlix.DTO.ResponseDTO;
 
 import java.time.LocalDate;
 
@@ -16,7 +16,7 @@ public class AvaliacaoFilmeResponseDTO {
     private LocalDate dataAvaliacao;
     private String nomeUsuario;
     
-    AvaliacaoFilmeResponseDTO(AvaliacaoFilme avaFilme){
+    public AvaliacaoFilmeResponseDTO(AvaliacaoFilme avaFilme){
     	this.nota = avaFilme.getNota();
     	this.comentario = avaFilme.getComentario();
     	this.dataAvaliacao = avaFilme.getDataAvaliacao();

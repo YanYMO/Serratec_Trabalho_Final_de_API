@@ -1,15 +1,19 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.DTO.RequestDTO.UsuarioRequestDTO;
+import org.serratec.serratecFlix.DTO.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
+import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class UsuarioService {
@@ -31,20 +35,19 @@ public class UsuarioService {
         return usuarioDTO;
     }
 
-    public UsuarioResponse findById (Long id) {
+    public UsuarioResponseDTO findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
-        UsuarioResponse usuarioDTO = new UsuarioResponseDTO(usuario);
+        UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO(usuario);
 
         return usuarioDTO;
     }
 
     @Transactional
-    public UsuarioResponseDTO cadastrar(@Valid UsuarioRequestDTO usuarioDTO) {
+    public UsuarioResponseDTO cadastrar(UsuarioRequestDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
-        usuario.setId(usuarioDTO.getId());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUserName(usuarioDTO.getUserName());
@@ -52,15 +55,14 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
-        return new UsuarioResponseDTO(aluno);
+        return new UsuarioResponseDTO(usuario);
     }
 
     @Transactional
-    public UsuarioResponseDTO atualizar(@Valid UsuarioRequestDTO usuarioDTO, Long id) {
+    public UsuarioResponseDTO atualizar( UsuarioRequestDTO usuarioDTO, Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
-        usuario.setId(usuarioDTO.getId());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUserName(usuarioDTO.getUserName());
@@ -68,13 +70,13 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
-        return new UsuarioResponseDTO(aluno);
+        return new UsuarioResponseDTO(usuario);
     }
 
     @Transactional
     public void deletar(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Aluno com esse identificador."));
+         usuarioRepository.findById(id)
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuarioRepository.deleteById(id);
     }
