@@ -74,7 +74,11 @@ public class SerieService {
 
     @Transactional
     public void deletar(Long id){
+<<<<<<< HEAD
          serieRepository.findById(id)
+=======
+        serieRepository.findById(id)
+>>>>>>> 0fe94a551e2d73f32de09680ba16c340f60e19a1
             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
     
         serieRepository.deleteById(id);

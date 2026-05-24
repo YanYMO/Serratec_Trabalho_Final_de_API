@@ -75,7 +75,7 @@ public class FilmeService {
 
     @Transactional
     public void deletar(Long id) {
-        Filme filme = filmeRepository.findById(id)
+        filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
         filmeRepository.deleteById(id);

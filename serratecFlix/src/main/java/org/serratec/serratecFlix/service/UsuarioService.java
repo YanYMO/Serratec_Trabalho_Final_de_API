@@ -73,7 +73,11 @@ public class UsuarioService {
 
     @Transactional
     public void deletar(Long id) {
+<<<<<<< HEAD
          usuarioRepository.findById(id)
+=======
+        usuarioRepository.findById(id)
+>>>>>>> 0fe94a551e2d73f32de09680ba16c340f60e19a1
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
         usuarioRepository.deleteById(id);
