@@ -17,18 +17,18 @@ import java.util.List;
 public class FilmeRequestDTO {
 
     @NotBlank(message = "O nome do filme e obrigatorio")
-    @Size(max = 50, message = "A senha deve ter no maximo 50 caracteres")
+    @Size(max = 70, message = "O nome do filme deve ter no maximo 70 caracteres")
     private String titulo;
 
     @NotBlank(message = "A descricao do filme e obrigatoria")
-    @Size(max = 200, message = "A senha deve ter no maximo 200 caracteres")
+    @Size(max = 200, message = "A descricao deve ter no maximo 200 caracteres")
     private String descricao;
 
     @NotNull(message = "A duracao do filme e obrigatoria")
     private Integer duracaoMinutos;
 
     @NotNull(message = "A data de lancamento do filme é obrigatoria")
-    @Past
+    @Past(message = "Data inválida! A data deve ser no passado")
     private LocalDate dataLancamento;
 
     @NotNull(message = "A classificacao do filme é obrigatoria")
@@ -36,6 +36,6 @@ public class FilmeRequestDTO {
 
     private List<AvaliacaoFilme> avaliacoesFilmes;
     
-    
+    @NotBlank
     private List<Categoria> categorias;
 }
