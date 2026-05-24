@@ -13,7 +13,7 @@ public interface PremioRepository extends JpaRepository<Premio, Long> {
     
     List<Premio> findByFilmeId(Long idFilme);
 
-   
+
     List<Premio> findBySerieId(Long idSerie);
 
     @Query(value = "SELECT * FROM premios WHERE ano = :ano ORDER BY nome ASC", nativeQuery = true)
