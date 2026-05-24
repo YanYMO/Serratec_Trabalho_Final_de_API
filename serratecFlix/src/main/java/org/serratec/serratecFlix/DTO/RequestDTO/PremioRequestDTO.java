@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.RequestDTO;
+package org.serratec.serratecFlix.DTO.RequestDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
