@@ -58,7 +58,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO atualizar( SerieRequestDTO serieDTO, Long id){
+    public SerieResponseDTO atualizar(Long id, SerieRequestDTO serieDTO){
         Serie serie = serieRepository.findById(id)
              .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
         

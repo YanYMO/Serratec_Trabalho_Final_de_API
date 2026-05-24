@@ -54,7 +54,7 @@ public class CategoriaService {
     }
 
     @Transactional
-    public CategoriaResponseDTO atualizar( CategoriaRequestDTO categoriaDTO, Long id){
+    public CategoriaResponseDTO atualizar(Long id, CategoriaRequestDTO categoriaDTO){
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
         
