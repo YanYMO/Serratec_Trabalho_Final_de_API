@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+
 
 @Service
 public class UsuarioService {

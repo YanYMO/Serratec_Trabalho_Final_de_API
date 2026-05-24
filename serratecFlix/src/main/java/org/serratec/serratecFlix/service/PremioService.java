@@ -71,6 +71,11 @@ public class PremioService {
     }
 
     public List<PremioResponseDTO> buscarPorFilme(Long idFilme) {
+         List<Premio> premios = premioRepository.findByFilmeId(idFilme);
+
+    if (premios.isEmpty()) {
+          throw new ValorNaoEncontradoException("Nenhum prêmio encontrado para o filme.");
+      }
         return premioRepository.findByFilmeId(idFilme)
                 .stream()
                 .map(this::toResponseDTO)
@@ -78,6 +83,12 @@ public class PremioService {
     }
 
     public List<PremioResponseDTO> buscarPorSerie(Long idSerie) {
+        List<Premio> premios = premioRepository.findBySerieId(idSerie);
+
+    if (premios.isEmpty()) {
+        throw new ValorNaoEncontradoException("Nenhum prêmio encontrado para a série.");
+    }
+        
         return premioRepository.findBySerieId(idSerie)
                 .stream()
                 .map(this::toResponseDTO)
@@ -86,6 +97,12 @@ public class PremioService {
 
 
     public List<PremioResponseDTO> buscarPorAno(Integer ano) {
+        List<Premio> premios = premioRepository.buscarPorAno(ano);
+
+    if (premios.isEmpty()) {
+        throw new ValorNaoEncontradoException("Nenhum prêmio encontrado para o ano informado.");
+    }
+
         return premioRepository.buscarPorAno(ano)
                 .stream()
                 .map(this::toResponseDTO)
