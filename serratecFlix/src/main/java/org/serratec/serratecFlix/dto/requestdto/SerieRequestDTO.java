@@ -39,6 +39,6 @@ public class SerieRequestDTO {
 
     private List<AvaliacaoSerie> avaliacoesSeries;
 
-    @NotBlank
+    @NotNull
     private List<Categoria> categorias;
 }

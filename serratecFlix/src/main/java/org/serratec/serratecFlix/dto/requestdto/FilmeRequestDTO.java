@@ -36,6 +36,6 @@ public class FilmeRequestDTO {
 
     private List<AvaliacaoFilme> avaliacoesFilmes;
     
-    @NotBlank
+    @NotNull
     private List<Categoria> categorias;
 }
