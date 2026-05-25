@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.dto.RequestDTO;
+package org.serratec.serratecFlix.dto.requestdto;
 
 public class LoginDTO {
 

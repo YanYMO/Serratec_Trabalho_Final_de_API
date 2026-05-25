@@ -1,18 +1,21 @@
 package org.serratec.serratecFlix.controller;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.FilmeRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
+import jakarta.validation.Valid;
+import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/filmes")
+@Validated
 public class FilmeController {
 
     @Autowired
@@ -29,13 +32,13 @@ public class FilmeController {
     }
 
     @PostMapping
-    public ResponseEntity<FilmeResponseDTO> criarFilme(@RequestBody FilmeRequestDTO request) {
+    public ResponseEntity<FilmeResponseDTO> criarFilme(@Valid @RequestBody FilmeRequestDTO request) {
         return ResponseEntity.status(201).body(filmeService.cadastrar(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<FilmeResponseDTO> atualizarFilme(@PathVariable Long id,
-                                                                   @RequestBody FilmeRequestDTO request) {
+    													   @Valid @RequestBody FilmeRequestDTO request) {
         return ResponseEntity.ok(filmeService.atualizar(id, request));
     }
 

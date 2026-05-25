@@ -1,17 +1,28 @@
 package org.serratec.serratecFlix.controller;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.AvaliacaoFilmeAtualizacaoDTO;
-import org.serratec.serratecFlix.DTO.RequestDTO.AvalicaoFilmeRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.AvaliacaoFilmeResponseDTO;
+import java.util.List;
+
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoFilmeAtualizacaoDTO;
+import org.serratec.serratecFlix.dto.requestdto.AvalicaoFilmeRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.service.AvaliacaoFilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/avaliacoes-filmes")
+@Validated
 public class AvaliacaoFilmeController {
     
     @Autowired
@@ -28,13 +39,13 @@ public class AvaliacaoFilmeController {
     }
 
     @PostMapping
-    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@RequestBody AvalicaoFilmeRequestDTO request) {
+    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@Valid @RequestBody AvalicaoFilmeRequestDTO request) {
         return ResponseEntity.status(201).body(avaliacaoFilmeService.cadastrar(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoFilmeResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-                                                               @RequestBody AvaliacaoFilmeAtualizacaoDTO request) {
+    																	@Valid @RequestBody AvaliacaoFilmeAtualizacaoDTO request) {
         return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request));
     }
 

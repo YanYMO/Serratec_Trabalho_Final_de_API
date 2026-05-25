@@ -1,9 +1,12 @@
 package org.serratec.serratecFlix.service;
 
-import jakarta.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.FilmeRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
+import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
@@ -14,10 +17,8 @@ import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class FilmeService {

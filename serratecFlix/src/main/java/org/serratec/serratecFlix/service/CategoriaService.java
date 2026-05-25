@@ -3,8 +3,8 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.CategoriaRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.CategoriaResponseDTO;
+import org.serratec.serratecFlix.dto.requestdto.CategoriaRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.CategoriaResponseDTO;
 import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.CategoriaRepository;

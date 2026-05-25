@@ -1,4 +1,4 @@
-package org.serratec.serratecFlix.DTO.ResponseDTO;
+package org.serratec.serratecFlix.dto.responsedto;
 
 import org.serratec.serratecFlix.entity.Categoria;
 
