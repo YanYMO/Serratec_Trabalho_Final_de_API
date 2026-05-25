@@ -72,7 +72,7 @@ public class UsuarioService {
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUsername(usuarioDTO.getUsername());
-        usuario.setSenha(usuarioDTO.getSenha());
+        usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
 
         usuarioRepository.save(usuario);
 
