@@ -1,17 +1,11 @@
 package org.serratec.serratecFlix.dto.requestdto;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import org.serratec.serratecFlix.entity.AvaliacaoSerie;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 import org.serratec.serratecFlix.entity.Categoria;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 
@@ -37,8 +31,6 @@ public class SerieRequestDTO {
     @Past(message = "Data inválida! A data deve ser no passado")
     private LocalDate dataLancamento;
 
-    private List<AvaliacaoSerie> avaliacoesSeries;
-
-    @NotNull
+    @NotNull(message = "A serie precisa ter pelo menos uma categoria.")
     private List<Categoria> categorias;
 }
