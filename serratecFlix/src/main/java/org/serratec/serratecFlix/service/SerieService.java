@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+
 
 @Service
 public class SerieService {
@@ -58,7 +58,7 @@ public class SerieService {
     }
 
     @Transactional
-    public SerieResponseDTO atualizar( SerieRequestDTO serieDTO, Long id){
+    public SerieResponseDTO atualizar(Long id, SerieRequestDTO serieDTO){
         Serie serie = serieRepository.findById(id)
              .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
         

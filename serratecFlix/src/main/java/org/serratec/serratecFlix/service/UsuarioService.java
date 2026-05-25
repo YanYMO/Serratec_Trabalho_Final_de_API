@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+
 
 @Service
 public class UsuarioService {
@@ -63,7 +63,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioResponseDTO atualizar( UsuarioRequestDTO usuarioDTO, Long id) {
+    public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO usuarioDTO) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
