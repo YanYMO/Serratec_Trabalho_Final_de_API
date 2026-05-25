@@ -5,11 +5,16 @@ import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.DTO.RequestDTO.FilmeRequestDTO;
 import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
+import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,5 +84,14 @@ public class FilmeService {
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
         filmeRepository.deleteById(id);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 }
