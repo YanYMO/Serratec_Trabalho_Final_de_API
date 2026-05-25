@@ -54,7 +54,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setUserName(usuarioDTO.getUserName());
+        usuario.setUsername(usuarioDTO.getUserName());
         usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
 
         usuarioRepository.save(usuario);
@@ -69,7 +69,7 @@ public class UsuarioService {
 
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setUserName(usuarioDTO.getUserName());
+        usuario.setUsername(usuarioDTO.getUserName());
         usuario.setSenha(usuarioDTO.getSenha());
 
         usuarioRepository.save(usuario);

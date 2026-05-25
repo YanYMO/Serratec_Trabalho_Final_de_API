@@ -1,10 +1,9 @@
 package org.serratec.serratecFlix.DTO.ResponseDTO;
 
-import java.time.LocalDate;
-
+import lombok.Data;
 import org.serratec.serratecFlix.entity.Usuario;
 
-import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 
@@ -16,7 +15,7 @@ public class UsuarioResponseDTO {
     
     public UsuarioResponseDTO(Usuario usuario){
     	this.nome = usuario.getNome();
-    	this.userName = usuario.getUserName();
+    	this.userName = usuario.getUsername();
     	this.dataCriacao = usuario.getDataCriacao();
     }
 }

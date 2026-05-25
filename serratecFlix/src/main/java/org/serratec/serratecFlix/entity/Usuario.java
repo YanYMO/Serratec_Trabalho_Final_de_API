@@ -1,6 +1,5 @@
 package org.serratec.serratecFlix.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,7 +39,7 @@ public class Usuario implements UserDetails, Serializable {
     private String email;
 
     @Column(name = "use_name", nullable = false, length = 40, unique = true)
-    private String userName;
+    private String username;
 
     @Column(name = "senha", nullable = false)
     private String senha;
@@ -73,6 +72,6 @@ public class Usuario implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 }
