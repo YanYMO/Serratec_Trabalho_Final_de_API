@@ -5,6 +5,8 @@ import org.serratec.serratecFlix.DTO.ResponseDTO.FilmeResponseDTO;
 import org.serratec.serratecFlix.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FilmeResponseDTO> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(filmeService.findById(id));
+    public ResponseEntity<FilmeResponseDTO> listarPorId(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(filmeService.findById(id, userDetails.getUsername()));
     }
 
     @PostMapping
