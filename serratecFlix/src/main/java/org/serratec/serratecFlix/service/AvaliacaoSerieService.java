@@ -46,7 +46,7 @@ public class AvaliacaoSerieService {
         AvaliacaoSerie avaliacoes = avaliacaoSerieRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Avaliação de Serie com esse identificador."));
         AvaliacaoSerieResponseDTO avaliacaoSerieDTO = new AvaliacaoSerieResponseDTO(avaliacoes);
-        return avaliacaoAerieDTO;
+        return avaliacaoSerieDTO;
     }
 
     public AvaliacaoSerieResponseDTO cadastrar(AvalicaoSerieRequestDTO avaliacaoSerieRequest) {
