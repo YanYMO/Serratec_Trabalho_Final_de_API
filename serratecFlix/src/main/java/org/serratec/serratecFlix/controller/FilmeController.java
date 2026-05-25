@@ -3,6 +3,7 @@ package org.serratec.serratecFlix.controller;
 import jakarta.validation.Valid;
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
+import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
 import org.serratec.serratecFlix.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,4 +48,9 @@ public class FilmeController {
         filmeService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/externo")
+    public ResponseEntity<OmdbFilmeResponseDTO> buscarExterno(@RequestParam String titulo) {
+    return ResponseEntity.ok(filmeService.buscarApiExterna(titulo));
+}
 }

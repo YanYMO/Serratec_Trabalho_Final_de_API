@@ -40,6 +40,7 @@ public class ConfigSecurity {
                         requests -> {
                             requests.requestMatchers(HttpMethod.POST,"/usuarios/cadastrar").permitAll()
                                     .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                                    .requestMatchers(HttpMethod.GET, "/filmes/externo").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                     .anyRequest().authenticated();
                         }
