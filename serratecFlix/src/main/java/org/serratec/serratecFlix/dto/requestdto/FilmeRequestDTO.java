@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 
@@ -33,9 +32,7 @@ public class FilmeRequestDTO {
 
     @NotNull(message = "A classificacao do filme é obrigatoria")
     private ClassificacaoIndicativa classificacao;
-
-    private List<AvaliacaoFilme> avaliacoesFilmes;
     
-    @NotNull
+    @NotNull(message = "O filme precisa ter pelo menos uma categoria.")
     private List<Categoria> categorias;
 }
