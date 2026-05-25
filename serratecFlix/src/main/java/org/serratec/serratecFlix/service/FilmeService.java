@@ -59,7 +59,7 @@ public class FilmeService {
     }
 
     @Transactional
-    public FilmeResponseDTO atualizar(FilmeRequestDTO filmeDTO, Long id) {
+    public FilmeResponseDTO atualizar(Long id, FilmeRequestDTO filmeDTO) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
