@@ -3,7 +3,6 @@ package org.serratec.serratecFlix.service;
 import org.serratec.serratecFlix.DTO.RequestDTO.AvaliacaoFilmeAtualizacaoDTO;
 import org.serratec.serratecFlix.DTO.RequestDTO.AvalicaoFilmeRequestDTO;
 import org.serratec.serratecFlix.DTO.ResponseDTO.AvaliacaoFilmeResponseDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Usuario;
@@ -29,12 +28,6 @@ public class AvaliacaoFilmeService {
 
     @Autowired
     private FilmeRepository filmeRepository;
-
-    @Autowired
-    private Filme filme;
-
-    @Autowired
-    private Usuario usuario;
 
     public List<AvaliacaoFilmeResponseDTO> findAll() {
         List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findAll();

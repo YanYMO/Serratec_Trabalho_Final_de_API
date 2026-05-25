@@ -1,3 +1,4 @@
+/*
 package org.serratec.serratecFlix.controller;
 
 import org.serratec.serratecFlix.DTO.RequestDTO.ListaFavoritosRequestDTO;
@@ -39,3 +40,4 @@ public class ListaFavoritosController {
         return ResponseEntity.noContent().build();
     }
 }
+*/
