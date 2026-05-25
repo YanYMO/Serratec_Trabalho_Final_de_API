@@ -19,6 +19,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,6 +67,9 @@ public class Usuario implements UserDetails, Serializable {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ListaFavoritos> listaFavoritos;
+    
+    @OneToOne(mappedBy = "Experiencia", cascade = CascadeType.ALL)
+    private Experiencia experiencia;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
