@@ -31,7 +31,7 @@ public class ListaFavoritos {
     private Boolean privada;
 
     @CreationTimestamp
-    @Column(name = "data_de_criacao", nullable = false, updatable = true)
+    @Column(name = "data_de_criacao", nullable = false, updatable = false)
     private LocalDate dataCriacao;
 
     @ManyToOne()
