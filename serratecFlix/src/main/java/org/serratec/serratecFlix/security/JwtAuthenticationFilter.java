@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             LoginDTO loginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    loginDTO.getUsername(), loginDTO.getPassworld(), new ArrayList<>());
+                    loginDTO.getUsername(), loginDTO.getPassword(), new ArrayList<>());
             Authentication auth = authenticationManager.authenticate(authToken);
 
             return auth;
@@ -46,9 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
         String token = jwtUtil.generateToken(username);
-        response.addHeader("Authorization", "Bearer" + token);
+        response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("acess-control-expose-headers", "Authorization");
-        
-        super.successfulAuthentication(request, response, chain, authResult);
     }
 }

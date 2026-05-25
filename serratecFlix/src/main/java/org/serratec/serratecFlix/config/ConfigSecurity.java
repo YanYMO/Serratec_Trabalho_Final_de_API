@@ -6,8 +6,9 @@ import org.serratec.serratecFlix.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,11 +33,13 @@ public class ConfigSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http.csrf(csrf -> csrf.disable())
                 .cors((cors) -> cors.configurationSource(corsConfigurationSource()))
-                .httpBasic(Customizer.withDefaults()).authorizeHttpRequests(
+                /*.httpBasic(Customizer.withDefaults())*/.authorizeHttpRequests(
                         requests -> {
-                            requests.requestMatchers("/usuarios/cadastrar", "/usuarios/login").permitAll()
+                            requests.requestMatchers(HttpMethod.POST,"/usuarios/cadastrar").permitAll()
+                                    .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                     .anyRequest().authenticated();
                         }

@@ -26,7 +26,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioResponseDTO> criarUsuario(@RequestBody UsuarioRequestDTO request) {
         return ResponseEntity.status(201).body(usuarioService.cadastrar(request));
     }

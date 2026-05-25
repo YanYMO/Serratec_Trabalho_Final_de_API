@@ -4,7 +4,7 @@ public class LoginDTO {
 
     private String username;
 
-    private String passworld;
+    private String password;
 
 
     public String getUsername() {
@@ -15,11 +15,11 @@ public class LoginDTO {
         this.username = username;
     }
 
-    public String getPassworld() {
-        return passworld;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassworld(String passworld) {
-        this.passworld = passworld;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

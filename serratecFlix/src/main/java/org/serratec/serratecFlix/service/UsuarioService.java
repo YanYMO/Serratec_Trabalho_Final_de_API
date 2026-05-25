@@ -52,9 +52,10 @@ public class UsuarioService {
     public UsuarioResponseDTO cadastrar(UsuarioRequestDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.getNome());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setUsername(usuarioDTO.getUserName());
+        usuario.setUsername(usuarioDTO.getUsername());
         usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
 
         usuarioRepository.save(usuario);
@@ -67,9 +68,10 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 
+        usuario.setNome(usuarioDTO.getNome());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setUsername(usuarioDTO.getUserName());
+        usuario.setUsername(usuarioDTO.getUsername());
         usuario.setSenha(usuarioDTO.getSenha());
 
         usuarioRepository.save(usuario);

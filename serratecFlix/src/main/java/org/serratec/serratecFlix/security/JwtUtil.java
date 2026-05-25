@@ -53,15 +53,18 @@ public class JwtUtil {
         Claims claims = getClaims(token);
 
         if (claims != null) {
-            String username = claims.getSubject();
+            return claims.getSubject();
         }
         return null;
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secretKey).build()
-                .parseClaimsJwt(token).getBody();
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(secretKey).build()
+                    .parseClaimsJws(token).getBody();
+        } catch (Exception e) {
+            return null;
+        }
     }
-
 }
