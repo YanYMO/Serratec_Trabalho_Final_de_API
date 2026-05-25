@@ -33,7 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		
 		FieldError error = ex.getFieldError();
-		String erroMsg = error.getField() + ":" + error.getDefaultMessage();
+		String erroMsg = error.getField() + ": " + error.getDefaultMessage();
 		
 		ErroResposta erro = new ErroResposta(status.value(), erroMsg);
 		
@@ -68,7 +68,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	public ResponseEntity<ErroResposta> handleDataIntegrity(DataIntegrityViolationException ex) {
 	    ErroResposta erro = new ErroResposta(
 	        HttpStatus.BAD_REQUEST.value(), 
-	        "Erro de integridade: verifique se todos os campos obrigatórios foram preenchidos corretamente."
+	        "Verifique se todos os campos obrigatórios foram preenchidos corretamente."
 	    );
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	public ResponseEntity<ErroResposta> handleInvalidId(InvalidDataAccessApiUsageException ex) {
 	    ErroResposta erro = new ErroResposta(
 	        HttpStatus.BAD_REQUEST.value(), 
-	        "ID inválido ou nulo. Verifique os campos de relacionamento (idProfessor, idCurso, idAlunos)."
+	        "ID inválido ou nulo. Verifique os campos de relacionamento"
 	    );
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}

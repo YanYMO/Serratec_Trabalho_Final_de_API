@@ -1,8 +1,11 @@
 package org.serratec.serratecFlix.service;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.AvaliacaoFilmeAtualizacaoDTO;
-import org.serratec.serratecFlix.DTO.RequestDTO.AvalicaoFilmeRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.AvaliacaoFilmeResponseDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoFilmeAtualizacaoDTO;
+import org.serratec.serratecFlix.dto.requestdto.AvalicaoFilmeRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Usuario;
@@ -13,9 +16,6 @@ import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AvaliacaoFilmeService {

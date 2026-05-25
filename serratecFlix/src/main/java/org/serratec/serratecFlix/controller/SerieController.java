@@ -1,16 +1,27 @@
 package org.serratec.serratecFlix.controller;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.SerieRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.SerieResponseDTO;
+import java.util.List;
+
+import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
 import org.serratec.serratecFlix.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/series")
+@Validated
 public class SerieController {
     
     @Autowired
@@ -27,13 +38,13 @@ public class SerieController {
     }
 
     @PostMapping
-    public ResponseEntity<SerieResponseDTO> criarSerie(@RequestBody SerieRequestDTO request) {
+    public ResponseEntity<SerieResponseDTO> criarSerie(@Valid @RequestBody SerieRequestDTO request) {
         return ResponseEntity.status(201).body(serieService.cadastrar(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SerieResponseDTO> atualizarSerie(@PathVariable Long id,
-                                                               @RequestBody SerieRequestDTO request) {
+    													   @Valid @RequestBody SerieRequestDTO request) {
         return ResponseEntity.ok(serieService.atualizar(id, request));
     }
 

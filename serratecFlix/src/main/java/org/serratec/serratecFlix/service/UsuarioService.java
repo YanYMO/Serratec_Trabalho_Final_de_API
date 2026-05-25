@@ -3,8 +3,8 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.serratec.serratecFlix.DTO.RequestDTO.UsuarioRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.UsuarioResponseDTO;
+import org.serratec.serratecFlix.dto.requestdto.UsuarioRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;

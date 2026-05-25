@@ -4,8 +4,8 @@ package org.serratec.serratecFlix.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.serratec.serratecFlix.DTO.RequestDTO.PremioRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.PremioResponseDTO;
+import org.serratec.serratecFlix.dto.requestdto.PremioRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.PremioResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Premio;
 import org.serratec.serratecFlix.entity.Serie;
