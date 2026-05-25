@@ -1,17 +1,27 @@
 package org.serratec.serratecFlix.controller;
 
-import org.apache.catalina.connector.Response;
-import org.serratec.serratecFlix.DTO.RequestDTO.CategoriaRequestDTO;
-import org.serratec.serratecFlix.DTO.ResponseDTO.CategoriaResponseDTO;
+import java.util.List;
+
+import org.serratec.serratecFlix.dto.requestdto.CategoriaRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.CategoriaResponseDTO;
 import org.serratec.serratecFlix.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
+@Validated
 public class CategoriaController {
 
     @Autowired
@@ -28,13 +38,13 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> criarCategoria(@RequestBody CategoriaRequestDTO request) {
+    public ResponseEntity<CategoriaResponseDTO> criarCategoria(@Valid @RequestBody CategoriaRequestDTO request) {
         return ResponseEntity.status(201).body(categoriaService.cadastrar(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaResponseDTO> atualizarCategoria(@PathVariable Long id,
-                                                                   @RequestBody CategoriaRequestDTO request) {
+    															   @Valid @RequestBody CategoriaRequestDTO request) {
         return ResponseEntity.ok(categoriaService.atualizar(id, request));
     }
 
