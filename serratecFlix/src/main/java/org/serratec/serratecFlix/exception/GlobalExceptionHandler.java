@@ -98,4 +98,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
+
+	@ExceptionHandler(IdadeInsuficienteException.class)
+	public ResponseEntity<ErroResposta> handleIdade (IdadeInsuficienteException ex) {
+		ErroResposta erro = new ErroResposta (
+				HttpStatus.FORBIDDEN.value(),
+				ex.getMessage());
+
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
+	}
 }

@@ -1,23 +1,32 @@
 package org.serratec.serratecFlix.service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
+import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
+import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+
 
 @Service
 public class FilmeService {
 
     @Autowired
     private FilmeRepository filmeRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public List<FilmeResponseDTO> findAll() {
         List<Filme> filmes = filmeRepository.findAll();
@@ -33,9 +42,16 @@ public class FilmeService {
         return filmeDTO;
     }
 
-    public FilmeResponseDTO findById(Long id) {
+    public FilmeResponseDTO findById(Long id, String username) {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
+
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario nao encontrado");
+        }
+
+        verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
 
         FilmeResponseDTO filmeDTO = new FilmeResponseDTO(filme);
 
@@ -79,5 +95,14 @@ public class FilmeService {
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
         filmeRepository.deleteById(id);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 }
