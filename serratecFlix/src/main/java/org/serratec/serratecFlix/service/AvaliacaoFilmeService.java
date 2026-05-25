@@ -60,8 +60,8 @@ public class AvaliacaoFilmeService {
         AvaliacaoFilme avaliacaoFilme = new AvaliacaoFilme();
         avaliacaoFilme.setNota(avaliacaoFilmeRequest.getNota());
         avaliacaoFilme.setComentario(avaliacaoFilmeRequest.getComentario());
-        avaliacaoFilme.getUsuario().setId(usuario.getId());
-        avaliacaoFilme.getFilme().setId(filme.getId());
+        avaliacaoFilme.setUsuario(usuario);
+        avaliacaoFilme.setFilme(filme);
 
         return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
     }
