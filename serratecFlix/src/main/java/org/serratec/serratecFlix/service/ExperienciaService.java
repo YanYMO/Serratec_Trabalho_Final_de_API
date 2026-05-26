@@ -51,7 +51,7 @@ public class ExperienciaService {
 	public ExperienciaResponseDTO atualizar(Long id, Integer experiencia) {
 		
 		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao atualizar a experiência"));
 		
 		Experiencia exp = usuario.getExperiencia();
 		
