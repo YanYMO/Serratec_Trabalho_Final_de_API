@@ -17,10 +17,16 @@ public class ExperienciaService {
 	@Autowired
 	private ExperienciaRepository experienciaRepository;
 	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
 	@Transactional
 	public ExperienciaResponseDTO findById(Long id) {
-		Experiencia exp = experienciaRepository.findById(id)
-				.orElseThrow(() -> new ValorNaoEncontradoException("O usuario nao foi encontrado!"));
+		
+		Usuario usu = usuarioRepository.findById(id)
+				.orElseThrow(() -> new ValorNaoEncontradoException("Não foi encontrado nenhum Usuario com esse id"));
+		
+		Experiencia exp = usu.getExperiencia();
 		
 		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
 		return expResponse;

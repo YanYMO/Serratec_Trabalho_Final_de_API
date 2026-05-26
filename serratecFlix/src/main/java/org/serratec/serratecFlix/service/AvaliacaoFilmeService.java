@@ -32,6 +32,9 @@ public class AvaliacaoFilmeService {
 
     @Autowired
     private FilmeRepository filmeRepository;
+    
+    @Autowired
+    private ExperienciaService experienciaService;
 
     public List<AvaliacaoFilmeResponseDTO> findAll() {
         List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findAll();
@@ -70,6 +73,10 @@ public class AvaliacaoFilmeService {
         avaliacaoFilme.setComentario(avaliacaoFilmeRequest.getComentario());
         avaliacaoFilme.setUsuario(usuario);
         avaliacaoFilme.setFilme(filme);
+        
+        //Experiencia
+        
+        experienciaService.atualizar(usuario, 2);
 
         return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
     }

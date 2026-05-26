@@ -59,9 +59,9 @@ public class FilmeService {
 
         FilmeResponseDTO filmeDTO = new FilmeResponseDTO(filme);
         
-        //Experiência
+        //Experiencia:
         
-        experienciaService.atualizar(usuario, 5);
+        experienciaService.atualizar(usuario, 4);
 
         return filmeDTO;
     }
