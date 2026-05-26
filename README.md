@@ -161,11 +161,11 @@ Authorization: Bearer SEU_TOKEN
 
 ### ❤️ Favoritos
 
-| Método | Endpoint          | Descrição          |
-| ------ | ----------------- | ------------------ |
-| GET    | `/favoritos`      | Listar favoritos   |
-| POST   | `/favoritos`      | Adicionar favorito |
-| DELETE | `/favoritos/{id}` | Remover favorito   |
+| Método | Endpoint                      | Descrição          |
+| ------ | ---------------------------   | ------------------ |
+| GET    | `/lista-favoritos`            | Listar favoritos   |
+| POST   | `/lista-favoritos`            | Adicionar favorito |
+| DELETE | `/lista-favoritos/{id}`       | Remover favorito   |
 
 ---
 
