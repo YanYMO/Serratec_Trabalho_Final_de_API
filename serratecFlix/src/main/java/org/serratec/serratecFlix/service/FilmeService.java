@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
+import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
@@ -16,6 +17,7 @@ import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import jakarta.transaction.Transactional;
 
@@ -105,4 +107,10 @@ public class FilmeService {
             throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
         }
     }
+    
+    public OmdbFilmeResponseDTO buscarApiExterna(String titulo) {
+    RestTemplate restTemplate = new RestTemplate();
+    String url = "https://www.omdbapi.com/?t=" + titulo + "&apikey=1ee52030";
+    return restTemplate.getForObject(url, OmdbFilmeResponseDTO.class); 
+}
 }
