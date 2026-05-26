@@ -42,6 +42,7 @@ public class Serie {
     @Column(name = "nota_media", nullable = true)
     private Double notaMedia;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "classificacao_indicativa", nullable = false)
     private ClassificacaoIndicativa classificacao;
 

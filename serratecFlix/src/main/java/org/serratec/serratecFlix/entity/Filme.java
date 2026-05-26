@@ -36,6 +36,7 @@ public class Filme {
     @Column(name = "data_de_lancamento", nullable = false)
     private LocalDate dataLancamento;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "classificacao_indicativa", nullable = false)
     private ClassificacaoIndicativa classificacao;
 
