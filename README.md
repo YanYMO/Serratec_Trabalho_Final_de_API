@@ -221,31 +221,40 @@ A aplicação utiliza:
 
 ## 📌 Funcionalidades
 
-✅ CRUD completo de filmes e séries
-✅ Cadastro e login de usuários
-✅ Sistema de favoritos
-✅ Avaliação de filmes e séries
-✅ Relacionamento entre entidades
-✅ Validações com Bean Validation
-✅ Tratamento global de exceções
-✅ Documentação automática da API
-✅ Segurança com JWT
-✅ Consumo de API externa
+* ✅ CRUD completo de filmes e séries
+
+* ✅ Cadastro e login de usuários
+
+* ✅ Sistema de favoritos
+
+* ✅ Avaliação de filmes e séries
+
+* ✅ Relacionamento entre entidades
+
+* ✅ Validações com Bean Validation
+
+* ✅ Tratamento global de exceções
+
+* ✅ Documentação automática da API
+
+* ✅ Segurança com JWT
+
+* ✅ Consumo de API externa
 
 ---
 
 ## 👨‍💻 Desenvolvedores / Tarefas individuais
-|----------------------------------|------------------------------------------------------------------------|
-| **João Pedro Carneiro Motta**    |**Prêmios (Todas as classes, endpoints e o repositories relacionados)** |
-|----------------------------------|------------------------------------------------------------------------|
+|                                  |                                                                        |
+|  **João Pedro Carneiro Motta**   | **Prêmios (Todas as classes, endpoints e o repositories relacionados)**|
+|                                  |                                                                        |
 | **Yan Yan Martins de Oliveira**  |                                                                        |
-|----------------------------------|------------------------------------------------------------------------|
-|  **Carlos Eduardo Carvalho**     |                                                                        |  
-|----------------------------------|------------------------------------------------------------------------|
-|     **Marcos Paulo**             |                                                                        |    
-|----------------------------------|------------------------------------------------------------------------|
-|    **Phelipe Damasio**           |                                                                        |  
-|----------------------------------|------------------------------------------------------------------------|
+|                                  |                                                                        |
+|   **Carlos Eduardo Carvalho**    |                                                                        |  
+|                                  |                                                                        |
+|       **Marcos Paulo**           |                                                                        |    
+|                                  |                                                                        |
+|      **Phelipe Damasio**         |                                                                        |  
+|                                  |                                                                        |
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
 
