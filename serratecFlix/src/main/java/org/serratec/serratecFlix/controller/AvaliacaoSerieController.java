@@ -1,9 +1,11 @@
-/*
 package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvaliacaoSerieRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.AvaliacaoSerieResponseDTO;
+import org.serratec.serratecFlix.service.AvaliacaoSerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -43,7 +45,7 @@ public class AvaliacaoSerieController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoSerieResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoSerieRequestDTO request) {
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
         return ResponseEntity.ok(avaliacaoSerieService.atualizar(id, request));
     }
 
@@ -53,4 +55,3 @@ public class AvaliacaoSerieController {
         return ResponseEntity.noContent().build();
     }
 }
-*/

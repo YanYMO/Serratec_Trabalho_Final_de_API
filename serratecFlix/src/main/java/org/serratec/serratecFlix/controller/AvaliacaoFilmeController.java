@@ -2,7 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
-import org.serratec.serratecFlix.dto.requestdto.AvaliacaoFilmeAtualizacaoDTO;
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvalicaoFilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.service.AvaliacaoFilmeService;
@@ -45,7 +45,7 @@ public class AvaliacaoFilmeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoFilmeResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoFilmeAtualizacaoDTO request) {
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
         return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request));
     }
 
