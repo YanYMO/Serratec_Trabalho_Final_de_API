@@ -1,9 +1,11 @@
-/*
 package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.ListaFavoritosRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.ListaFavoritosResponseDTO;
+import org.serratec.serratecFlix.service.ListaFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@Tag(name = "Lista de Favoritos", description = "Cadastro de filmes e séries favoritos")
 @RestController
 @RequestMapping("/listas-favoritos")
 @Validated
@@ -53,4 +56,3 @@ public class ListaFavoritosController {
         return ResponseEntity.noContent().build();
     }
 }
-*/

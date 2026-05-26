@@ -2,7 +2,8 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
-import org.serratec.serratecFlix.dto.requestdto.AvaliacaoFilmeAtualizacaoDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvalicaoFilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.service.AvaliacaoFilmeService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@Tag(name = "Avaliação de Filmes", description = "Cadastro de avaliações de filmes")
 @RestController
 @RequestMapping("/avaliacoes-filmes")
 @Validated
@@ -45,7 +47,7 @@ public class AvaliacaoFilmeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoFilmeResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoFilmeAtualizacaoDTO request) {
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
         return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request));
     }
 
