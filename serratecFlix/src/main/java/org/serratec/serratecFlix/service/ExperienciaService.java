@@ -17,9 +17,6 @@ public class ExperienciaService {
 	@Autowired
 	private ExperienciaRepository experienciaRepository;
 	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
-	
 	@Transactional
 	public ExperienciaResponseDTO findById(Long id) {
 		Experiencia exp = experienciaRepository.findById(id)
@@ -30,10 +27,7 @@ public class ExperienciaService {
 	}
 	
 	@Transactional
-	public ExperienciaResponseDTO cadastrar(Long id) {
-		
-		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao cadastrar a Experiência. "));
+	public ExperienciaResponseDTO cadastrar(Usuario usuario) {
 		
 		Experiencia exp = new Experiencia();
 		exp.setXp(0);
@@ -48,19 +42,16 @@ public class ExperienciaService {
 	}
 	
 	@Transactional
-	public ExperienciaResponseDTO atualizar(Long id, Integer experiencia) {
-		
-		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao atualizar a experiência"));
+	public ExperienciaResponseDTO atualizar(Usuario usuario, Integer experiencia) {
 		
 		Experiencia exp = usuario.getExperiencia();
 		
 		exp.setXp(exp.getXp()+experiencia);
-		exp.setNivel((exp.getXp()/80)+1);	
+		exp.setNivel((exp.getXp()/80)+1);
 		
 		experienciaRepository.save(exp);
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());	
 		return expResponse;
 	}
 }
