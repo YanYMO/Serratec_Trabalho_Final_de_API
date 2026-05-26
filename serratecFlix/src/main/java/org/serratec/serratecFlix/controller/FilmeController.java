@@ -78,8 +78,12 @@ public class FilmeController {
         filmeService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/externo")
+    
+    @Operation(summary = "Buscar filme em API externa", description = "Busca informações de um filme na API do OMDB pelo título")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso! (campos podem ser nulos caso o filme não seja encontrado)"),
+        @ApiResponse(responseCode = "400", description = "Título inválido ou não informado")
+    })
     public ResponseEntity<OmdbFilmeResponseDTO> buscarExterno(@RequestParam String titulo) {
     return ResponseEntity.ok(filmeService.buscarApiExterna(titulo));
 }
