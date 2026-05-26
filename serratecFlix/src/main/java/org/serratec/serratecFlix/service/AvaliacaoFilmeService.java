@@ -3,7 +3,7 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.serratec.serratecFlix.dto.requestdto.AvaliacaoFilmeAtualizacaoDTO;
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvalicaoFilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
@@ -66,7 +66,7 @@ public class AvaliacaoFilmeService {
         return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
     }
 
-    public AvaliacaoFilmeResponseDTO atualizar(Long id, AvaliacaoFilmeAtualizacaoDTO avaliacaoFilmeAtualizacao) {
+    public AvaliacaoFilmeResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoFilmeAtualizacao) {
         AvaliacaoFilme avaliacaoFilme = avaliacaoFilmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
         avaliacaoFilme.setNota(avaliacaoFilmeAtualizacao.getNota());

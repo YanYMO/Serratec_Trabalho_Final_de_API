@@ -3,6 +3,8 @@ package org.serratec.serratecFlix.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoSerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoSerieResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoSerie;
 import org.serratec.serratecFlix.entity.Serie;
@@ -49,7 +51,7 @@ public class AvaliacaoSerieService {
         return avaliacaoSerieDTO;
     }
 
-    public AvaliacaoSerieResponseDTO cadastrar(AvalicaoSerieRequestDTO avaliacaoSerieRequest) {
+    public AvaliacaoSerieResponseDTO cadastrar(AvaliacaoSerieRequestDTO avaliacaoSerieRequest) {
         Usuario usuario = usuarioRepository.findById(avaliacaoSerieRequest.getUsuarioId())
                 .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
 
@@ -65,7 +67,7 @@ public class AvaliacaoSerieService {
         return new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
     }
 
-    public AvaliacaoSerieResponseDTO atualizar(Long id, AvaliacaoSerieAtualizacaoDTO avaliacaoSerieAtualizacao) {
+    public AvaliacaoSerieResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoSerieAtualizacao) {
         AvaliacaoSerie avaliacaoSerie = avaliacaoSerieRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
         avaliacaoSerie.setNota(avaliacaoSerieAtualizacao.getNota());
