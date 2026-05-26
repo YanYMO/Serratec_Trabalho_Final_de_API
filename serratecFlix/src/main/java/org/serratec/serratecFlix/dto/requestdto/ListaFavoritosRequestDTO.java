@@ -21,9 +21,6 @@ public class ListaFavoritosRequestDTO {
     @NotNull(message = "O tipo da lista e obrigatorio")
     private Boolean privada;
 
-    @NotNull(message = "O id do usuario e obrigatorio")
-    private Long idUsuario;
-
     private List<Long> idFilmes;
 
     private List<Long> idSeries;
