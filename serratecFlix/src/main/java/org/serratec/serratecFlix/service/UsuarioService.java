@@ -6,6 +6,7 @@ import java.util.List;
 import org.serratec.serratecFlix.dto.requestdto.UsuarioRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.UsuarioResponseDTO;
 import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.Perfil;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
@@ -57,6 +58,7 @@ public class UsuarioService {
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setUsername(usuarioDTO.getUsername());
         usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
+        usuario.setPerfil(Perfil.USUARIO);
 
         usuarioRepository.save(usuario);
 
