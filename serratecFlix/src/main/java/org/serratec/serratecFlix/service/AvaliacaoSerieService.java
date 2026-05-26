@@ -32,7 +32,7 @@ public class AvaliacaoSerieService {
         List<AvaliacaoSerie> avaliacoes = avaliacaoSerieRepository.findAll();
 
         if (avaliacoes.isEmpty()) {
-            throw new ValorDuplicadoException("Não existem Avaliações cadastrados.");
+            throw new ValorDuplicadoException("Não existem Avaliações cadastradas.");
         }
         List<AvaliacaoSerieResponseDTO> avaliacaoSerieDTO = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class AvaliacaoSerieService {
                 .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
 
         Serie Serie = SerieRepository.findById(avaliacaoSerieRequest.getSerieId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Série não encontrada."));
 
         AvaliacaoSerie avaliacaoSerie = new AvaliacaoSerie();
         avaliacaoSerie.setNota(avaliacaoSerieRequest.getNota());
