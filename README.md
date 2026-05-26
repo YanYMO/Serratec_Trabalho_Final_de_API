@@ -115,11 +115,11 @@ Authorization: Bearer SEU_TOKEN
 
 ### 👤 Usuários
 
-| Método | Endpoint    | Descrição         |
-| ------ | ----------- | ----------------- |
-| POST   | `/usuarios` | Cadastrar usuário |
-| POST   | `/login`    | Realizar login    |
-| GET    | `/usuarios` | Listar usuários   |
+| Método | Endpoint              | Descrição         |
+| ------ | --------------------  | ----------------- |
+| POST   | `/usuarios/cadastrar` | Cadastrar usuário |
+| POST   | `/login`              | Realizar login    |
+| GET    | `/usuarios`           | Listar usuários   |
 
 ---
 
