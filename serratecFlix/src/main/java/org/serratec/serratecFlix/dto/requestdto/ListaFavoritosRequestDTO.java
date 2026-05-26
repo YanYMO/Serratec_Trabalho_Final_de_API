@@ -2,16 +2,12 @@ package org.serratec.serratecFlix.dto.requestdto;
 
 import java.util.List;
 
-import org.serratec.serratecFlix.entity.Filme;
-import org.serratec.serratecFlix.entity.Serie;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-
 public class ListaFavoritosRequestDTO {
 
     @NotBlank(message = "O nome da lista e obrigatorio")
@@ -22,9 +18,9 @@ public class ListaFavoritosRequestDTO {
     private Boolean privada;
 
     @NotNull(message = "O id do usuario e obrigatorio")
-    private Long idUsuario;
+    private Long usuarioId;
 
-    private List<Filme> filmes;
+    private List<Long> filmesIds;
 
-    private List<Serie> series;
+    private List<Long> seriesIds;
 }
