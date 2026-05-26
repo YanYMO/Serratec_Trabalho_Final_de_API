@@ -61,7 +61,7 @@ public class FilmeService {
     }
 
     @Transactional
-    public FilmeResponseDTO cadastrar( FilmeRequestDTO filmeDTO) {
+    public FilmeResponseDTO cadastrar(FilmeRequestDTO filmeDTO) {
 
         Filme filme = new Filme();
         filme.setTitulo(filmeDTO.getTitulo());

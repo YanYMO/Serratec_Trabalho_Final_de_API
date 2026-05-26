@@ -1,5 +1,7 @@
 package org.serratec.serratecFlix.service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.AvaliacaoFilmeRepository;
@@ -50,12 +54,16 @@ public class AvaliacaoFilmeService {
         return avaliacaoFilmeDTO;
     }
 
-    public AvaliacaoFilmeResponseDTO cadastrar(AvalicaoFilmeRequestDTO avaliacaoFilmeRequest) {
-        Usuario usuario = usuarioRepository.findById(avaliacaoFilmeRequest.getUsuarioId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+    public AvaliacaoFilmeResponseDTO cadastrar(Long id, AvalicaoFilmeRequestDTO avaliacaoFilmeRequest, String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
 
-        Filme filme = filmeRepository.findById(avaliacaoFilmeRequest.getFilmeId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+        Filme filme = filmeRepository.findById(id)
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
+
+        verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
 
         AvaliacaoFilme avaliacaoFilme = new AvaliacaoFilme();
         avaliacaoFilme.setNota(avaliacaoFilmeRequest.getNota());
@@ -66,9 +74,19 @@ public class AvaliacaoFilmeService {
         return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
     }
 
-    public AvaliacaoFilmeResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoFilmeAtualizacao) {
+    public AvaliacaoFilmeResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoFilmeAtualizacao, String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
+
         AvaliacaoFilme avaliacaoFilme = avaliacaoFilmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+
+        if (avaliacaoFilme.getUsuario().getId() != usuario.getId()) {
+            throw new ValorNaoEncontradoException("Você não tem permissão para atualizar esta avaliação de filme.");
+        }
+
         avaliacaoFilme.setNota(avaliacaoFilmeAtualizacao.getNota());
         avaliacaoFilme.setComentario(avaliacaoFilmeAtualizacao.getComentario());
 
@@ -78,5 +96,14 @@ public class AvaliacaoFilmeService {
     public void deletar(Long id) {
         avaliacaoFilmeRepository.findById(id).orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
         avaliacaoFilmeRepository.deleteById(id);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 }
