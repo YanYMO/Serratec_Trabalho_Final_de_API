@@ -66,8 +66,9 @@ public class AvaliacaoSerieController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoSerieResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
-        return ResponseEntity.ok(avaliacaoSerieService.atualizar(id, request));
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request,
+                                                                        @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(avaliacaoSerieService.atualizar(id, request, userDetails.getUsername()));
     }
 
     @Operation(summary = "Deletar avaliação de série", description = "Remove uma avaliação de série do sistema")
