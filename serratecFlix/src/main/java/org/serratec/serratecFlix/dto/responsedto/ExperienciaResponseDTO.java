@@ -11,6 +11,4 @@ public class ExperienciaResponseDTO {
 		this.xp = exp;
 		this.nivel = level;
 	}
-	
-	
 }
