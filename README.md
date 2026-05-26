@@ -125,13 +125,15 @@ Authorization: Bearer SEU_TOKEN
 
 ### 🎬 Filmes
 
-| Método | Endpoint       | Descrição           |
-| ------ | -------------- | ------------------- |
-| GET    | `/filmes`      | Listar filmes       |
-| GET    | `/filmes/{id}` | Buscar filme por ID |
-| POST   | `/filmes`      | Cadastrar filme     |
-| PUT    | `/filmes/{id}` | Atualizar filme     |
-| DELETE | `/filmes/{id}` | Remover filme       |
+| Método | Endpoint          | Descrição                 |
+| ------ | ----------------  | ------------------------- |
+| GET    | `/filmes`         | Listar filmes             |
+| GET    | `/filmes/{id}`    | Buscar filme por ID       |
+| POST   | `/filmes`         | Cadastrar filme           |
+| PUT    | `/filmes/{id}`    | Atualizar filme           |
+| DELETE | `/filmes/{id}`    | Remover filme             |
+| GET    | `/filmes/externo` | Usar API externa de filmes|
+
 
 ---
 
