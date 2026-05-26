@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.AvaliacaoSerieRequestDTO;
-
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoSerieResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoSerie;
 import org.serratec.serratecFlix.entity.Serie;
