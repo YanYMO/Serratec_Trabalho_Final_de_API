@@ -48,17 +48,19 @@ public class ExperienciaService {
 	}
 	
 	@Transactional
-	public ExperienciaResponseDTO atualizar(Long id) {
+	public ExperienciaResponseDTO atualizar(Long id, Integer experiencia) {
 		
 		Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
 		
+		Experiencia exp = usuario.getExperiencia();
 		
+		exp.setXp(exp.getXp()+experiencia);
+		exp.setNivel((exp.getXp()/80)+1);	
 		
+		experienciaRepository.save(exp);
 		
-		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());		
+		return expResponse;
 	}
-	
-	
-	
 }
