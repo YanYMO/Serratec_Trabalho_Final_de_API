@@ -72,8 +72,9 @@ public class AvaliacaoFilmeController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoFilmeResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
-        return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request));
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request,
+                                                                        @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request, userDetails.getUsername()));
     }
 
     @Operation(summary = "Deletar avaliação de filme", description = "Remove uma avaliação de filme do sistema")
