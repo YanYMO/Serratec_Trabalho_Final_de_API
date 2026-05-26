@@ -29,6 +29,8 @@ public class FilmeService {
     private FilmeRepository filmeRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ExperienciaService experienciaService;
 
     public List<FilmeResponseDTO> findAll() {
         List<Filme> filmes = filmeRepository.findAll();
@@ -56,6 +58,10 @@ public class FilmeService {
         verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
 
         FilmeResponseDTO filmeDTO = new FilmeResponseDTO(filme);
+        
+        //Experiência
+        
+        experienciaService.atualizar(usuario, 5);
 
         return filmeDTO;
     }
