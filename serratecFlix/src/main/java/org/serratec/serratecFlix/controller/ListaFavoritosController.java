@@ -1,9 +1,11 @@
-/*
+
 package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.ListaFavoritosRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.ListaFavoritosResponseDTO;
+import org.serratec.serratecFlix.service.ListaFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -53,4 +55,4 @@ public class ListaFavoritosController {
         return ResponseEntity.noContent().build();
     }
 }
-*/
+
