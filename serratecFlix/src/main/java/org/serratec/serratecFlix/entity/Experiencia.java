@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -23,9 +24,9 @@ public class Experiencia {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@Column(name = "xp")
-	private Integer xp = 0;
+	@Column(name = "xp", nullable = false)
+	private Integer xp;
 	
-	@Column(name = "nivel")
-	private Integer nivel = 1;
+	@Column(name = "nivel", nullable = false)
+	private Integer nivel;
 }

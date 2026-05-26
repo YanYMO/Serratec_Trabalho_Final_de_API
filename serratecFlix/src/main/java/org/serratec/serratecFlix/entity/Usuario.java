@@ -68,7 +68,7 @@ public class Usuario implements UserDetails, Serializable {
     @JsonManagedReference
     private List<ListaFavoritos> listaFavoritos;
     
-    @OneToOne(mappedBy = "Experiencia", cascade = CascadeType.ALL)
+    @OneToOne (mappedBy = "usuario", cascade = CascadeType.ALL)
     private Experiencia experiencia;
 
     @Override

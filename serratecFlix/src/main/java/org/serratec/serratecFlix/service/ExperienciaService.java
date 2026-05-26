@@ -33,7 +33,7 @@ public class ExperienciaService {
 	public ExperienciaResponseDTO cadastrar(Long id) {
 		
 		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao cadastrar a Experiência. "));
 		
 		Experiencia exp = new Experiencia();
 		exp.setXp(0);
