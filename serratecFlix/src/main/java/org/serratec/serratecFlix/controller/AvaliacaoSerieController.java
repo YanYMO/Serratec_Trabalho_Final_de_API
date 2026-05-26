@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvaliacaoSerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoSerieResponseDTO;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@Tag(name = "Avaliação de Séries", description = "Cadastro de avaliações de séries")
 @RestController
 @RequestMapping("avaliacoes-series")
 @Validated

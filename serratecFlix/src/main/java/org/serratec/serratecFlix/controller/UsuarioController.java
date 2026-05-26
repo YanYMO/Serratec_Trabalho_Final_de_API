@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.UsuarioRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.UsuarioResponseDTO;
 import org.serratec.serratecFlix.service.UsuarioService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@Tag(name = "Usuário", description = "Cadastro de usuários")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {

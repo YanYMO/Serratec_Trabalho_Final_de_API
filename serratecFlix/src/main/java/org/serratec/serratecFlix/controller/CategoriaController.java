@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.CategoriaRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.CategoriaResponseDTO;
 import org.serratec.serratecFlix.service.CategoriaService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@Tag(name = "Categoria", description = "Cadastro de categorias")
 @RestController
 @RequestMapping("/categorias")
 @Validated

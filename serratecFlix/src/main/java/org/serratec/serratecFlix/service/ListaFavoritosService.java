@@ -55,11 +55,17 @@ public class ListaFavoritosService {
     }
 
     public ListaFavoritosResponseDTO cadastrar(ListaFavoritosRequestDTO listaFavoritosRequest) {
-        Usuario usuario = usuarioRepository.findById(listaFavoritosRequest.getUsuarioId())
+        Usuario usuario = usuarioRepository.findById(listaFavoritosRequest.getIdUsuario())
                 .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
 
-        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getFilmesIds());
-        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getSeriesIds());
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
+        if(filmes.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
+        }
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
+        if(series.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        }
 
         ListaFavoritos lista = new ListaFavoritos();
         lista.setNomeLista(listaFavoritosRequest.getNomeLista());
@@ -77,9 +83,14 @@ public class ListaFavoritosService {
         ListaFavoritos lista = listaFavoritosRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Lista de Favoritos com esse identificador."));
 
-        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getFilmesIds());
-        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getSeriesIds());
-
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
+        if(filmes.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
+        }
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
+        if(series.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        }
         lista.setNomeLista(listaFavoritosRequest.getNomeLista());
         lista.setPrivada(listaFavoritosRequest.getPrivada());
         lista.setFilmes(filmes);
