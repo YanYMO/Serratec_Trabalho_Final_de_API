@@ -55,7 +55,7 @@ public class AvaliacaoFilmeService {
                 .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
 
         Filme filme = filmeRepository.findById(avaliacaoFilmeRequest.getFilmeId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+                .orElseThrow(() -> new ValorNaoEncontradoException("Filme não encontrado."));
 
         AvaliacaoFilme avaliacaoFilme = new AvaliacaoFilme();
         avaliacaoFilme.setNota(avaliacaoFilmeRequest.getNota());
@@ -63,7 +63,9 @@ public class AvaliacaoFilmeService {
         avaliacaoFilme.setUsuario(usuario);
         avaliacaoFilme.setFilme(filme);
 
-        return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
+        AvaliacaoFilmeResponseDTO response = new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
+        atualizarMediaFilme(filme);
+        return response;
     }
 
     public AvaliacaoFilmeResponseDTO atualizar(Long id, AvaliacaoFilmeAtualizacaoDTO avaliacaoFilmeAtualizacao) {
@@ -72,11 +74,33 @@ public class AvaliacaoFilmeService {
         avaliacaoFilme.setNota(avaliacaoFilmeAtualizacao.getNota());
         avaliacaoFilme.setComentario(avaliacaoFilmeAtualizacao.getComentario());
 
-        return new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
+        AvaliacaoFilmeResponseDTO response = new AvaliacaoFilmeResponseDTO(avaliacaoFilmeRepository.save(avaliacaoFilme));
+        atualizarMediaFilme(avaliacaoFilme.getFilme());
+        return response;
     }
 
     public void deletar(Long id) {
-        avaliacaoFilmeRepository.findById(id).orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+        AvaliacaoFilme avaliacaoFilme = avaliacaoFilmeRepository.findById(id)
+                .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+
+        Filme filme = avaliacaoFilme.getFilme();
         avaliacaoFilmeRepository.deleteById(id);
+        atualizarMediaFilme(filme);
+    }
+
+    private void atualizarMediaFilme(Filme filme) {
+        List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findByFilme(filme);
+
+        if (avaliacoes.isEmpty()) {
+            filme.setNotaMedia(0.0);
+        } else {
+            int soma = 0;
+            for (AvaliacaoFilme avaliacao : avaliacoes) {
+                soma += avaliacao.getNota();
+            }
+            double media = (double) soma / avaliacoes.size();
+            filme.setNotaMedia(media);
+        }
+        filmeRepository.save(filme);
     }
 }
