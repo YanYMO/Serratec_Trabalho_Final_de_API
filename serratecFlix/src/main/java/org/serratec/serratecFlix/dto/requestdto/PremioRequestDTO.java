@@ -18,7 +18,6 @@ public class PremioRequestDTO {
     private Long filmeId;
     private Long serieId;
 
-
     public String getNome() {
         return nome;
     }
@@ -50,8 +49,4 @@ public class PremioRequestDTO {
     public void setSerieId(Long serieId) {
         this.serieId = serieId;
     }
-
-    
-
-    
 }
