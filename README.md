@@ -243,18 +243,16 @@ A aplicação utiliza:
 
 ---
 
-## 👨‍💻 Desenvolvedores / Tarefas individuais
-|                                  |                                                                        |
-|  **João Pedro Carneiro Motta**   | **Prêmios (Todas as classes, endpoints e o repositories relacionados)**|
-|                                  |                                                                        |
-| **Yan Yan Martins de Oliveira**  |                                                                        |
-|                                  |                                                                        |
-|   **Carlos Eduardo Carvalho**    |                                                                        |  
-|                                  |                                                                        |
-|       **Marcos Paulo**           |                                                                        |    
-|                                  |                                                                        |
-|      **Phelipe Damasio**         |                                                                        |  
-|                                  |                                                                        |
+## 👨‍💻 Desenvolvedores / Tarefas Individuais
+
+| Desenvolvedor                 | Responsabilidades                                                 |
+| ----------------------------- | ----------------------------------------------------------------- |
+| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados) |
+| **Yan Martins de Oliveira**   |                                                                   |
+| **Carlos Eduardo Carvalho**   |                                                                   |
+| **Marcos Paulo**              |                                                                   |
+| **Phelipe Damasio**           |                                                                   |
+
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
 
