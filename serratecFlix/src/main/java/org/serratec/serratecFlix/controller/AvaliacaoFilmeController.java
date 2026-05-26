@@ -12,6 +12,8 @@ import org.serratec.serratecFlix.dto.responsedto.AvaliacaoFilmeResponseDTO;
 import org.serratec.serratecFlix.service.AvaliacaoFilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,9 +59,11 @@ public class AvaliacaoFilmeController {
             @ApiResponse(responseCode = "201", description = "Avaliação de filme cadastrada com sucesso!"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
-    @PostMapping
-    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@Valid @RequestBody AvalicaoFilmeRequestDTO request) {
-        return ResponseEntity.status(201).body(avaliacaoFilmeService.cadastrar(request));
+    @PostMapping("/{id}")
+    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@PathVariable Long id,
+                                                                    @Valid @RequestBody AvalicaoFilmeRequestDTO request,
+                                                                    @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.status(201).body(avaliacaoFilmeService.cadastrar(id, request, userDetails.getUsername()));
     }
 
     @Operation(summary = "Atualizar avaliação de filme", description = "Atualiza os dados de uma avaliação de filme existente")
@@ -70,8 +74,9 @@ public class AvaliacaoFilmeController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<AvaliacaoFilmeResponseDTO> atualizarAvaliacao(@PathVariable Long id,
-    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request) {
-        return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request));
+    																	@Valid @RequestBody AvaliacaoAtualizacaoDTO request,
+                                                                        @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(avaliacaoFilmeService.atualizar(id, request, userDetails.getUsername()));
     }
 
     @Operation(summary = "Deletar avaliação de filme", description = "Remove uma avaliação de filme do sistema")

@@ -16,10 +16,4 @@ public class AvaliacaoSerieRequestDTO {
     private Integer nota;
     
     private String comentario;
-
-    @NotNull(message = "O id do Usuario e obrigatorio")
-    private Long usuarioId;
-
-    @NotNull(message = "O id da Serie e obrigatorio")
-    private Long serieId;
 }
