@@ -79,6 +79,7 @@ public class FilmeController {
         return ResponseEntity.noContent().build();
     }
     
+    @GetMapping("/externo")
     @Operation(summary = "Buscar filme em API externa", description = "Busca informações de um filme na API do OMDB pelo título")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso! (campos podem ser nulos caso o filme não seja encontrado)"),
