@@ -60,7 +60,9 @@ public class AvaliacaoFilmeController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping("/{id}")
-    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@PathVariable Long id, @Valid @RequestBody AvalicaoFilmeRequestDTO request, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<AvaliacaoFilmeResponseDTO> criarAvaliacao(@PathVariable Long id,
+                                                                    @Valid @RequestBody AvalicaoFilmeRequestDTO request,
+                                                                    @AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.status(201).body(avaliacaoFilmeService.cadastrar(id, request, userDetails.getUsername()));
     }
 
