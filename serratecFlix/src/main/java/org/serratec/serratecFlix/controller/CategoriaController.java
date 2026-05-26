@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.CategoriaRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.CategoriaResponseDTO;
@@ -29,27 +30,32 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Operation(summary = "Listar todas as categorias", description = "Retorna uma lista com todas as categorias cadastradas")
     @GetMapping
     public ResponseEntity<List<CategoriaResponseDTO>> listarCategorias() {
         return ResponseEntity.ok(categoriaService.findAll());
     }
 
+    @Operation(summary = "Buscar categoria por ID", description = "Retorna uma categoria específica pelo ID")
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaResponseDTO> listarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(categoriaService.findById(id));
     }
 
+    @Operation(summary = "Cadastrar categoria", description = "Cadastra uma nova categoria no sistema")
     @PostMapping
     public ResponseEntity<CategoriaResponseDTO> criarCategoria(@Valid @RequestBody CategoriaRequestDTO request) {
         return ResponseEntity.status(201).body(categoriaService.cadastrar(request));
     }
 
+    @Operation(summary = "Atualizar categoria", description = "Atualiza os dados de uma categoria existente")
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaResponseDTO> atualizarCategoria(@PathVariable Long id,
     															   @Valid @RequestBody CategoriaRequestDTO request) {
         return ResponseEntity.ok(categoriaService.atualizar(id, request));
     }
 
+    @Operation(summary = "Deletar categoria", description = "Remove uma categoria do sistema")
     @DeleteMapping("/{id}")
     public ResponseEntity<CategoriaResponseDTO> deletarCategoria(@PathVariable Long id) {
         categoriaService.deletar(id);

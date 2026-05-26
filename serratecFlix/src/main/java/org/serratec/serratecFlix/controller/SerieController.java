@@ -2,6 +2,7 @@ package org.serratec.serratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
@@ -29,27 +30,32 @@ public class SerieController {
     @Autowired
     private SerieService serieService;
 
+    @Operation(summary = "Listar todos as séries", description = "Retorna uma lista com todas as séries cadastradas")
     @GetMapping
     public ResponseEntity<List<SerieResponseDTO>> listarSeries() {
         return ResponseEntity.ok(serieService.findAll());
     }
 
+    @Operation(summary = "Buscar série por ID", description = "Retorna uma série específica pelo ID")
     @GetMapping("/{id}")
     public ResponseEntity<SerieResponseDTO> listarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(serieService.findById(id));
     }
 
+    @Operation(summary = "Cadastrar série", description = "Cadastra uma nova série no sistema")
     @PostMapping
     public ResponseEntity<SerieResponseDTO> criarSerie(@Valid @RequestBody SerieRequestDTO request) {
         return ResponseEntity.status(201).body(serieService.cadastrar(request));
     }
 
+    @Operation(summary = "Atualizar série", description = "Atualiza os dados de uma série existente")
     @PutMapping("/{id}")
     public ResponseEntity<SerieResponseDTO> atualizarSerie(@PathVariable Long id,
     													   @Valid @RequestBody SerieRequestDTO request) {
         return ResponseEntity.ok(serieService.atualizar(id, request));
     }
 
+    @Operation(summary = "Deletar série", description = "Remove uma série do sistema")
     @DeleteMapping("/{id}")
     public ResponseEntity<SerieResponseDTO> deletarSerie(@PathVariable Long id) {
         serieService.deletar(id);

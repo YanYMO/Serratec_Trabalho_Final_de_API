@@ -1,5 +1,6 @@
 package org.serratec.serratecFlix.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
@@ -24,27 +25,32 @@ public class FilmeController {
     @Autowired
     private FilmeService filmeService;
 
+    @Operation(summary = "Listar todos os filmes", description = "Retorna uma lista com todos os filmes cadastrados")
     @GetMapping
     public ResponseEntity<List<FilmeResponseDTO>> listarFilmes() {
         return ResponseEntity.ok(filmeService.findAll());
     }
 
+    @Operation(summary = "Buscar filme por ID", description = "Retorna um filme específico pelo ID")
     @GetMapping("/{id}")
     public ResponseEntity<FilmeResponseDTO> listarPorId(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(filmeService.findById(id, userDetails.getUsername()));
     }
 
+    @Operation(summary = "Cadastrar filme", description = "Cadastra um novo filme no sistema")
     @PostMapping
     public ResponseEntity<FilmeResponseDTO> criarFilme(@Valid @RequestBody FilmeRequestDTO request) {
         return ResponseEntity.status(201).body(filmeService.cadastrar(request));
     }
 
+    @Operation(summary = "Atualizar filme", description = "Atualiza os dados de um filme existente")
     @PutMapping("/{id}")
     public ResponseEntity<FilmeResponseDTO> atualizarFilme(@PathVariable Long id,
     													   @Valid @RequestBody FilmeRequestDTO request) {
         return ResponseEntity.ok(filmeService.atualizar(id, request));
     }
 
+    @Operation(summary = "Deletar filme", description = "Remove um filme do sistema")
     @DeleteMapping("/{id}")
     public ResponseEntity<FilmeResponseDTO> deletarFilme(@PathVariable Long id) {
         filmeService.deletar(id);
