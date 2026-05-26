@@ -2,6 +2,8 @@ package org.serratec.serratecFlix.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -17,7 +19,8 @@ import lombok.Data;
 public class Experiencia {
 	
 	@Id
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 	@MapsId
 	@OneToOne
