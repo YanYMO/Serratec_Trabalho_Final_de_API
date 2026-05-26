@@ -1,6 +1,8 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
+import lombok.Data;
 
+@Data
 
 public class PremioResponseDTO {
    
@@ -11,45 +13,22 @@ public class PremioResponseDTO {
     private String nomeConteudo;
     private String tipoConteudo;
 
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getCategoria() {
-        return categoria;
-    }
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    public Integer getAno() {
-        return ano;
-    }
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
     
-    public String getNomeConteudo() {
-        return nomeConteudo;
+    
+    public PremioResponseDTO() {
     }
-    public void setNomeConteudo(String nomeConteudo) {
+
+    public PremioResponseDTO(Long id, String nome, String categoria, Integer ano, String nomeConteudo,
+            String tipoConteudo) {
+        this.id = id;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.ano = ano;
         this.nomeConteudo = nomeConteudo;
-    }
-    public String getTipoConteudo() {
-        return tipoConteudo;
-    }
-    public void setTipoConteudo(String tipoConteudo) {
         this.tipoConteudo = tipoConteudo;
     }
-   
+
+    
     
    
     
