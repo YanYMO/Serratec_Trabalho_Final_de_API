@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.serratec.serratecFlix.dto.requestdto.HistoricoRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.HistoricoCompletoResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResumoResponseDTO;
 import org.serratec.serratecFlix.enums.StatusAssistido;
@@ -48,12 +49,22 @@ public class HistoricoController {
 
     @Operation(summary = "Resumo do histórico", description = "Retorna um resumo do histórico do usuário logado")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Resumo retornado com sucesso!"),
+            @ApiResponse(responseCode = "200", description = "Resumo encontrado com sucesso!"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     @GetMapping("/resumo")
     public ResponseEntity<HistoricoResumoResponseDTO> resumo(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(historicoService.resumo(userDetails.getUsername()));
+    }
+
+    @Operation(summary = "Listar tudo", description = "Retorna filmes, séries e dados do usuário logado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Histórico completo encontrado com sucesso!"),
+            @ApiResponse(responseCode = "401", description = "Não autorizado")
+    })
+    @GetMapping("/completo")
+    public ResponseEntity<HistoricoCompletoResponseDTO> listarTudo(@AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(historicoService.listarTudo(userDetails.getUsername()));
     }
 
     @Operation(summary = "Cadastrar histórico de filmes ou séries", description = "Cadastra um novo histórico de filmes ou séries no sistema")
