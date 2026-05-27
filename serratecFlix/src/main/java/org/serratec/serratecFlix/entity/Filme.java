@@ -55,7 +55,7 @@ public class Filme {
     private List<Categoria> categorias;
     
     @OneToOne(mappedBy = "filme", cascade = CascadeType.ALL)
-    private List<Premio> premios;
+    private Premio premio;
     
     @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL)
     @JsonManagedReference
