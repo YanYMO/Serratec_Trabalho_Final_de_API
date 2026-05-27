@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
-import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;
@@ -15,6 +14,7 @@ import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
+import org.serratec.serratecFlix.repository.PremioRepository;
 import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,8 @@ public class SerieService {
     private ExperienciaService experienciaService;
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
+    @Autowired
+    private PremioRepository premioRepository;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -66,7 +68,7 @@ public class SerieService {
         
         experienciaService.atualizar(usuario, 7);
 
-        return new SerieResponseDTO(serie);
+        return serieDTO;
     }
 
     @Transactional
@@ -117,6 +119,12 @@ public class SerieService {
             lista.getSeries().remove(serie);
             listaFavoritosRepository.save(lista);
         }
+
+        /*List<Premio> premios = premioRepository.findBySerieId(id);
+         for (Premio premio : premios) {
+             premio.getSerie().remove(serie);
+             premioRepository.save(premio);
+         }*/
 
         serieRepository.deleteById(id);
     }

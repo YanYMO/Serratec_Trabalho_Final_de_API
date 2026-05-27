@@ -23,9 +23,6 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
-    @Autowired
-    private ExperienciaService experienciaService;
 
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -68,8 +65,6 @@ public class UsuarioService {
         exp.setUsuario(usuario);
 
         usuarioRepository.save(usuario);
-        
-        //experienciaService.cadastrar(usuario);
         
         return new UsuarioResponseDTO(usuario);
     }

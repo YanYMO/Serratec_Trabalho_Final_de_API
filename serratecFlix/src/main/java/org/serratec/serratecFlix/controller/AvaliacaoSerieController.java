@@ -51,7 +51,7 @@ public class AvaliacaoSerieController {
             @ApiResponse(responseCode = "201", description = "Avaliação de série cadastrada com sucesso!"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
-    @PostMapping("{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<AvaliacaoSerieResponseDTO> criarAvaliacao(@PathVariable Long id,
                                                                     @Valid @RequestBody AvaliacaoSerieRequestDTO request,
                                                                     @AuthenticationPrincipal UserDetails userDetails) {
