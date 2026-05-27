@@ -218,6 +218,16 @@ Authorization: Bearer SEU_TOKEN
 | DELETE | `/historicos/{id}`        | Remover histórico                     |
 
 ---
+
+### 🏆 Ranking
+
+| Método | Endpoint                   | Descrição                       |
+| ------ | -------------------------- | ------------------------------- |
+| GET    | `/ranking/filmes`          | Top5 filmes mais bem avaliados  |
+| GET    | `/ranking/series`          | Top5 séries mais bem avaliadas  |
+
+---
+
 ## 📖 Swagger / OpenAPI
 
 Após iniciar a aplicação, acesse:
