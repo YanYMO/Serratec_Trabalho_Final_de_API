@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.serratec.serratecFlix.dto.requestdto.HistoricoRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResponseDTO;
+import org.serratec.serratecFlix.dto.responsedto.HistoricoResumoResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.HistoricoAssistido;
 import org.serratec.serratecFlix.entity.Serie;
@@ -54,6 +55,20 @@ public class HistoricoService {
                 .stream().filter(h -> h.getSerie() != null)
                 .map(h -> new HistoricoResponseDTO(h))
                 .collect(Collectors.toList());
+    }
+
+    public HistoricoResumoResponseDTO resumo(String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if(usuario==null) {
+            throw new ValorNaoEncontradoException("Usuário não foi econtrado");
+        }
+        List<HistoricoAssistido> listaHistorico = historicoAssistidoRepository.findByUsuarioId(usuario.getId());
+        long totalFilmes = listaHistorico.stream().filter(h -> h.getFilme() != null).count();
+        long totalSeries = listaHistorico.stream().filter(h -> h.getSerie() != null).count();
+        long assistindo = listaHistorico.stream().filter(h -> h.getStatusAssistido() == StatusAssistido.ASSISTINDO).count();
+        long pausado = listaHistorico.stream().filter(h -> h.getStatusAssistido() == StatusAssistido.PAUSADO).count();
+        long assistido = listaHistorico.stream().filter(h -> h.getStatusAssistido() == StatusAssistido.ASSISTIDO).count();
+        return new HistoricoResumoResponseDTO(totalFilmes, totalSeries, assistindo, pausado, assistido);
     }
 
     public HistoricoResponseDTO salvar(HistoricoRequestDTO request, String username) {
