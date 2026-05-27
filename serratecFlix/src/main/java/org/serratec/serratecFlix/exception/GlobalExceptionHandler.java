@@ -107,4 +107,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
 	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<ErroResposta> handleIllegalArgument(IllegalArgumentException ex) {
+	    ErroResposta erro = new ErroResposta(HttpStatus.BAD_REQUEST.value(), "Dado inválido: " + ex.getMessage());
+	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
 }
