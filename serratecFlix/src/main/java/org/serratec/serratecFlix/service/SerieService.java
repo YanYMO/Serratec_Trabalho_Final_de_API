@@ -8,11 +8,13 @@ import java.util.List;
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
+import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
+import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
 import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class SerieService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ExperienciaService experienciaService;
+    @Autowired
+    private ListaFavoritosRepository listaFavoritosRepository;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -102,9 +106,18 @@ public class SerieService {
 
     @Transactional
     public void deletar(Long id){
-         serieRepository.findById(id)
+         Serie serie = serieRepository.findById(id)
             .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
-    
+
+        serie.getCategorias().clear();
+        serieRepository.save(serie);
+
+        List<ListaFavoritos> listas = listaFavoritosRepository.findBySeriesId(id);
+        for (ListaFavoritos lista : listas) {
+            lista.getSeries().remove(serie);
+            listaFavoritosRepository.save(lista);
+        }
+
         serieRepository.deleteById(id);
     }
 
