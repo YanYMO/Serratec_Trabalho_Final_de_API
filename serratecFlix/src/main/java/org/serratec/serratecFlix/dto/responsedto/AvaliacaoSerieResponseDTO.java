@@ -28,5 +28,6 @@ public class AvaliacaoSerieResponseDTO {
         this.nota = avaliacaoSerie.getNota();
         this.comentario = avaliacaoSerie.getComentario();
         this.dataAvaliacao = avaliacaoSerie.getDataAvaliacao();
+        this.nomeUsuario = avaliacaoSerie.getUsuario().getNome();
     }
 }
