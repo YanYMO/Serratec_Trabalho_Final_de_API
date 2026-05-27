@@ -40,6 +40,7 @@ public class ConfigSecurity {
                             requests.requestMatchers(HttpMethod.POST,"/usuarios/cadastrar").permitAll()
                                     .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers(HttpMethod.GET, "/filmes/externo").permitAll()
+                                    .requestMatchers(HttpMethod.DELETE, "/historicos/*").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                                     .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("ADMINISTRADOR")
