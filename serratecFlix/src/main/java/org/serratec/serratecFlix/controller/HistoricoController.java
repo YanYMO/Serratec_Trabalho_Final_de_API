@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.serratec.serratecFlix.dto.requestdto.HistoricoRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResponseDTO;
+import org.serratec.serratecFlix.dto.responsedto.HistoricoResumoResponseDTO;
 import org.serratec.serratecFlix.enums.StatusAssistido;
 import org.serratec.serratecFlix.service.HistoricoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class HistoricoController {
     @GetMapping("/series")
     public ResponseEntity<List<HistoricoResponseDTO>> listarSeries(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(historicoService.listarSeries(userDetails.getUsername()));
+    }
+
+    @Operation(summary = "Resumo do histórico", description = "Retorna um resumo do histórico do usuário logado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Resumo retornado com sucesso!"),
+            @ApiResponse(responseCode = "401", description = "Não autorizado")
+    })
+    @GetMapping("/resumo")
+    public ResponseEntity<HistoricoResumoResponseDTO> resumo(@AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(historicoService.resumo(userDetails.getUsername()));
     }
 
     @Operation(summary = "Cadastrar histórico de filmes ou séries", description = "Cadastra um novo histórico de filmes ou séries no sistema")
