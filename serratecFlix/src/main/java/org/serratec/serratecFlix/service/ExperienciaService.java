@@ -1,7 +1,12 @@
 package org.serratec.serratecFlix.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.serratec.serratecFlix.dto.responsedto.ExperienciaResponseDTO;
+import org.serratec.serratecFlix.dto.responsedto.ListaFavoritosResponseDTO;
 import org.serratec.serratecFlix.entity.Experiencia;
+import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.ExperienciaRepository;
@@ -30,6 +35,38 @@ public class ExperienciaService {
 		
 		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
 		return expResponse;
+	}
+	
+	@Transactional
+	public ExperienciaResponseDTO findByUsername(String userName) {
+		
+		Usuario usu = usuarioRepository.findByUsername(userName);
+			
+		if (usu == null) {
+            throw new ValorNaoEncontradoException("O usuario não possui uma conta ou um Username!");
+        }
+		
+		Experiencia exp = usu.getExperiencia();
+		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
+		return expResponse;
+	}
+	
+	@Transactional
+	public List<ExperienciaResponseDTO> findAll() {
+		
+		List<Experiencia> exp = experienciaRepository.findAll();
+		List<ExperienciaResponseDTO> expDTO = new ArrayList<>();
+		
+		if (exp.isEmpty()) {
+			throw new ValorNaoEncontradoException("Não existe nenhum usuario com nivel cadastrado");
+		}
+		
+        for (Experiencia xp : exp) {
+            expDTO.add(new ExperienciaResponseDTO(xp));
+        }
+        
+        return expDTO;
 	}
 	
 	@Transactional
