@@ -263,7 +263,7 @@ A aplicação utiliza:
 | **Yan Martins de Oliveira**   |                                                                       |
 | **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
 | **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                                      |
-| **Phelipe Damasio**           |                                                                       |
+| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)                                                                      |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
