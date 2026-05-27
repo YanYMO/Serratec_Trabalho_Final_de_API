@@ -21,7 +21,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 public class AvaliacaoSerieService {
 
@@ -79,7 +78,9 @@ public class AvaliacaoSerieService {
         
         experienciaService.atualizar(usuario, 2);
 
-        return new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
+        AvaliacaoSerieResponseDTO response = new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
+        atualizarMediaSerie(serie);
+        return response;
     }
 
     public AvaliacaoSerieResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoSerieAtualizacao, String username) {
@@ -98,12 +99,17 @@ public class AvaliacaoSerieService {
         avaliacaoSerie.setNota(avaliacaoSerieAtualizacao.getNota());
         avaliacaoSerie.setComentario(avaliacaoSerieAtualizacao.getComentario());
 
-        return new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
+        AvaliacaoSerieResponseDTO response = new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
+        atualizarMediaSerie(avaliacaoSerie.getSerie());
+        return response;
     }
 
     public void deletar(Long id) {
-        avaliacaoSerieRepository.findById(id).orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+        AvaliacaoSerie avaliacaoSerie = avaliacaoSerieRepository.findById(id)
+                .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+        Serie serie = avaliacaoSerie.getSerie();
         avaliacaoSerieRepository.deleteById(id);
+        atualizarMediaSerie(serie);
     }
 
     private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
@@ -114,4 +120,21 @@ public class AvaliacaoSerieService {
             throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
         }
     }
+
+    private void atualizarMediaSerie(Serie serie) {
+        List<AvaliacaoSerie> avaliacoes = avaliacaoSerieRepository.findBySerie(serie);
+
+        if (avaliacoes.isEmpty()) {
+            serie.setNotaMedia(0.0);
+        } else {
+            int soma = 0;
+            for (AvaliacaoSerie avaliacao : avaliacoes) {
+                soma += avaliacao.getNota();
+            }
+            double media = (double) soma / avaliacoes.size();
+            serie.setNotaMedia(media);
+        }
+        serieRepository.save(serie);
+    }
 }
+

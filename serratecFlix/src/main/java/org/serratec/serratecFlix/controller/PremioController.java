@@ -67,7 +67,7 @@ public class PremioController {
             @ApiResponse(responseCode = "200", description = "Prêmio encontrado com sucesso!"),
             @ApiResponse(responseCode = "404", description = "Prêmio não encontrado")
     })
-    @GetMapping("/filme/{filmeId}")
+    @GetMapping("/filme/{idFilme}")
     public ResponseEntity<List<PremioResponseDTO>> buscarPorFilme(@PathVariable Long idFilme) {
         return ResponseEntity.ok(premioService.buscarPorFilme(idFilme));
     }
@@ -77,7 +77,7 @@ public class PremioController {
             @ApiResponse(responseCode = "200", description = "Prêmio encontrado com sucesso!"),
             @ApiResponse(responseCode = "404", description = "Prêmio não encontrado")
     })
-    @GetMapping("/serie/{serieId}")
+    @GetMapping("/serie/{idSerie}")
     public ResponseEntity<List<PremioResponseDTO>> buscarPorSerie(@PathVariable Long idSerie) {
         return ResponseEntity.ok(premioService.buscarPorSerie(idSerie));
     }

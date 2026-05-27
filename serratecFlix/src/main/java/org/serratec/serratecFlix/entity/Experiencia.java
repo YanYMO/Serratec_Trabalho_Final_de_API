@@ -19,9 +19,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "experiencia")
 public class Experiencia {
-	
+
 	@Id
-    private Long id;
+	private Long id;
 
 	@MapsId
 	@OneToOne
