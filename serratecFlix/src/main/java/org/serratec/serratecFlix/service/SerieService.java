@@ -1,26 +1,23 @@
 package org.serratec.serratecFlix.service;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
+import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
-import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
-import org.serratec.serratecFlix.repository.PremioRepository;
-import org.serratec.serratecFlix.repository.SerieRepository;
-import org.serratec.serratecFlix.repository.UsuarioRepository;
+import org.serratec.serratecFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -36,6 +33,8 @@ public class SerieService {
     private ListaFavoritosRepository listaFavoritosRepository;
     @Autowired
     private PremioRepository premioRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -73,6 +72,10 @@ public class SerieService {
 
     @Transactional
     public SerieResponseDTO cadastrar(SerieRequestDTO serieDTO) {
+        List<Categoria> categorias = categoriaRepository.findAllById(serieDTO.getCategorias());
+        if (categorias.isEmpty()){
+            throw new ValorNaoEncontradoException("Alguma categoria informada, não está disponível.");
+        }
         
         Serie serie = new Serie();
         serie.setTitulo(serieDTO.getTitulo());
@@ -81,7 +84,8 @@ public class SerieService {
         serie.setEpisodios(serieDTO.getEpisodios());
         serie.setDataLancamento(serieDTO.getDataLancamento());
         serie.setClassificacao(serieDTO.getClassificacao());
-        serie.setCategorias(serieDTO.getCategorias());
+        serie.setNotaMedia(0.0);
+        serie.setCategorias(categorias);
         
         serieRepository.save(serie);
     
@@ -92,6 +96,11 @@ public class SerieService {
     public SerieResponseDTO atualizar(Long id, SerieRequestDTO serieDTO){
         Serie serie = serieRepository.findById(id)
              .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Série com esse identificador."));
+
+        List<Categoria> categorias = categoriaRepository.findAllById(serieDTO.getCategorias());
+        if (categorias.isEmpty()){
+            throw new ValorNaoEncontradoException("Alguma categoria informada, não está disponível.");
+        }
         
         serie.setTitulo(serieDTO.getTitulo());
         serie.setDescricao(serieDTO.getDescricao());
@@ -99,7 +108,7 @@ public class SerieService {
         serie.setEpisodios(serieDTO.getEpisodios());
         serie.setDataLancamento(serieDTO.getDataLancamento());
         serie.setClassificacao(serieDTO.getClassificacao());
-        serie.setCategorias(serieDTO.getCategorias());
+        serie.setCategorias(categorias);
     
         serieRepository.save(serie);
         
@@ -119,12 +128,6 @@ public class SerieService {
             lista.getSeries().remove(serie);
             listaFavoritosRepository.save(lista);
         }
-
-        /*List<Premio> premios = premioRepository.findBySerieId(id);
-         for (Premio premio : premios) {
-             premio.getSerie().remove(serie);
-             premioRepository.save(premio);
-         }*/
 
         serieRepository.deleteById(id);
     }

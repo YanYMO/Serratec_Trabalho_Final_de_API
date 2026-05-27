@@ -36,5 +36,5 @@ public class SerieRequestDTO {
     private ClassificacaoIndicativa classificacao;
 
     @NotNull(message = "A serie precisa ter pelo menos uma categoria.")
-    private List<Categoria> categorias;
+    private List<Long> categorias;
 }
