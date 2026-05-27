@@ -38,6 +38,6 @@ public class ExperienciaResponseDTO {
 		super();
 		this.userName = user.getNome();
 		this.xp = user.getExperiencia().getXp();
-		this.nivel = user.getExperiencia().getXp();
+		this.nivel = user.getExperiencia().getNivel();
 	}
 }
