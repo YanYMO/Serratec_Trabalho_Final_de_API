@@ -262,7 +262,7 @@ A aplicação utiliza:
 | **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
 | **Yan Martins de Oliveira**   |                                                                       |
 | **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
-| **Marcos Paulo**              |                                                                       |
+| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                                      |
 | **Phelipe Damasio**           |                                                                       |
 
 
