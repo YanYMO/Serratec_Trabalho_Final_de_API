@@ -9,11 +9,13 @@ import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
+import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
+import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class FilmeService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ExperienciaService experienciaService;
+    @Autowired
+    private ListaFavoritosRepository listaFavoritosRepository;
 
     public List<FilmeResponseDTO> findAll() {
         List<Filme> filmes = filmeRepository.findAll();
@@ -101,8 +105,17 @@ public class FilmeService {
 
     @Transactional
     public void deletar(Long id) {
-         filmeRepository.findById(id)
+         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
+
+         filme.getCategorias().clear();
+         filmeRepository.save(filme);
+
+         List<ListaFavoritos> listas = listaFavoritosRepository.findByFilmesId(id);
+         for (ListaFavoritos lista : listas) {
+             lista.getFilmes().remove(filme);
+             listaFavoritosRepository.save(lista);
+         }
 
         filmeRepository.deleteById(id);
     }
