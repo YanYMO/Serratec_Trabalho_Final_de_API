@@ -204,6 +204,20 @@ Authorization: Bearer SEU_TOKEN
 | GET    | `/experiencias/minhaexp`   | Buscar a experiencia do usuario |
 
 ---
+
+### 🕘 Histórico de Exibição
+
+| Método | Endpoint                  | Descrição                             |
+| ------ | ------------------------- | ------------------------------------- |
+| GET    | `/historicos/filmes`      | Listar histórico de filmes            |
+| GET    | `/historicos/series`      | Listar histórico de séries            |
+| GET    | `/historicos/resumo`      | Exibir resumo do histórico do usuário |
+| GET    | `/historicos/completo`    | Listar histórico completo do usuário  |
+| POST   | `/historicos`             | Cadastrar histórico                   |
+| PUT    | `/historicos/{id}/status` | Atualizar status do histórico         |
+| DELETE | `/historicos/{id}`        | Remover histórico                     |
+
+---
 ## 📖 Swagger / OpenAPI
 
 Após iniciar a aplicação, acesse:
