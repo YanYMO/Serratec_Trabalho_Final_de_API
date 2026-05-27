@@ -16,7 +16,9 @@ import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.enums.StatusAssistido;
+import org.serratec.serratecFlix.exception.ErroResposta;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
+import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.HistoricoAssistidoRepository;
@@ -24,6 +26,7 @@ import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Service
 public class HistoricoService {
@@ -90,10 +93,10 @@ public class HistoricoService {
 
     public HistoricoResponseDTO salvar(HistoricoRequestDTO request, String username) {
         if (request.getIdFilme() == null && request.getIdSerie() == null)
-            throw new RuntimeException("Informe idFilme ou idSerie");
+            throw new ValorNaoEncontradoException("Informe idFilme ou idSerie");
 
         if (request.getIdFilme() != null && request.getIdSerie() != null)
-            throw new RuntimeException("Preencha apenas um: idFilme ou idSerie");
+            throw new ValorDuplicadoException("Preencha apenas um: idFilme ou idSerie");
 
         Usuario usuario = usuarioRepository.findByUsername(username);
         if (usuario == null)
