@@ -32,6 +32,9 @@ public class AvaliacaoSerieService {
 
     @Autowired
     private SerieRepository serieRepository;
+    
+    @Autowired
+    private ExperienciaService experienciaService;
 
     public List<AvaliacaoSerieResponseDTO> findAll() {
         List<AvaliacaoSerie> avaliacoes = avaliacaoSerieRepository.findAll();
@@ -70,6 +73,10 @@ public class AvaliacaoSerieService {
         avaliacaoSerie.setComentario(avaliacaoSerieRequest.getComentario());
         avaliacaoSerie.setUsuario(usuario);
         avaliacaoSerie.setSerie(serie);
+        
+        //Experiencia
+        
+        experienciaService.atualizar(usuario, 2);
 
         AvaliacaoSerieResponseDTO response = new AvaliacaoSerieResponseDTO(avaliacaoSerieRepository.save(avaliacaoSerie));
         atualizarMediaSerie(serie);
