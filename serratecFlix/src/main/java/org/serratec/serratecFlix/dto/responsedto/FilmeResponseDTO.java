@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @JsonPropertyOrder({
     "id",
     "titulo",
-    "classificao",
+    "classificacao",
     "notaMedia",
     "descricao",
     "duracaoMinutos",
