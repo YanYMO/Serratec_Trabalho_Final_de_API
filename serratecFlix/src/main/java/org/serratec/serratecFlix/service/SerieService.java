@@ -28,6 +28,8 @@ public class SerieService {
     private SerieRepository serieRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ExperienciaService experienciaService;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -55,6 +57,10 @@ public class SerieService {
         verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
 
         SerieResponseDTO serieDTO = new SerieResponseDTO(serie);
+        
+        //Experiencia
+        
+        experienciaService.atualizar(usuario, 7);
 
         return new SerieResponseDTO(serie);
     }
