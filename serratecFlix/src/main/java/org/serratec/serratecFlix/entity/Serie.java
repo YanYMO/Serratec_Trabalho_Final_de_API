@@ -58,7 +58,7 @@ public class Serie {
     private List<Categoria> categorias;
     
     @OneToOne(mappedBy = "serie", cascade = CascadeType.ALL)
-    private List<Premio> premios;
+    private Premio premio;
 
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     @JsonManagedReference
