@@ -114,7 +114,7 @@ public class SerieService {
 
         List<ListaFavoritos> listas = listaFavoritosRepository.findBySeriesId(id);
         for (ListaFavoritos lista : listas) {
-            lista.getFilmes().remove(serie);
+            lista.getSeries().remove(serie);
             listaFavoritosRepository.save(lista);
         }
 
