@@ -16,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @JsonPropertyOrder({
-    "id",
     "userName",
     "nivel",
     "xp"
@@ -30,6 +29,7 @@ public class ExperienciaResponseDTO {
 	
 	public ExperienciaResponseDTO(Experiencia exp) {
 		super();
+		this.userName = exp.getUsuario().getUsername();
 		this.xp = exp.getXp();
 		this.nivel = exp.getNivel();
 	}
