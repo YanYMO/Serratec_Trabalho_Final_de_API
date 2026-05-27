@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
-import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;

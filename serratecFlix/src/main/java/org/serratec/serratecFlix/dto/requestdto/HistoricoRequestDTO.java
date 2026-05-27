@@ -1,8 +1,8 @@
 package org.serratec.serratecFlix.dto.requestdto;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import org.serratec.serratecFlix.enums.StatusAssistido;
+
+import lombok.Data;
 
 @Data
 public class HistoricoRequestDTO {

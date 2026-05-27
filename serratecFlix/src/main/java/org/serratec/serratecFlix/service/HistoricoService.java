@@ -1,5 +1,9 @@
 package org.serratec.serratecFlix.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.serratec.serratecFlix.dto.requestdto.HistoricoRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
@@ -14,11 +18,6 @@ import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class HistoricoService {

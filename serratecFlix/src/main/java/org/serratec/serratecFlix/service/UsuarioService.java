@@ -23,9 +23,6 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
-    @Autowired
-    private ExperienciaService experienciaService;
 
     @Autowired
     private BCryptPasswordEncoder encoder;
