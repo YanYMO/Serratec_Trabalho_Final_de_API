@@ -15,10 +15,4 @@ public class AvalicaoFilmeRequestDTO {
     private Integer nota;
 
     private String comentario;
-
-    @NotNull(message = "O id do usuario é obrigatorio")
-    private Long usuarioId;
-
-    @NotNull(message = "O id do filme é obrigatorio")
-    private Long filmeId;
 }

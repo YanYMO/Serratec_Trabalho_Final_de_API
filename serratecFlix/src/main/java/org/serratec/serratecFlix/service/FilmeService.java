@@ -50,7 +50,7 @@ public class FilmeService {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
         if (usuario == null) {
-            throw new ValorNaoEncontradoException("Usuario nao encontrado");
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
         }
 
         verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
@@ -61,7 +61,7 @@ public class FilmeService {
     }
 
     @Transactional
-    public FilmeResponseDTO cadastrar( FilmeRequestDTO filmeDTO) {
+    public FilmeResponseDTO cadastrar(FilmeRequestDTO filmeDTO) {
 
         Filme filme = new Filme();
         filme.setTitulo(filmeDTO.getTitulo());
@@ -84,6 +84,8 @@ public class FilmeService {
         filme.setTitulo(filmeDTO.getTitulo());
         filme.setDescricao(filmeDTO.getDescricao());
         filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
+        filme.setDataLancamento(filmeDTO.getDataLancamento());
+        filme.setClassificacao(filmeDTO.getClassificacao());
         filme.setCategorias(filmeDTO.getCategorias());
 
         filmeRepository.save(filme);

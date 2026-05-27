@@ -1,14 +1,13 @@
 package org.serratec.serratecFlix.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.serratec.serratecFlix.dto.requestdto.ListaFavoritosRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.ListaFavoritosResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
@@ -16,6 +15,11 @@ import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ListaFavoritosService {
@@ -54,12 +58,27 @@ public class ListaFavoritosService {
         return listaDTO;
     }
 
-    public ListaFavoritosResponseDTO cadastrar(ListaFavoritosRequestDTO listaFavoritosRequest) {
-        Usuario usuario = usuarioRepository.findById(listaFavoritosRequest.getUsuarioId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+    public ListaFavoritosResponseDTO cadastrar(ListaFavoritosRequestDTO listaFavoritosRequest, String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
 
-        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getFilmesIds());
-        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getSeriesIds());
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
+        if(filmes.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
+        }
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
+        if(series.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        }
+
+        for (Filme filme : filmes) {
+            verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
+        }
+        for (Serie serie : series) {
+            verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
+        }
 
         ListaFavoritos lista = new ListaFavoritos();
         lista.setNomeLista(listaFavoritosRequest.getNomeLista());
@@ -73,12 +92,34 @@ public class ListaFavoritosService {
         return new ListaFavoritosResponseDTO(lista);
     }
 
-    public ListaFavoritosResponseDTO atualizar(Long id, ListaFavoritosRequestDTO listaFavoritosRequest) {
+    public ListaFavoritosResponseDTO atualizar(Long id, ListaFavoritosRequestDTO listaFavoritosRequest, String username) {
         ListaFavoritos lista = listaFavoritosRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Lista de Favoritos com esse identificador."));
 
-        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getFilmesIds());
-        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getSeriesIds());
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
+
+        if (lista.getUsuario().getId() != usuario.getId()) {
+            throw new ValorNaoEncontradoException("Você não tem permissão para atualizar esta lista de favoritos.");
+        }
+
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
+        if(filmes.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
+        }
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
+        if(series.isEmpty()) {
+            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        }
+
+        for (Filme filme : filmes) {
+            verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
+        }
+        for (Serie serie : series) {
+            verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
+        }
 
         lista.setNomeLista(listaFavoritosRequest.getNomeLista());
         lista.setPrivada(listaFavoritosRequest.getPrivada());
@@ -95,5 +136,14 @@ public class ListaFavoritosService {
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Lista de Favoritos com esse identificador."));
 
         listaFavoritosRepository.deleteById(id);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 }

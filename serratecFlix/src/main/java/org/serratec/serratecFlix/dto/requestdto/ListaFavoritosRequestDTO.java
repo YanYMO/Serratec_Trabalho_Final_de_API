@@ -20,7 +20,7 @@ public class ListaFavoritosRequestDTO {
     @NotNull(message = "O id do usuario e obrigatorio")
     private Long usuarioId;
 
-    private List<Long> filmesIds;
+    private List<Long> idFilmes;
 
-    private List<Long> seriesIds;
+    private List<Long> idSeries;
 }

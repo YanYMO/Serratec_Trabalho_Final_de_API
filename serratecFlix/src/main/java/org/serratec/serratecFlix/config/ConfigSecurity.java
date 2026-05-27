@@ -36,13 +36,22 @@ public class ConfigSecurity {
 
         http.csrf(csrf -> csrf.disable())
                 .cors((cors) -> cors.configurationSource(corsConfigurationSource()))
-                /*.httpBasic(Customizer.withDefaults())*/.authorizeHttpRequests(
+                .authorizeHttpRequests(
                         requests -> {
                             requests.requestMatchers(HttpMethod.POST,"/usuarios/cadastrar").permitAll()
                                     .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers(HttpMethod.GET, "/filmes/externo").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                    .anyRequest().authenticated();
+
+                                    .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.POST, "/filmes").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.PUT, "/filmes/**").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.POST, "/series").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.PUT, "/series/**").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.POST, "/categorias").hasAuthority("ADMINISTRADOR")
+                                    .requestMatchers(HttpMethod.PUT, "/categorias/**").hasAuthority("ADMINISTRADOR")
+
+                                    .anyRequest().hasAnyAuthority("USUARIO", "ADMINISTRADOR");
                         }
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

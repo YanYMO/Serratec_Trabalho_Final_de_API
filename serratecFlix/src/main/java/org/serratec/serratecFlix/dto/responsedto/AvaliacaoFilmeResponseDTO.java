@@ -1,15 +1,13 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
-import java.time.LocalDate;
-
+import lombok.Data;
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 
-import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 
 public class AvaliacaoFilmeResponseDTO {
-	
 
     private Integer nota;
     private String comentario;
@@ -20,5 +18,6 @@ public class AvaliacaoFilmeResponseDTO {
     	this.nota = avaFilme.getNota();
     	this.comentario = avaFilme.getComentario();
     	this.dataAvaliacao = avaFilme.getDataAvaliacao();
+        this.nomeUsuario = avaFilme.getUsuario().getNome();
     }
 }

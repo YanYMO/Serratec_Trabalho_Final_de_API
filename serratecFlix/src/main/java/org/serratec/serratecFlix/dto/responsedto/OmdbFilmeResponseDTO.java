@@ -2,6 +2,8 @@ package org.serratec.serratecFlix.dto.responsedto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
+@Data
 public class OmdbFilmeResponseDTO {
  @JsonProperty("Title")
     private String titulo;
@@ -32,87 +34,23 @@ public class OmdbFilmeResponseDTO {
 
     @JsonProperty("Type")
     private String tipo;
-    
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
+    public OmdbFilmeResponseDTO(String titulo, String ano, String genero, String diretor, String atores, String sinopse,
+            String poster, String nota, String duracao, String tipo) {
         this.titulo = titulo;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
         this.ano = ano;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public String getDiretor() {
-        return diretor;
-    }
-
-    public void setDiretor(String diretor) {
         this.diretor = diretor;
-    }
-
-    public String getAtores() {
-        return atores;
-    }
-
-    public void setAtores(String atores) {
         this.atores = atores;
-    }
-
-    public String getSinopse() {
-        return sinopse;
-    }
-
-    public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
-    }
-
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
         this.poster = poster;
-    }
-
-    public String getNota() {
-        return nota;
-    }
-
-    public void setNota(String nota) {
         this.nota = nota;
-    }
-
-    public String getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(String duracao) {
         this.duracao = duracao;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    
+
+    
 
     
 }

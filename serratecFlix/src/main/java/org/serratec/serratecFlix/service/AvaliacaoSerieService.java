@@ -1,13 +1,13 @@
 package org.serratec.serratecFlix.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.serratec.serratecFlix.dto.requestdto.AvaliacaoAtualizacaoDTO;
 import org.serratec.serratecFlix.dto.requestdto.AvaliacaoSerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.AvaliacaoSerieResponseDTO;
 import org.serratec.serratecFlix.entity.AvaliacaoSerie;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.AvaliacaoSerieRepository;
@@ -15,6 +15,11 @@ import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AvaliacaoSerieService {
@@ -49,12 +54,16 @@ public class AvaliacaoSerieService {
         return avaliacaoSerieDTO;
     }
 
-    public AvaliacaoSerieResponseDTO cadastrar(AvaliacaoSerieRequestDTO avaliacaoSerieRequest) {
-        Usuario usuario = usuarioRepository.findById(avaliacaoSerieRequest.getUsuarioId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Usuário não encontrado."));
+    public AvaliacaoSerieResponseDTO cadastrar(Long id, AvaliacaoSerieRequestDTO avaliacaoSerieRequest, String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
 
-        Serie serie = serieRepository.findById(avaliacaoSerieRequest.getSerieId())
-                .orElseThrow(() -> new ValorNaoEncontradoException("Série não encontrada."));
+        Serie serie = serieRepository.findById(id)
+                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Serie com esse identificador."));
+
+        verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
 
         AvaliacaoSerie avaliacaoSerie = new AvaliacaoSerie();
         avaliacaoSerie.setNota(avaliacaoSerieRequest.getNota());
@@ -67,9 +76,19 @@ public class AvaliacaoSerieService {
         return response;
     }
 
-    public AvaliacaoSerieResponseDTO atualizar(Long id, AvaliacaoSerieRequestDTO avaliacaoSerieAtualizacao) {
+    public AvaliacaoSerieResponseDTO atualizar(Long id, AvaliacaoAtualizacaoDTO avaliacaoSerieAtualizacao, String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
+
         AvaliacaoSerie avaliacaoSerie = avaliacaoSerieRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Avaliação não encontrada."));
+
+        if (avaliacaoSerie.getUsuario().getId() != usuario.getId()) {
+            throw new ValorNaoEncontradoException("Você não tem permissão para atualizar esta avaliação de serie.");
+        }
+
         avaliacaoSerie.setNota(avaliacaoSerieAtualizacao.getNota());
         avaliacaoSerie.setComentario(avaliacaoSerieAtualizacao.getComentario());
 
@@ -84,6 +103,15 @@ public class AvaliacaoSerieService {
         Serie serie = avaliacaoSerie.getSerie();
         avaliacaoSerieRepository.deleteById(id);
         atualizarMediaSerie(serie);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 
     private void atualizarMediaSerie(Serie serie) {
@@ -102,3 +130,4 @@ public class AvaliacaoSerieService {
         serieRepository.save(serie);
     }
 }
+

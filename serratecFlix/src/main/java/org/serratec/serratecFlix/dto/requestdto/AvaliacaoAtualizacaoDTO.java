@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class AvaliacaoFilmeAtualizacaoDTO {
+public class AvaliacaoAtualizacaoDTO {
 
     @NotNull(message = "A avaliacao precisa ter uma nota")
     @Min(value = 0, message = "A nota minima e 0")
