@@ -1,27 +1,28 @@
 package org.serratec.serratecFlix.service;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
+import org.serratec.serratecFlix.entity.Premio;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
+import org.serratec.serratecFlix.repository.PremioRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import jakarta.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -35,6 +36,8 @@ public class FilmeService {
     private ExperienciaService experienciaService;
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
+    @Autowired
+    private PremioRepository premioRepository;
 
     public List<FilmeResponseDTO> findAll() {
         List<Filme> filmes = filmeRepository.findAll();
@@ -116,6 +119,12 @@ public class FilmeService {
              lista.getFilmes().remove(filme);
              listaFavoritosRepository.save(lista);
          }
+
+         /*List<Premio> premios = premioRepository.findByFilmeId(id);
+         for (Premio premio : premios) {
+             premio.getFilme().remove(filme);
+             premioRepository.save(premio);
+         }*/
 
         filmeRepository.deleteById(id);
     }
