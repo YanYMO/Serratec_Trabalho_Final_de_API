@@ -2,6 +2,8 @@ package org.serratec.serratecFlix.dto.responsedto;
 
 import org.serratec.serratecFlix.entity.Experiencia;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +14,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@JsonPropertyOrder({
+    "id",
+    "usuarioUsername",
+    "nivel",
+    "xp"
+})
+
 public class ExperienciaResponseDTO {
 	
 	Integer xp;
-	
 	Integer nivel;
 	
 	public ExperienciaResponseDTO(Experiencia exp) {

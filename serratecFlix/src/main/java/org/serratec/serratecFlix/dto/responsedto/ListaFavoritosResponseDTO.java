@@ -5,11 +5,22 @@ import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Serie;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "nomeLista",
+    "dataCriacao",
+    "filmes",
+    "series"
+})
+
 public class ListaFavoritosResponseDTO {
 
     private String nomeLista;
