@@ -257,13 +257,13 @@ A aplicação utiliza:
 
 ## 👨‍💻 Desenvolvedores / Tarefas Individuais
 
-| Desenvolvedor                 | Responsabilidades                                                 |
-| ----------------------------- | ----------------------------------------------------------------- |
-| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados) |
-| **Yan Martins de Oliveira**   |                                                                   |
-| **Carlos Eduardo Carvalho**   | Prêmios (todas as classes, endpoints e repositories relacionados) |
-| **Marcos Paulo**              |                                                                   |
-| **Phelipe Damasio**           |                                                                   |
+| Desenvolvedor                 | Responsabilidades                                                     |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
+| **Yan Martins de Oliveira**   |                                                                       |
+| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
+| **Marcos Paulo**              |                                                                       |
+| **Phelipe Damasio**           |                                                                       |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
