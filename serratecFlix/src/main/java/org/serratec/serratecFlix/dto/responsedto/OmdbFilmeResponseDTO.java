@@ -1,9 +1,24 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
 @Data
+
+@JsonPropertyOrder({
+    "Title",
+    "Year",
+    "Genre",
+    "Type",
+    "Director",
+    "Actors",
+    "imdbRating",
+    "Plot",
+    "Runtime",
+    "Poster"
+})
+
 public class OmdbFilmeResponseDTO {
  @JsonProperty("Title")
     private String titulo;

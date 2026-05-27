@@ -1,5 +1,8 @@
 package org.serratec.serratecFlix.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.serratec.serratecFlix.dto.responsedto.ExperienciaResponseDTO;
 import org.serratec.serratecFlix.entity.Experiencia;
 import org.serratec.serratecFlix.entity.Usuario;
@@ -22,18 +25,52 @@ public class ExperienciaService {
 	
 	@Transactional
 	public ExperienciaResponseDTO findById(Long id) {
-		Experiencia exp = experienciaRepository.findById(id)
-				.orElseThrow(() -> new ValorNaoEncontradoException("O usuario nao foi encontrado!"));
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
+		Usuario usu = usuarioRepository.findById(id)
+				.orElseThrow(() -> new ValorNaoEncontradoException("Não foi encontrado nenhum Usuario com esse id"));
+		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(usu);
 		return expResponse;
 	}
 	
 	@Transactional
-	public ExperienciaResponseDTO cadastrar(Long id) {
+	public ExperienciaResponseDTO findByUsername(String userName) {
 		
-		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao cadastrar a Experiência. "));
+		Usuario usu = usuarioRepository.findByUsername(userName);
+			
+		if (usu == null) {
+            throw new ValorNaoEncontradoException("O usuario não possui uma conta ou um Username!");
+        }
+		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(usu);
+		return expResponse;
+	}
+	
+	@Transactional
+	public List<ExperienciaResponseDTO> findAll() {
+		
+		List<Experiencia> exp = experienciaRepository.findAll();
+		List<ExperienciaResponseDTO> expDTO = new ArrayList<>();
+		
+		if (exp.isEmpty()) {
+			throw new ValorNaoEncontradoException("Não existe nenhum usuario com nivel cadastrado");
+		}
+		
+        for (Experiencia xp : exp) {
+            expDTO.add(new ExperienciaResponseDTO(xp));
+        }
+        
+        return expDTO;
+	}
+	
+	/*
+	 * 
+	 * 				MENÇÃO HONROSA:
+	 * 
+	 * Jaz aqui, a função nunca utilizada.
+	
+	@Transactional
+	public Experiencia cadastrar(Usuario usuario) {
 		
 		Experiencia exp = new Experiencia();
 		exp.setXp(0);
@@ -42,25 +79,21 @@ public class ExperienciaService {
 		
 		experienciaRepository.save(exp);
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
-		
-		return expResponse;
+		return exp;
 	}
+	*/
 	
 	@Transactional
-	public ExperienciaResponseDTO atualizar(Long id, Integer experiencia) {
-		
-		Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Usuário com esse identificador ao atualizar a experiência"));
+	public ExperienciaResponseDTO atualizar(Usuario usuario, Integer experiencia) {
 		
 		Experiencia exp = usuario.getExperiencia();
 		
 		exp.setXp(exp.getXp()+experiencia);
-		exp.setNivel((exp.getXp()/80)+1);	
+		exp.setNivel((exp.getXp()/80)+1);
 		
 		experienciaRepository.save(exp);
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());		
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp);	
 		return expResponse;
 	}
 }
