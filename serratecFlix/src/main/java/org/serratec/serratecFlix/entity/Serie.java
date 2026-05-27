@@ -1,6 +1,7 @@
 package org.serratec.serratecFlix.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -50,7 +51,7 @@ public class Serie {
     @JsonManagedReference
     private List<AvaliacaoSerie> avaliacoesSeries;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "serie_categoria",
             joinColumns = @JoinColumn(name = "id_serie"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
@@ -58,9 +59,10 @@ public class Serie {
     private List<Categoria> categorias;
     
     @OneToOne(mappedBy = "serie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Premio premio;
 
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<HistoricoAssistido> historicos;
 }
