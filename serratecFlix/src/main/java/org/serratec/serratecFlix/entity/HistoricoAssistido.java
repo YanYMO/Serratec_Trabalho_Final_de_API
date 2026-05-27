@@ -1,5 +1,6 @@
 package org.serratec.serratecFlix.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.serratec.serratecFlix.enums.StatusAssistido;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,14 +25,17 @@ public class HistoricoAssistido {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "idFilme")
+    @JsonBackReference
     private Filme filme;
 
     @ManyToOne
     @JoinColumn(name = "idSerie")
+    @JsonBackReference
     private Serie serie;
 
     @Enumerated(EnumType.STRING)
@@ -38,5 +43,5 @@ public class HistoricoAssistido {
     private StatusAssistido statusAssistido;
 
     @Column(nullable = false)
-    private LocalDate data;
+    private LocalDateTime data;
 }

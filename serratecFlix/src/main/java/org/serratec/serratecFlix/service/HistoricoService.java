@@ -71,7 +71,7 @@ public class HistoricoService {
         HistoricoAssistido historico = new HistoricoAssistido();
         historico.setUsuario(usuario);
         historico.setStatusAssistido(request.getStatus());
-        historico.setData(LocalDate.now());
+        historico.setData(LocalDateTime.now());
 
         if (request.getIdFilme() != null) {
             Filme filme = filmeRepository.findById(request.getIdFilme()).orElseThrow(() -> new ValorNaoEncontradoException("Filme não encontrado"));
@@ -92,7 +92,7 @@ public class HistoricoService {
         HistoricoAssistido historico = historicoAssistidoRepository.findById(id).orElseThrow(() -> new ValorNaoEncontradoException("Histórico não foi encontrado"));
 
         historico.setStatusAssistido(novoStatus);
-        historico.setData(LocalDate.now());
+        historico.setData(LocalDateTime.now());
         return new HistoricoResponseDTO(historicoAssistidoRepository.save(historico));
     }
 

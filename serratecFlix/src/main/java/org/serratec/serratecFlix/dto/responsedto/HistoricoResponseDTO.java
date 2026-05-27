@@ -12,7 +12,7 @@ public class HistoricoResponseDTO {
     private Long id;
     private String titulo;
     private String tipo;
-    private StatusAssistido status;
+    private StatusAssistido statusAssistido;
     private LocalDateTime data;
 
     public HistoricoResponseDTO(HistoricoAssistido historicoAssistido) {
@@ -25,7 +25,7 @@ public class HistoricoResponseDTO {
             this.titulo = historicoAssistido.getFilme().getTitulo();
             this.tipo = "FILME";
         }
-        this.status = status;
-        this.data = data;
+        this.statusAssistido = historicoAssistido.getStatusAssistido();
+        this.data = historicoAssistido.getData();
     }
 }
