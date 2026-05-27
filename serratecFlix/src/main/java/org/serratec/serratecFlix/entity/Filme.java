@@ -53,9 +53,11 @@ public class Filme {
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     @JsonManagedReference
     private List<Categoria> categorias;
-
-    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL)
+    
+    @OneToOne(mappedBy = "filme", cascade = CascadeType.ALL)
     private List<Premio> premios;
+    
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<HistoricoAssistido> historicos;
 }
