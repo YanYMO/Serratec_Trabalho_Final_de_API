@@ -65,7 +65,7 @@ public class SerieService {
         
         experienciaService.atualizar(usuario, 7);
 
-        return new SerieResponseDTO(serie);
+        return serieDTO;
     }
 
     @Transactional
