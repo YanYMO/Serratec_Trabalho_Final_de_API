@@ -1,6 +1,7 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
 import lombok.Data;
+import org.serratec.serratecFlix.entity.HistoricoAssistido;
 import org.serratec.serratecFlix.enums.StatusAssistido;
 
 import java.time.LocalDateTime;
@@ -13,4 +14,18 @@ public class HistoricoResponseDTO {
     private String tipo;
     private StatusAssistido status;
     private LocalDateTime data;
+
+    public HistoricoResponseDTO(HistoricoAssistido historicoAssistido) {
+        this.id = historicoAssistido.getId();
+        if(historicoAssistido.getFilme() == null) {
+            this.titulo = historicoAssistido.getSerie().getTitulo();
+            this.tipo = "SERIE";
+        }
+        if(historicoAssistido.getSerie() == null) {
+            this.titulo = historicoAssistido.getFilme().getTitulo();
+            this.tipo = "FILME";
+        }
+        this.status = status;
+        this.data = data;
+    }
 }
