@@ -1,6 +1,8 @@
 package org.serratec.serratecFlix.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +14,9 @@ import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.entity.HistoricoAssistido;
 import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.enums.StatusAssistido;
+import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.HistoricoAssistidoRepository;
@@ -102,9 +106,11 @@ public class HistoricoService {
 
         if (request.getIdFilme() != null) {
             Filme filme = filmeRepository.findById(request.getIdFilme()).orElseThrow(() -> new ValorNaoEncontradoException("Filme não encontrado"));
+            verificarIdade(usuario, filme.getTitulo(), filme.getClassificacao());
             historico.setFilme(filme);
         } else if(request.getIdSerie() != null) {
             Serie serie = serieRepository.findById(request.getIdSerie()).orElseThrow(() -> new ValorNaoEncontradoException("Série não encontrada"));
+            verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
             historico.setSerie(serie);
         }
 
@@ -126,5 +132,14 @@ public class HistoricoService {
     public void deletar(Long id) {
         historicoAssistidoRepository.findById(id).orElseThrow(() -> new ValorNaoEncontradoException("Histórico não foi encontrado"));
         historicoAssistidoRepository.deleteById(id);
+    }
+
+    private void verificarIdade(Usuario usuario, String titulo, ClassificacaoIndicativa classificacao) {
+
+        Integer idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+
+        if (idade < classificacao.getIdadeMinima()) {
+            throw new IdadeInsuficienteException(titulo, classificacao.getIdadeMinima());
+        }
     }
 }
