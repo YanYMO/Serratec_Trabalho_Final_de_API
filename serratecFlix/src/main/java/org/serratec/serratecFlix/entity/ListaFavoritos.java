@@ -3,9 +3,6 @@ package org.serratec.serratecFlix.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,20 +24,17 @@ public class ListaFavoritos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Este campo precisa ser preenchido")
-    @Size(max = 60)
     @Column(name = "nome_lista", nullable = false, length = 60)
     private String nomeLista;
 
-    @NotNull(message = "Este campo precisa ser preenchido")
     @Column(name = "privada", nullable = false)
     private Boolean privada;
 
     @CreationTimestamp
-    @Column(name = "data_de_criacao", nullable = false, updatable = true)
+    @Column(name = "data_de_criacao", nullable = false, updatable = false)
     private LocalDate dataCriacao;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne()
     @JoinColumn(name = "usuario_id", nullable = false)
     @JsonBackReference
     private Usuario usuario;
