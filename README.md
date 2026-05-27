@@ -262,8 +262,8 @@ A aplicação utiliza:
 | **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
 | **Yan Martins de Oliveira**   |                                                                       |
 | **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
-| **Marcos Paulo**              |                                                                       |
-| **Phelipe Damasio**           |                                                                       |
+| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                                      |
+| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)                                                                      |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
