@@ -29,9 +29,7 @@ public class ExperienciaService {
 		Usuario usu = usuarioRepository.findById(id)
 				.orElseThrow(() -> new ValorNaoEncontradoException("Não foi encontrado nenhum Usuario com esse id"));
 		
-		Experiencia exp = usu.getExperiencia();
-		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(usu);
 		return expResponse;
 	}
 	
@@ -44,9 +42,7 @@ public class ExperienciaService {
             throw new ValorNaoEncontradoException("O usuario não possui uma conta ou um Username!");
         }
 		
-		Experiencia exp = usu.getExperiencia();
-		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(usu);
 		return expResponse;
 	}
 	
@@ -69,7 +65,8 @@ public class ExperienciaService {
 	
 	/*
 	 * 
-	 * 				MENÇÃO HONROSA
+	 * 				MENÇÃO HONROSA:
+	 * 
 	 * Jaz aqui, a função nunca utilizada.
 	
 	@Transactional
@@ -96,7 +93,7 @@ public class ExperienciaService {
 		
 		experienciaRepository.save(exp);
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());	
+		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp);	
 		return expResponse;
 	}
 }

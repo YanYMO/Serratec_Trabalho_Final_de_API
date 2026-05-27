@@ -56,4 +56,9 @@ public class Serie {
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     @JsonManagedReference
     private List<Categoria> categorias;
+
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    private List<Premio> premios;
+    @JsonManagedReference
+    private List<HistoricoAssistido> historicos;
 }

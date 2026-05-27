@@ -194,6 +194,16 @@ Authorization: Bearer SEU_TOKEN
 | DELETE | `/premios/{id}`            | Remover prêmio           |
 
 ---
+
+### 👑 Experiência
+
+| Método | Endpoint                   | Descrição                       |
+| ------ | -------------------------- | ------------------------------- |
+| GET    | `/experiencias`            | Listar experiências             |
+| GET    | `/experiencias/{id}`       | Buscar experiência por ID       |
+| GET    | `/experiencias/minhaexp`   | Buscar a experiencia do usuario |
+
+---
 ## 📖 Swagger / OpenAPI
 
 Após iniciar a aplicação, acesse:
@@ -247,13 +257,13 @@ A aplicação utiliza:
 
 ## 👨‍💻 Desenvolvedores / Tarefas Individuais
 
-| Desenvolvedor                 | Responsabilidades                                                 |
-| ----------------------------- | ----------------------------------------------------------------- |
-| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados) |
-| **Yan Martins de Oliveira**   |                                                                   |
-| **Carlos Eduardo Carvalho**   |                                                                   |
-| **Marcos Paulo**              |                                                                   |
-| **Phelipe Damasio**           |                                                                   |
+| Desenvolvedor                 | Responsabilidades                                                     |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
+| **Yan Martins de Oliveira**   |                                                                       |
+| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
+| **Marcos Paulo**              |                                                                       |
+| **Phelipe Damasio**           |                                                                       |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.

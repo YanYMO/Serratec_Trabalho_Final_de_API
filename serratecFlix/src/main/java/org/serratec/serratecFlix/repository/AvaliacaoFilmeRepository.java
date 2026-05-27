@@ -1,14 +1,12 @@
 package org.serratec.serratecFlix.repository;
 
+import java.util.List;
+
 import org.serratec.serratecFlix.entity.AvaliacaoFilme;
 import org.serratec.serratecFlix.entity.Filme;
-import org.serratec.serratecFlix.entity.Premio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface AvaliacaoFilmeRepository extends JpaRepository <AvaliacaoFilme, Long>{

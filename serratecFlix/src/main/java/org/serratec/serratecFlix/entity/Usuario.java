@@ -67,6 +67,10 @@ public class Usuario implements UserDetails, Serializable {
     @OneToOne (mappedBy = "usuario", cascade = CascadeType.ALL)
     private Experiencia experiencia;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<HistoricoAssistido> historicos;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.perfil.name()));

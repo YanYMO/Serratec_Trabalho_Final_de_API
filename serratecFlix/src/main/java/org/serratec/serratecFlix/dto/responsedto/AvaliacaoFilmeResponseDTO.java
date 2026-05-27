@@ -1,11 +1,22 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
-import lombok.Data;
-import org.serratec.serratecFlix.entity.AvaliacaoFilme;
-
 import java.time.LocalDate;
 
+import org.serratec.serratecFlix.entity.AvaliacaoFilme;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import lombok.Data;
+
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "nomeUsuario",
+    "dataAvaliacao",
+    "nota",
+    "comentario"
+})
 
 public class AvaliacaoFilmeResponseDTO {
 
