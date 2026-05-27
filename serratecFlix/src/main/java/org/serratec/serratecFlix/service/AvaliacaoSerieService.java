@@ -32,7 +32,7 @@ public class AvaliacaoSerieService {
     private AvaliacaoSerieRepository avaliacaoSerieRepository;
 
     @Autowired
-    private SerieRepository SerieRepository;
+    private SerieRepository serieRepository;
     
     @Autowired
     private ExperienciaService experienciaService;
@@ -64,7 +64,7 @@ public class AvaliacaoSerieService {
             throw new ValorNaoEncontradoException("Usuario não encontrado");
         }
 
-        Serie serie = SerieRepository.findById(id)
+        Serie serie = serieRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Serie com esse identificador."));
 
         verificarIdade(usuario, serie.getTitulo(), serie.getClassificacao());
