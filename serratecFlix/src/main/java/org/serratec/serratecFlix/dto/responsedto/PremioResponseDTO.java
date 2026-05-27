@@ -1,8 +1,19 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import lombok.Data;
 
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "nome",
+    "categoria",
+    "ano",
+    "nomeConteudo",
+    "tipoConteudo"
+})
 
 public class PremioResponseDTO {
    

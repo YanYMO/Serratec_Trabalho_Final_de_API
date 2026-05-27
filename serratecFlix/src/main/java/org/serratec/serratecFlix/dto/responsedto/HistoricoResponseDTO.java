@@ -4,9 +4,20 @@ import lombok.Data;
 import org.serratec.serratecFlix.entity.HistoricoAssistido;
 import org.serratec.serratecFlix.enums.StatusAssistido;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.LocalDateTime;
 
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "titulo",
+    "tipo",
+    "statusAssistido",
+    "data"
+})
+
 public class HistoricoResponseDTO {
 
     private Long id;

@@ -4,9 +4,21 @@ import lombok.Data;
 import org.serratec.serratecFlix.entity.Filme;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.LocalDate;
 
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "titulo",
+    "classificao",
+    "notaMedia",
+    "descricao",
+    "duracaoMinutos",
+    "dataLancamento"
+})
 
 public class FilmeResponseDTO {
 	
