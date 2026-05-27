@@ -1,10 +1,7 @@
 package org.serratec.serratecFlix.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.serratec.serratecFlix.dto.requestdto.LoginDTO;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,10 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import tools.jackson.core.JacksonException;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import tools.jackson.core.JacksonException;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -48,6 +49,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
         String token = jwtUtil.generateToken(username);
         response.addHeader("Authorization", "Bearer " + token);
-        response.addHeader("acess-control-expose-headers", "Authorization");
+        response.addHeader("access-control-expose-headers", "Authorization");
+    }
+    
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write("{\"status\": 401, \"message\": \"Falha na autenticação: Usuário ou senha incorretos.\"}");
     }
 }
