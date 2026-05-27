@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.serratecFlix.dto.responsedto.ExperienciaResponseDTO;
-import org.serratec.serratecFlix.dto.responsedto.ListaFavoritosResponseDTO;
 import org.serratec.serratecFlix.entity.Experiencia;
-import org.serratec.serratecFlix.entity.ListaFavoritos;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.ExperienciaRepository;
@@ -69,8 +67,13 @@ public class ExperienciaService {
         return expDTO;
 	}
 	
+	/*
+	 * 
+	 * 				MENÇÃO HONROSA
+	 * Jaz aqui, a função nunca utilizada.
+	
 	@Transactional
-	public ExperienciaResponseDTO cadastrar(Usuario usuario) {
+	public Experiencia cadastrar(Usuario usuario) {
 		
 		Experiencia exp = new Experiencia();
 		exp.setXp(0);
@@ -79,10 +82,9 @@ public class ExperienciaService {
 		
 		experienciaRepository.save(exp);
 		
-		ExperienciaResponseDTO expResponse = new ExperienciaResponseDTO(exp.getXp(), exp.getNivel());
-		
-		return expResponse;
+		return exp;
 	}
+	*/
 	
 	@Transactional
 	public ExperienciaResponseDTO atualizar(Usuario usuario, Integer experiencia) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.serratec.serratecFlix.dto.requestdto.UsuarioRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.UsuarioResponseDTO;
+import org.serratec.serratecFlix.entity.Experiencia;
 import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.Perfil;
 import org.serratec.serratecFlix.exception.ValorDuplicadoException;
@@ -54,7 +55,8 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioResponseDTO cadastrar(UsuarioRequestDTO usuarioDTO) {
-
+    	
+    	Experiencia exp = new Experiencia();
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.getNome());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
@@ -62,10 +64,12 @@ public class UsuarioService {
         usuario.setUsername(usuarioDTO.getUsername());
         usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
         usuario.setPerfil(Perfil.USUARIO);
+        usuario.setExperiencia(exp);
+        exp.setUsuario(usuario);
 
         usuarioRepository.save(usuario);
         
-        experienciaService.cadastrar(usuario);
+        //experienciaService.cadastrar(usuario);
         
         return new UsuarioResponseDTO(usuario);
     }

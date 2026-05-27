@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Experiência", description = "Acesso às Experiências")
 @RestController
-@RequestMapping("/experiencia")
+@RequestMapping("/experiencias")
 public class ExperienciaController {
 	
 	@Autowired
