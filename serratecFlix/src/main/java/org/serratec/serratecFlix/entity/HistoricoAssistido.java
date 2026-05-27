@@ -30,7 +30,7 @@ public class HistoricoAssistido {
     private Filme filme;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idSerie")
     private Serie serie;
 
     @Enumerated(EnumType.STRING)

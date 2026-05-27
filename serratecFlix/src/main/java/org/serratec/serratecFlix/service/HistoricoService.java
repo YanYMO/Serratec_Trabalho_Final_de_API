@@ -61,6 +61,9 @@ public class HistoricoService {
         if (request.getIdFilme() == null && request.getIdSerie() == null)
             throw new RuntimeException("Informe idFilme ou idSerie");
 
+        if (request.getIdFilme() != null && request.getIdSerie() != null)
+            throw new RuntimeException("Preencha apenas um: idFilme ou idSerie");
+
         Usuario usuario = usuarioRepository.findByUsername(username);
         if (usuario == null)
             throw new ValorNaoEncontradoException("Usuário não foi encontrado");
@@ -73,7 +76,7 @@ public class HistoricoService {
         if (request.getIdFilme() != null) {
             Filme filme = filmeRepository.findById(request.getIdFilme()).orElseThrow(() -> new ValorNaoEncontradoException("Filme não encontrado"));
             historico.setFilme(filme);
-        } else {
+        } else if(request.getIdSerie() != null) {
             Serie serie = serieRepository.findById(request.getIdSerie()).orElseThrow(() -> new ValorNaoEncontradoException("Série não encontrada"));
             historico.setSerie(serie);
         }
