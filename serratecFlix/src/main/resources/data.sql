@@ -10,10 +10,10 @@
 -- =====================================================
 
 INSERT INTO usuario
-(id, nome, data_de_nascimento, email, username, senha, data_de_criacao, perfil)
+(nome, data_de_nascimento, email, username, senha, data_de_criacao, perfil)
 VALUES
-(1, 'Usuario', '2000-05-12', 'usuario@email.com', 'usuario', '$2a$12$lNc5FWFfs0nS00RzLSMehuBJvcNGy4RyN9/uuLma0c60MRg4waWZe', '2026-01-10', 'USUARIO'),
-(2, 'Administrador', '2000-09-22', 'administrador@email.com', 'administrador', '$2a$12$FUisLQqLDaWpHZhuCZOcXeBRCacbkRUpLa9tqaCZ0IwFbHYSXsg4u', '2026-01-11', 'ADMINISTRADOR');
+('Usuario', '2000-05-12', 'usuario@email.com', 'usuario', '$2a$12$lNc5FWFfs0nS00RzLSMehuBJvcNGy4RyN9/uuLma0c60MRg4waWZe', '2026-01-10', 'USUARIO'),
+('Administrador', '2000-09-22', 'administrador@email.com', 'administrador', '$2a$12$FUisLQqLDaWpHZhuCZOcXeBRCacbkRUpLa9tqaCZ0IwFbHYSXsg4u', '2026-01-11', 'ADMINISTRADOR');
 
 -- =====================================================
 -- EXPERIENCIA
