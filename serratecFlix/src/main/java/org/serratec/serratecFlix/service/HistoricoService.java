@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.serratec.serratecFlix.dto.requestdto.HistoricoRequestDTO;
+import org.serratec.serratecFlix.dto.responsedto.HistoricoCompletoResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.HistoricoResumoResponseDTO;
 import org.serratec.serratecFlix.entity.Filme;
@@ -69,6 +70,18 @@ public class HistoricoService {
         long pausado = listaHistorico.stream().filter(h -> h.getStatusAssistido() == StatusAssistido.PAUSADO).count();
         long assistido = listaHistorico.stream().filter(h -> h.getStatusAssistido() == StatusAssistido.ASSISTIDO).count();
         return new HistoricoResumoResponseDTO(totalFilmes, totalSeries, assistindo, pausado, assistido);
+    }
+
+    public HistoricoCompletoResponseDTO listarTudo(String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if(usuario==null) {
+            throw new ValorNaoEncontradoException("Usuário não foi econtrado");
+        }
+        return new HistoricoCompletoResponseDTO(
+                usuario.getNome(),
+                usuario.getEmail(),
+                listarFilmes(username),
+                listarSeries(username));
     }
 
     public HistoricoResponseDTO salvar(HistoricoRequestDTO request, String username) {
