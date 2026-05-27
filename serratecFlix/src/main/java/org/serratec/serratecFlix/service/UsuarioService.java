@@ -69,8 +69,6 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
         
-        //experienciaService.cadastrar(usuario);
-        
         return new UsuarioResponseDTO(usuario);
     }
 
