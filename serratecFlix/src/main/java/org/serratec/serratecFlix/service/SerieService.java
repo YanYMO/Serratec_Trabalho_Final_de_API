@@ -14,6 +14,7 @@ import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
+import org.serratec.serratecFlix.repository.PremioRepository;
 import org.serratec.serratecFlix.repository.SerieRepository;
 import org.serratec.serratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class SerieService {
     private ExperienciaService experienciaService;
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
+    @Autowired
+    private PremioRepository premioRepository;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -116,6 +119,12 @@ public class SerieService {
             lista.getSeries().remove(serie);
             listaFavoritosRepository.save(lista);
         }
+
+        /*List<Premio> premios = premioRepository.findBySerieId(id);
+         for (Premio premio : premios) {
+             premio.getSerie().remove(serie);
+             premioRepository.save(premio);
+         }*/
 
         serieRepository.deleteById(id);
     }
