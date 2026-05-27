@@ -3,9 +3,22 @@ package org.serratec.serratecFlix.dto.responsedto;
 import lombok.Data;
 import org.serratec.serratecFlix.entity.Serie;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.LocalDate;
 
 @Data
+
+@JsonPropertyOrder({
+    "id",
+    "titulo",
+    "classificacao",
+    "notaMedia",
+    "descricao",
+    "temporadas",
+    "episodios",
+    "dataLancamento"
+})
 
 public class SerieResponseDTO {
 	

@@ -59,4 +59,6 @@ public class Serie {
 
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     private List<Premio> premios;
+    @JsonManagedReference
+    private List<HistoricoAssistido> historicos;
 }
