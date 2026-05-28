@@ -281,19 +281,29 @@ A aplicação utiliza:
 
 ## 👨‍💻 Desenvolvedores / Tarefas Individuais
 
-| Desenvolvedor                 | Responsabilidades                                                     |
-| ----------------------------- | --------------------------------------------------------------------- |
-| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
-| **Yan Martins de Oliveira**   |                                                                       |
-| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
-| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                                      |
-| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)                                                                      |
+| Desenvolvedor                 | Responsabilidades                                                               |
+| ----------------------------- | ------------------------------------------------------------------------------- |
+| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)               |
+| **Yan Martins de Oliveira**   |                                                                                 |
+| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados)           |
+| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados) |
+| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)               |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
 
 ---
 
+## 🔨 Separação Inicial de Tarefas</b></h2>
 
+| Desenvolvedor                 | Responsabilidades Gerais                                                           |
+| ----------------------------- | ---------------------------------------------------------------------------------- |
+| **João Pedro Carneiro Motta** |                                                                                    |
+| **Yan Martins de Oliveira**   |                                                                                    |
+| **Carlos Eduardo Carvalho**   | Criar ResponseDTO, Exceptions e Fazer a Analise dos Pull Request antes dos Merges. |
+| **Marcos Paulo**              |                                                                                    |
+| **Phelipe Damasio**           |                                                                                    |
+
+---
 
 
