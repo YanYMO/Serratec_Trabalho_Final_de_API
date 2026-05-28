@@ -294,6 +294,16 @@ Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
 
 ---
 
+## 🔨 Separação Inicial de Tarefas</b></h2>
 
+| Desenvolvedor                 | Responsabilidades Gerais                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------ |
+| **João Pedro Carneiro Motta** | Criar o config do Swagger, criar os repositories principais, ajudar na criação de services |
+| **Yan Martins de Oliveira**   |                                                                                            |
+| **Carlos Eduardo Carvalho**   | Criar ResponseDTO, Exceptions e Fazer a Analise dos Pull Request antes dos Merges.         |
+| **Marcos Paulo**              |                                                                                            |
+| **Phelipe Damasio**           |                                                                                            |
+
+---
 
 
