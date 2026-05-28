@@ -46,7 +46,7 @@ public class Serie {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "classificacao_indicativa", nullable = false)
     private ClassificacaoIndicativa classificacao;
-
+    
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AvaliacaoSerie> avaliacoesSeries;

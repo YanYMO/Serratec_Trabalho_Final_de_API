@@ -2,7 +2,7 @@ package org.serratec.serratecFlix.dto.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.serratec.serratecFlix.entity.HistoricoAssistido;
+
 
 @Data
 @AllArgsConstructor
