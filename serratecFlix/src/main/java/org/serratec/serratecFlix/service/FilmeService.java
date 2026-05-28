@@ -33,8 +33,7 @@ public class FilmeService {
     private ExperienciaService experienciaService;
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
-    @Autowired
-    private PremioRepository premioRepository;
+    
     @Autowired
     private CategoriaRepository categoriaRepository;
 
