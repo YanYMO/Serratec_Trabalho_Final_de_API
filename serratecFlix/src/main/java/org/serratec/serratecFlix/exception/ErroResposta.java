@@ -7,15 +7,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ErroResposta {
 	
 	private Integer status;
-	private String menssagem;
+	private String mensagem;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dataHora;
 	
-	public ErroResposta(Integer status, String menssagem) {
+	public ErroResposta(Integer status, String mensagem) {
 		super();
 		this.status = status;
-		this.menssagem = menssagem;
+		this.mensagem = mensagem;
 		this.setDataHora(LocalDateTime.now());
 	}
 
@@ -27,8 +27,8 @@ public class ErroResposta {
 		this.status = status;
 	}
 
-	public String getMenssagem() {
-		return menssagem;
+	public String getMensagem() {
+		return mensagem;
 	}
 
 	public LocalDateTime getDataHora() {

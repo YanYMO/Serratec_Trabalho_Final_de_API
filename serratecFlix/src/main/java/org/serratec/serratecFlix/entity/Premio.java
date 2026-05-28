@@ -43,8 +43,6 @@ public class Premio {
     @JsonIgnore
     private Serie serie;
 
-    
-
     public Premio() {
     }
 
@@ -89,7 +87,6 @@ public class Premio {
     public void setAno(Integer ano) {
         this.ano = ano;
     }
-
 
     public Filme getFilme() {
         return filme;
