@@ -204,6 +204,30 @@ Authorization: Bearer SEU_TOKEN
 | GET    | `/experiencias/minhaexp`   | Buscar a experiencia do usuario |
 
 ---
+
+### 🕘 Histórico de Exibição
+
+| Método | Endpoint                  | Descrição                             |
+| ------ | ------------------------- | ------------------------------------- |
+| GET    | `/historicos/filmes`      | Listar histórico de filmes            |
+| GET    | `/historicos/series`      | Listar histórico de séries            |
+| GET    | `/historicos/resumo`      | Exibir resumo do histórico do usuário |
+| GET    | `/historicos/completo`    | Listar histórico completo do usuário  |
+| POST   | `/historicos`             | Cadastrar histórico                   |
+| PUT    | `/historicos/{id}/status` | Atualizar status do histórico         |
+| DELETE | `/historicos/{id}`        | Remover histórico                     |
+
+---
+
+### 🏆 Ranking
+
+| Método | Endpoint                   | Descrição                       |
+| ------ | -------------------------- | ------------------------------- |
+| GET    | `/ranking/filmes`          | Top5 filmes mais bem avaliados  |
+| GET    | `/ranking/series`          | Top5 séries mais bem avaliadas  |
+
+---
+
 ## 📖 Swagger / OpenAPI
 
 Após iniciar a aplicação, acesse:
@@ -262,8 +286,8 @@ A aplicação utiliza:
 | **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)     |
 | **Yan Martins de Oliveira**   |                                                                       |
 | **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados) |
-| **Marcos Paulo**              |                                                                       |
-| **Phelipe Damasio**           |                                                                       |
+| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                                      |
+| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)                                                                      |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
