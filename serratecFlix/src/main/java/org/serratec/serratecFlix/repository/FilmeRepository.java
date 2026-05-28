@@ -9,10 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FilmeRepository extends JpaRepository <Filme, Long> {
-      Boolean existsByTitulo(String titulo);
+    Boolean existsByTitulo(String titulo);
 
-      
-
+    List<Filme> findByCategoriasId(Long id);
 }
