@@ -301,7 +301,7 @@ Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.
 | **João Pedro Carneiro Motta** | Criar o config do Swagger, criar os repositories principais, ajudar na criação de services |
 | **Yan Martins de Oliveira**   |                                                                                            |
 | **Carlos Eduardo Carvalho**   | Criar ResponseDTO, Exceptions e Fazer a Analise dos Pull Request antes dos Merges.         |
-| **Marcos Paulo**              |                                                                                            |
+| **Marcos Paulo**              | Criar Controllers e auxiliar na criação de services.                                                                                           |
 | **Phelipe Damasio**           |                                                                                            |
 
 ---
