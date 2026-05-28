@@ -131,9 +131,18 @@ public class ListaFavoritosService {
         return new ListaFavoritosResponseDTO(lista);
     }
 
-    public void deletar(Long id) {
-        listaFavoritosRepository.findById(id)
+    public void deletar(Long id, String username) {
+        ListaFavoritos lista = listaFavoritosRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Lista de Favoritos com esse identificador."));
+
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
+
+        if (!lista.getUsuario().getId().equals(usuario.getId())) {
+            throw new ValorNaoEncontradoException("Você não pode excluir a lista de favoritos de outro usuário.");
+        }
 
         listaFavoritosRepository.deleteById(id);
     }

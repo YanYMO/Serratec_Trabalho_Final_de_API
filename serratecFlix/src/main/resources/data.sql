@@ -13,6 +13,7 @@ INSERT INTO usuario
 (nome, data_de_nascimento, email, username, senha, data_de_criacao, perfil)
 VALUES
 ('Usuario', '2000-05-12', 'usuario@email.com', 'usuario', '$2a$12$lNc5FWFfs0nS00RzLSMehuBJvcNGy4RyN9/uuLma0c60MRg4waWZe', '2026-01-10', 'USUARIO'),
+('Menor', '2011-05-12', 'menor@email.com', 'menor', '$2a$12$lNc5FWFfs0nS00RzLSMehuBJvcNGy4RyN9/uuLma0c60MRg4waWZe', '2026-01-12', 'USUARIO'),
 ('Administrador', '2000-09-22', 'administrador@email.com', 'administrador', '$2a$12$FUisLQqLDaWpHZhuCZOcXeBRCacbkRUpLa9tqaCZ0IwFbHYSXsg4u', '2026-01-11', 'ADMINISTRADOR');
 
 -- =====================================================
@@ -23,7 +24,8 @@ INSERT INTO experiencia
 (usuario_id, xp, nivel)
 VALUES
 (1, 2500, 31),
-(2, 1200, 15);
+(2, 1200, 15),
+(3, 1200, 15);
 
 -- =====================================================
 -- CATEGORIAS
@@ -145,7 +147,7 @@ VALUES
 (1, 1),
 (1, 5),
 (2, 3),
-(3, 4);
+(1, 4);
 
 -- =====================================================
 -- FAVORITOS - SERIES

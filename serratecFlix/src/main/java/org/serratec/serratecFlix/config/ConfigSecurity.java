@@ -51,6 +51,7 @@ public class ConfigSecurity {
                                     .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers(HttpMethod.GET, "/filmes/externo").permitAll()
                                     .requestMatchers(HttpMethod.DELETE, "/historicos/*").permitAll()
+                                    .requestMatchers(HttpMethod.DELETE, "/listas-favoritos/*").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                     .requestMatchers("/error").permitAll()
 
