@@ -1,17 +1,20 @@
 package org.serratec.serratecFlix.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.CategoriaRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.CategoriaResponseDTO;
 import org.serratec.serratecFlix.entity.Categoria;
+import org.serratec.serratecFlix.entity.Filme;
+import org.serratec.serratecFlix.entity.Serie;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
 import org.serratec.serratecFlix.repository.CategoriaRepository;
+import org.serratec.serratecFlix.repository.FilmeRepository;
+import org.serratec.serratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -19,6 +22,10 @@ public class CategoriaService {
    
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private FilmeRepository filmeRepository;
+    @Autowired
+    private SerieRepository serieRepository;
 
     public List<CategoriaResponseDTO> findAll(){
         List<Categoria> categorias = categoriaRepository.findAll();
@@ -67,11 +74,21 @@ public class CategoriaService {
 
     @Transactional
     public void deletar(Long id){
-        categoriaRepository.findById(id)
+        Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Categoria com esse identificador."));
+
+        List<Filme> filmes = filmeRepository.findByCategoriasId(id);
+        for (Filme filme : filmes) {
+            filme.getCategorias().remove(categoria);
+            filmeRepository.save(filme);
+        }
+
+        List<Serie> series = serieRepository.findByCategoriasId(id);
+        for (Serie serie : series) {
+            serie.getCategorias().remove(categoria);
+            serieRepository.save(serie);
+        }
 
         categoriaRepository.deleteById(id);
     }
-
-
 }
