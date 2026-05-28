@@ -3,7 +3,6 @@ package org.serratec.serratecFlix.dto.requestdto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 
 import java.time.LocalDate;
