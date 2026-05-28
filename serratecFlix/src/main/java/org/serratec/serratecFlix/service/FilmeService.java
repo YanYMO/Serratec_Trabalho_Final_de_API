@@ -4,17 +4,11 @@ import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
-import org.serratec.serratecFlix.entity.Filme;
-import org.serratec.serratecFlix.entity.ListaFavoritos;
-import org.serratec.serratecFlix.entity.Premio;
-import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.entity.*;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
-import org.serratec.serratecFlix.repository.FilmeRepository;
-import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
-import org.serratec.serratecFlix.repository.PremioRepository;
-import org.serratec.serratecFlix.repository.UsuarioRepository;
+import org.serratec.serratecFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -37,7 +31,10 @@ public class FilmeService {
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
     @Autowired
-    private PremioRepository premioRepository;
+    private HistoricoAssistidoRepository historicoAssistidoRepository;
+    
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public List<FilmeResponseDTO> findAll() {
         List<Filme> filmes = filmeRepository.findAll();
@@ -75,6 +72,10 @@ public class FilmeService {
 
     @Transactional
     public FilmeResponseDTO cadastrar(FilmeRequestDTO filmeDTO) {
+        List<Categoria> categorias = categoriaRepository.findAllById(filmeDTO.getCategorias());
+        if (categorias.isEmpty()) {
+            throw new ValorNaoEncontradoException("Alguma categoria informada, não está disponível.");
+        }
 
         Filme filme = new Filme();
         filme.setTitulo(filmeDTO.getTitulo());
@@ -82,7 +83,8 @@ public class FilmeService {
         filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
         filme.setDataLancamento(filmeDTO.getDataLancamento());
         filme.setClassificacao(filmeDTO.getClassificacao());
-        filme.setCategorias(filmeDTO.getCategorias());
+        filme.setNotaMedia(0.0);
+        filme.setCategorias(categorias);
 
         filmeRepository.save(filme);
 
@@ -94,12 +96,17 @@ public class FilmeService {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos um Filme com esse identificador."));
 
+        List<Categoria> categoria = categoriaRepository.findAllById(filmeDTO.getCategorias());
+        if (categoria.isEmpty()) {
+            throw new ValorNaoEncontradoException("Alguma categoria informada, não está disponível.");
+        }
+
         filme.setTitulo(filmeDTO.getTitulo());
         filme.setDescricao(filmeDTO.getDescricao());
         filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
         filme.setDataLancamento(filmeDTO.getDataLancamento());
         filme.setClassificacao(filmeDTO.getClassificacao());
-        filme.setCategorias(filmeDTO.getCategorias());
+        filme.setCategorias(categoria);
 
         filmeRepository.save(filme);
 
@@ -120,11 +127,10 @@ public class FilmeService {
              listaFavoritosRepository.save(lista);
          }
 
-         /*List<Premio> premios = premioRepository.findByFilmeId(id);
-         for (Premio premio : premios) {
-             premio.getFilme().remove(filme);
-             premioRepository.save(premio);
-         }*/
+        List<HistoricoAssistido> assistidos = historicoAssistidoRepository.findByFilmeId(id);
+        for (HistoricoAssistido assistido : assistidos) {
+            assistido.getFilme().getHistoricos().remove(filme);
+        }
 
         filmeRepository.deleteById(id);
     }

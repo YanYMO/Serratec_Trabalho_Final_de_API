@@ -1,8 +1,8 @@
 package org.serratec.serratecFlix.dto.requestdto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.serratec.serratecFlix.entity.Categoria;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 
 import java.time.LocalDate;
@@ -32,9 +32,10 @@ public class SerieRequestDTO {
     @Past(message = "Data inválida! A data deve ser no passado")
     private LocalDate dataLancamento;
 
+    @Schema(type = "integer", example = "1", description = "Classificação: 1 = Livre, 2 = 10 anos, 3 = 12 anos, 4 = 14 anos, 5 = 16 anos, 6 = 18 anos")
     @NotNull(message = "A classificacao da serie é obrigatoria")
     private ClassificacaoIndicativa classificacao;
 
     @NotNull(message = "A serie precisa ter pelo menos uma categoria.")
-    private List<Categoria> categorias;
+    private List<Long> categorias;
 }

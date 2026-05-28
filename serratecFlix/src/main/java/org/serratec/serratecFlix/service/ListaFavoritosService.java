@@ -9,6 +9,7 @@ import org.serratec.serratecFlix.entity.Usuario;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
+import org.serratec.serratecFlix.exception.ValorNecessarioException;
 import org.serratec.serratecFlix.repository.FilmeRepository;
 import org.serratec.serratecFlix.repository.ListaFavoritosRepository;
 import org.serratec.serratecFlix.repository.SerieRepository;
@@ -65,12 +66,10 @@ public class ListaFavoritosService {
         }
 
         List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
-        if(filmes.isEmpty()) {
-            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
-        }
         List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
-        if(series.isEmpty()) {
-            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        
+        if(filmes.isEmpty() && series.isEmpty()) {
+            throw new ValorNecessarioException("Precisa ter pelo menos um filme e uma série para criar a Lista");
         }
 
         for (Filme filme : filmes) {
@@ -104,14 +103,12 @@ public class ListaFavoritosService {
         if (lista.getUsuario().getId() != usuario.getId()) {
             throw new ValorNaoEncontradoException("Você não tem permissão para atualizar esta lista de favoritos.");
         }
-
+        
         List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequest.getIdFilmes());
-        if(filmes.isEmpty()) {
-            throw new ValorNaoEncontradoException("Id do filme não encontrado!");
-        }
         List<Serie> series = serieRepository.findAllById(listaFavoritosRequest.getIdSeries());
-        if(series.isEmpty()) {
-            throw new ValorNaoEncontradoException("Id da série não encontrada!");
+        
+        if(filmes.isEmpty() && series.isEmpty()) {
+            throw new ValorNecessarioException("Precisa ter pelo menos um filme e uma série para criar a Lista");
         }
 
         for (Filme filme : filmes) {
@@ -131,9 +128,18 @@ public class ListaFavoritosService {
         return new ListaFavoritosResponseDTO(lista);
     }
 
-    public void deletar(Long id) {
-        listaFavoritosRepository.findById(id)
+    public void deletar(Long id, String username) {
+        ListaFavoritos lista = listaFavoritosRepository.findById(id)
                 .orElseThrow(() -> new ValorNaoEncontradoException("Não encontramos uma Lista de Favoritos com esse identificador."));
+
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new ValorNaoEncontradoException("Usuario não encontrado");
+        }
+
+        if (!lista.getUsuario().getId().equals(usuario.getId())) {
+            throw new ValorNaoEncontradoException("Você não pode excluir a lista de favoritos de outro usuário.");
+        }
 
         listaFavoritosRepository.deleteById(id);
     }

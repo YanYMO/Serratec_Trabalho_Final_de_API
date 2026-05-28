@@ -2,6 +2,8 @@ package org.serratec.serratecFlix.config;
 
 import java.util.Arrays;
 
+import org.serratec.serratecFlix.exception.AutorizacaoException;
+import org.serratec.serratecFlix.exception.LoginException;
 import org.serratec.serratecFlix.security.JwtAuthenticationFilter;
 import org.serratec.serratecFlix.security.JwtAuthorizationFilter;
 import org.serratec.serratecFlix.security.JwtUtil;
@@ -29,19 +31,29 @@ public class ConfigSecurity {
     private JwtUtil jwtUtil;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private LoginException loginException;
+    @Autowired
+    private AutorizacaoException autorizacaoException;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
                 .cors((cors) -> cors.configurationSource(corsConfigurationSource()))
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(loginException)
+                        .accessDeniedHandler(autorizacaoException)
+                    )
                 .authorizeHttpRequests(
                         requests -> {
                             requests.requestMatchers(HttpMethod.POST,"/usuarios/cadastrar").permitAll()
                                     .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers(HttpMethod.GET, "/filmes/externo").permitAll()
                                     .requestMatchers(HttpMethod.DELETE, "/historicos/*").permitAll()
+                                    .requestMatchers(HttpMethod.DELETE, "/listas-favoritos/*").permitAll()
                                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                                    .requestMatchers("/error").permitAll()
 
                                     .requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("ADMINISTRADOR")
                                     .requestMatchers(HttpMethod.POST, "/filmes").hasAuthority("ADMINISTRADOR")

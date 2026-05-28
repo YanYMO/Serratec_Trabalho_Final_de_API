@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
 public class RankingService {
 
     @Autowired
-    private AvaliacaoFilmeRepository avaliacaoFilmeRepository; // <- precisa desse
+    private AvaliacaoFilmeRepository avaliacaoFilmeRepository; 
 
     @Autowired
-    private AvaliacaoSerieRepository avaliacaoSerieRepository; // <- e desse
+    private AvaliacaoSerieRepository avaliacaoSerieRepository; 
 
     public List<FilmeResponseDTO> top5Filmes() {
-        List<Filme> filmes = avaliacaoFilmeRepository.top5Filmes(); // <- minúsculo
+        List<Filme> filmes = avaliacaoFilmeRepository.top5Filmes(); 
 
         if (filmes.isEmpty()) {
             throw new ValorNaoEncontradoException("Nenhum filme encontrado.");
@@ -37,7 +37,7 @@ public class RankingService {
     }
 
     public List<SerieResponseDTO> top5Series() {
-        List<Serie> series = avaliacaoSerieRepository.top5Series(); // <- minúsculo
+        List<Serie> series = avaliacaoSerieRepository.top5Series(); 
 
         if (series.isEmpty()) {
             throw new ValorNaoEncontradoException("Nenhuma série encontrada.");

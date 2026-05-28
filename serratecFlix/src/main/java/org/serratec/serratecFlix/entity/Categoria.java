@@ -1,6 +1,7 @@
 package org.serratec.serratecFlix.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,10 +29,10 @@ public class Categoria {
     private String descricao;
 
     @ManyToMany(mappedBy = "categorias")
-    @JsonBackReference
+    @JsonIgnore
     private List<Filme> filmes;
 
     @ManyToMany(mappedBy = "categorias")
-    @JsonBackReference
+    @JsonIgnore
     private List<Serie> series;
 }

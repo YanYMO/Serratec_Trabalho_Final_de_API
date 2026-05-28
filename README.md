@@ -281,13 +281,13 @@ A aplicação utiliza:
 
 ## 👨‍💻 Desenvolvedores / Tarefas Individuais
 
-| Desenvolvedor                 | Responsabilidades                                                               |
-| ----------------------------- | ------------------------------------------------------------------------------- |
-| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)               |
-| **Yan Martins de Oliveira**   |                                                                                 |
-| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados)           |
-| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados) |
-| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)               |
+| Desenvolvedor                 | Responsabilidades                                                                                                                |
+| ----------------------------- |----------------------------------------------------------------------------------------------------------------------------------|
+| **João Pedro Carneiro Motta** | Prêmios (todas as classes, endpoints e repositories relacionados)                                                                |
+| **Yan Martins de Oliveira**   | Validação de idade ao acessar os filmes e séries (Metodo/Função) seja acessando, avaliando ou adicionando na lista de favoritos. |
+| **Carlos Eduardo Carvalho**   | Experiência (todas as classes, endpoints e repositories relacionados)                                                            |
+| **Marcos Paulo**              | Histórico de exibição (todas as classes, endpoints e repositories relacionados)                                                  |
+| **Phelipe Damasio**           | Ranking (todas as classes, endpoints e repositories relacionados)                                                                |
 
 
 Projeto desenvolvido como trabalho final utilizando Spring Boot e PostgreSQL.

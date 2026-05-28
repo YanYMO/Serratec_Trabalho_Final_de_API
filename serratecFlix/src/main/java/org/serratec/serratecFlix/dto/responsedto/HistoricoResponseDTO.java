@@ -1,5 +1,6 @@
 package org.serratec.serratecFlix.dto.responsedto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.serratec.serratecFlix.entity.HistoricoAssistido;
 import org.serratec.serratecFlix.enums.StatusAssistido;
@@ -24,6 +25,7 @@ public class HistoricoResponseDTO {
     private String titulo;
     private String tipo;
     private StatusAssistido statusAssistido;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime data;
 
     public HistoricoResponseDTO(HistoricoAssistido historicoAssistido) {
