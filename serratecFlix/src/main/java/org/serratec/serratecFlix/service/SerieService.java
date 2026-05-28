@@ -3,10 +3,7 @@ package org.serratec.serratecFlix.service;
 import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.SerieRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.SerieResponseDTO;
-import org.serratec.serratecFlix.entity.Categoria;
-import org.serratec.serratecFlix.entity.ListaFavoritos;
-import org.serratec.serratecFlix.entity.Serie;
-import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.entity.*;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
@@ -35,6 +32,8 @@ public class SerieService {
     private PremioRepository premioRepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private HistoricoAssistidoRepository historicoAssistidoRepository;
 
     public List<SerieResponseDTO> findAll() {
         List<Serie> series = serieRepository.findAll();
@@ -127,6 +126,11 @@ public class SerieService {
         for (ListaFavoritos lista : listas) {
             lista.getSeries().remove(serie);
             listaFavoritosRepository.save(lista);
+        }
+
+        List<HistoricoAssistido> assistidos = historicoAssistidoRepository.findBySerieId(id);
+        for (HistoricoAssistido assistido : assistidos) {
+            assistido.getSerie().getHistoricos().remove(serie);
         }
 
         serieRepository.deleteById(id);

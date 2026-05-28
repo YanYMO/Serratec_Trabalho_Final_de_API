@@ -4,10 +4,7 @@ import jakarta.transaction.Transactional;
 import org.serratec.serratecFlix.dto.requestdto.FilmeRequestDTO;
 import org.serratec.serratecFlix.dto.responsedto.FilmeResponseDTO;
 import org.serratec.serratecFlix.dto.responsedto.OmdbFilmeResponseDTO;
-import org.serratec.serratecFlix.entity.Categoria;
-import org.serratec.serratecFlix.entity.Filme;
-import org.serratec.serratecFlix.entity.ListaFavoritos;
-import org.serratec.serratecFlix.entity.Usuario;
+import org.serratec.serratecFlix.entity.*;
 import org.serratec.serratecFlix.enums.ClassificacaoIndicativa;
 import org.serratec.serratecFlix.exception.IdadeInsuficienteException;
 import org.serratec.serratecFlix.exception.ValorNaoEncontradoException;
@@ -33,6 +30,8 @@ public class FilmeService {
     private ExperienciaService experienciaService;
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
+    @Autowired
+    private HistoricoAssistidoRepository historicoAssistidoRepository;
     
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -127,6 +126,11 @@ public class FilmeService {
              lista.getFilmes().remove(filme);
              listaFavoritosRepository.save(lista);
          }
+
+        List<HistoricoAssistido> assistidos = historicoAssistidoRepository.findByFilmeId(id);
+        for (HistoricoAssistido assistido : assistidos) {
+            assistido.getFilme().getHistoricos().remove(filme);
+        }
 
         filmeRepository.deleteById(id);
     }

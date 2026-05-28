@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface HistoricoAssistidoRepository extends JpaRepository<HistoricoAssistido, Long> {
     List<HistoricoAssistido> findByUsuarioId(Long idUsuario);
+
+    List<HistoricoAssistido> findBySerieId(Long id);
+
+    List<HistoricoAssistido> findByFilmeId(Long id);
 }
