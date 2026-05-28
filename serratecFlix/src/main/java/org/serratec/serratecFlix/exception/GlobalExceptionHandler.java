@@ -62,6 +62,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErroResposta erro = new ErroResposta(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
+    
+    @ExceptionHandler(ValorNecessarioException.class)
+    public ResponseEntity<ErroResposta> ValorNecessarioException(ValorNecessarioException ex) {
+        ErroResposta erro = new ErroResposta(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+    }
 
     @ExceptionHandler(ValorDuplicadoException.class)
     public ResponseEntity<ErroResposta> handleValorDuplicado(ValorDuplicadoException ex) {
