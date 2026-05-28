@@ -12,8 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface AvaliacaoFilmeRepository extends JpaRepository <AvaliacaoFilme, Long>{
      Boolean existsByUsuarioId(Long idUsuario);
 
-     /* BUSCANDO TODAS AS AVALIAÇÕES DE UM FILME ESPECÍFICO*/
-     /* CALCULANDO A MEDIA DE NOTAS DOS FILME*/
+     
      List<AvaliacaoFilme> findByFilme(Filme filme);
 
      @Query(value = "SELECT * FROM filme ORDER BY nota_media DESC LIMIT 5", nativeQuery = true)
