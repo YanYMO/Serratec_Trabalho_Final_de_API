@@ -75,8 +75,8 @@ public class ListaFavoritosController {
             @ApiResponse(responseCode = "404", description = "Lista de favoritos não encontrada")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<ListaFavoritosResponseDTO> deletarLista(@PathVariable Long id) {
-        listaFavoritosService.deletar(id);
+    public ResponseEntity<ListaFavoritosResponseDTO> deletarLista(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
+        listaFavoritosService.deletar(id, userDetails.getUsername());
         return ResponseEntity.noContent().build();
     }
 }
